@@ -1,2 +1,46 @@
+# AI search, retrieval and citation are intentionally allowed.
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Crawling or reuse for foundation-model training is intentionally disallowed
+# where providers offer a dedicated robots.txt control for that purpose.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+# Google-Extended is intentionally allowed. This permits Google's extended
+# AI uses controlled by this token, including Gemini-related model use and grounding.
+User-agent: Google-Extended
+Allow: /
+
+# General web crawlers remain allowed for ordinary indexing and discovery.
 User-agent: *
 Allow: /
+
+Sitemap: https://www.valentinacontini.eu/sitemap.xml

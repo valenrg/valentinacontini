@@ -119,3 +119,13 @@ The updated speaker kit is included at `downloads/valentina-contini-speaker-kit-
 - Added five individual article landing pages with cover, summary, open/download actions, and previous/next navigation.
 - Updated the Bionics hub to use the real designed covers.
 - Updated the speaker kit and aligned the Speaking page with the featured talks in the kit.
+
+## Search / GEO launch setup
+
+- Canonical production domain: `https://www.valentinacontini.eu/`
+- XML sitemap: `/sitemap.xml`
+- `robots.txt` explicitly allows major search and AI-retrieval crawlers.
+- Homepage contains `WebSite` + `Person` JSON-LD; About contains `ProfilePage` + the same `Person` identity.
+- Search Console ownership should be verified as the Domain property `valentinacontini.eu` via DNS at Aruba; then submit `/sitemap.xml`.
+- Bing Webmaster Tools can be imported from the verified Google Search Console property, avoiding a second site-verification change.
+- Keep sitemap `lastmod` dates accurate when substantive page content changes; do not update every date on every deployment.
