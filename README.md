@@ -1,3 +1,9 @@
+## v54 — Side Quest copy refinement
+- Built from v53.
+- Rephrases the Wednesday Dungeon framing to “I occasionally turn real-world systems into playable experiments.”
+- Reduces repeated use of “occasionally” on the homepage while preserving the existing Speaking-page phrase.
+- Preserves the production `CNAME` file for `valentinacontini.eu`.
+
 # Valentina Contini — website prototype v2
 
 A dependency-free static prototype for the redesigned valentinacontini.eu.

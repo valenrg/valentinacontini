@@ -1117,3 +1117,85 @@ body { overflow-x: hidden; }
   .collision-preview, .collision-preview-inner { min-height: 300px; }
 }
 
+
+
+/* Side Quest / Wednesday Dungeon */
+.side-quest-home {
+  padding: 96px 0;
+  background: var(--lavender);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.side-quest-home-grid {
+  display: grid;
+  grid-template-columns: minmax(0,.78fr) minmax(420px,1.22fr);
+  gap: clamp(48px,8vw,120px);
+  align-items: center;
+}
+.side-quest-home-copy h2 {
+  font: 700 clamp(3.2rem,6vw,7rem)/.9 var(--display);
+  letter-spacing: -.045em;
+  margin: 20px 0 24px;
+}
+.side-quest-home-copy > p { max-width: 650px; }
+.side-quest-hook { font-size: clamp(1.25rem,1.7vw,1.65rem); line-height: 1.35; }
+.side-quest-home-copy .link-arrow { margin-top: 10px; color: var(--purple); }
+
+.dungeon-mini {
+  display: block;
+  background: #090b10;
+  color: #eef2f7;
+  border: 1px solid #2a3240;
+  padding: clamp(18px,2.3vw,30px);
+  box-shadow: 14px 14px 0 rgba(60,22,109,.18);
+  font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.dungeon-mini:hover { transform: translate(-3px,-3px); box-shadow: 19px 19px 0 rgba(60,22,109,.22); }
+.dungeon-mini-top { display:flex; justify-content:space-between; gap:18px; color:#ff3bb8; font-size:.66rem; letter-spacing:.12em; }
+.dungeon-mini-top strong { color:#b45cff; font-weight:600; }
+.dungeon-mini-title { margin: clamp(24px,4vw,48px) 0 18px; font: 700 clamp(2.2rem,5vw,5.6rem)/.9 var(--display); letter-spacing:-.04em; }
+.dungeon-mini-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:22px 0 28px; }
+.dungeon-mini-stats div { min-width:0; }
+.dungeon-mini-stats span { display:block; margin-bottom:6px; color:#9aa6b2; font-size:.58rem; }
+.dungeon-mini-stats i { display:block; height:7px; border:1px solid #2a3240; background:#11151d; overflow:hidden; }
+.dungeon-mini-stats b { display:block; height:100%; background:linear-gradient(90deg,#b45cff,#ff3bb8); }
+.dungeon-mini-scene { border-left:3px solid #ff3bb8; background:#11151d; padding:15px 17px; display:grid; gap:5px; }
+.dungeon-mini-scene small { color:#ffb703; letter-spacing:.1em; }
+.dungeon-mini-scene strong { font-size:clamp(1rem,1.5vw,1.35rem); }
+.dungeon-mini-scene span { color:#c7ced7; font-size:.82rem; }
+.dungeon-mini-cta { margin-top:20px; text-align:right; color:#b45cff; font-weight:700; letter-spacing:.12em; }
+
+.sidequest-hero { padding-bottom: 72px; }
+.sidequest-hero .sidequest-lead { max-width: 930px; }
+.sidequest-actions { display:flex; flex-wrap:wrap; align-items:center; gap:22px; margin-top:34px; }
+.sidequest-play {
+  display:inline-flex; align-items:center; gap:12px;
+  background:var(--purple); color:#fff; padding:15px 20px;
+  font:700 .82rem var(--display); letter-spacing:.09em; text-transform:uppercase;
+  transition:background .2s ease, transform .2s ease;
+}
+.sidequest-play:hover { background:var(--purple-deep); transform:translateY(-2px); }
+.sidequest-play::after { content:"→"; font-size:1.15em; }
+.sidequest-stage { margin-top:62px; }
+.sidequest-stage .dungeon-mini { max-width: 1120px; }
+.sidequest-origin { background:var(--ink); color:var(--white); }
+.sidequest-origin .page-copy p { color:#d8d2db; }
+.sidequest-origin .page-grid h2 { color:#fff; }
+.sidequest-note { color:#a99fb1; font-size:.9rem; margin-top:22px; }
+
+@media (max-width: 900px) {
+  .side-quest-home-grid { grid-template-columns:1fr; }
+  .dungeon-mini { max-width:760px; }
+}
+@media (max-width: 560px) {
+  .side-quest-home { padding:72px 0; }
+  .side-quest-home-copy h2 { font-size:15vw; }
+  .dungeon-mini { padding:15px; box-shadow:8px 8px 0 rgba(60,22,109,.18); }
+  .dungeon-mini:hover { transform:none; box-shadow:8px 8px 0 rgba(60,22,109,.18); }
+  .dungeon-mini-top { display:grid; gap:4px; }
+  .dungeon-mini-stats { grid-template-columns:1fr 1fr; }
+  .dungeon-mini-scene span { font-size:.75rem; }
+  .sidequest-actions { align-items:stretch; }
+  .sidequest-play { width:100%; justify-content:space-between; }
+}

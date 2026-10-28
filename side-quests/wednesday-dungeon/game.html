@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Wednesday Dungeon V2: Return to Office</title>
+<meta name="robots" content="noindex,follow" />
+<link rel="canonical" href="https://www.valentinacontini.eu/side-quests/wednesday-dungeon/" />
+<style>
+  :root{
+    --bg:#090b10;
+    --panel:#11151d;
+    --panel2:#171c26;
+    --ink:#eef2f7;
+    --muted:#9aa6b2;
+    --danger:#ff4d6d;
+    --warn:#ffb703;
+    --good:#67e8a8;
+    --accent:#b45cff;
+    --accent2:#ff3bb8;
+    --line:#2a3240;
+    --rare:#ffd166;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0}
+  body{
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 20% 0%, rgba(180,92,255,.13), transparent 28%),
+      radial-gradient(circle at 80% 8%, rgba(255,59,184,.10), transparent 25%),
+      linear-gradient(180deg,#07090d 0%,#0c0f15 100%);
+    font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+    overflow:hidden;
+  }
+  body:before{
+    content:"";
+    position:fixed;inset:0;pointer-events:none;opacity:.12;
+    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:24px 24px;
+  }
+  body[data-mood="4"]:after,body[data-mood="5"]:after{
+    content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;
+    background:linear-gradient(transparent 50%,rgba(255,59,184,.05) 50%);background-size:100% 4px;
+  }
+
+  .shell{
+    width:min(1190px,calc(100% - 20px));height:100dvh;margin:0 auto;padding:9px 0 7px;
+    display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;gap:7px;overflow:hidden;
+  }
+  .titlebar{display:flex;gap:14px;align-items:center;justify-content:space-between;min-width:0}
+  .titlecopy{min-width:0}.eyebrow{font-size:9px;letter-spacing:.16em;color:var(--accent2);text-transform:uppercase;margin-bottom:3px}
+  h1{font-size:clamp(19px,2.3vw,29px);line-height:1;margin:0;text-transform:uppercase;letter-spacing:-.035em;white-space:nowrap}
+  .sub{color:var(--muted);font-size:10px;line-height:1.25;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .moodbox{border:1px solid var(--accent);background:#0d0b13;padding:5px 8px;min-width:150px;text-align:right;box-shadow:3px 3px 0 #251436;flex:0 0 auto}
+  .moodbox small{display:block;color:#8d99a6;font-size:7.5px;letter-spacing:.12em;text-transform:uppercase}
+  .moodbox b{display:block;color:#f4c9ff;font-size:10px;margin-top:2px;letter-spacing:.05em}
+
+  .hud{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;min-width:0}
+  .stat{background:var(--panel);border:1px solid var(--line);padding:5px 8px;min-width:0}
+  .stat label{display:flex;justify-content:space-between;gap:8px;font-size:8.5px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+  .bar{height:6px;background:#080a0e;border:1px solid #252b37;overflow:hidden}.fill{height:100%;width:50%;transition:width .25s ease}
+  .energy{background:linear-gradient(90deg,#67e8a8,#c6ff70)}.sanity{background:linear-gradient(90deg,#b45cff,#ff3bb8)}
+  .productivity{background:linear-gradient(90deg,#66d9ff,#67e8a8)}.money{background:linear-gradient(90deg,#ffb703,#ffd166)}
+
+  .game{min-height:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(318px,31%);gap:9px}
+  .screen,.side{background:rgba(17,21,29,.95);border:1px solid var(--line);box-shadow:0 12px 40px rgba(0,0,0,.25);min-height:0}
+  .screen{height:100%;display:flex;flex-direction:column;overflow:hidden;position:relative}
+  .scene{padding:14px 18px 5px;min-height:0;overflow:hidden}
+  .kicker{font-size:8.5px;color:var(--warn);text-transform:uppercase;letter-spacing:.13em}
+  .scene h2{font-size:clamp(18px,2.1vw,26px);margin:5px 0 8px;line-height:1.02}
+  .scene p{line-height:1.34;color:#d7dde5;margin:0 0 6px;font-size:11.5px}
+  .system{margin:7px 0;border-left:3px solid var(--accent2);background:#0b0e14;padding:7px 10px;color:#f5b7df;font-size:10px;line-height:1.3}
+  .system strong{color:#fff}
+  .choices{padding:7px 18px 12px;margin-top:auto;display:grid;gap:5px;flex:0 0 auto}
+  button{appearance:none;border:1px solid #343d4d;background:#171c26;color:var(--ink);padding:8px 10px;text-align:left;font:inherit;font-size:10.5px;cursor:pointer;transition:.13s ease;line-height:1.24;min-height:34px}
+  button:hover{transform:translateY(-1px);border-color:var(--accent);background:#1d2330;box-shadow:0 0 0 1px rgba(180,92,255,.18)}
+  button:active{transform:translateY(1px)}button strong{color:#fff}
+
+  .side{height:100%;padding:9px;display:grid;grid-template-rows:minmax(0,.72fr) auto minmax(0,1.08fr);gap:8px;overflow:hidden}
+  .sideblock{min-height:0;overflow:hidden;display:flex;flex-direction:column}
+  .sideblock + .sideblock{border-top:1px solid var(--line);padding-top:7px}
+  .side h3{font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin:0 0 5px;display:flex;justify-content:space-between;gap:8px;flex:0 0 auto}
+  .side h3 span{color:#657180;letter-spacing:.04em;font-weight:400}
+  .log{display:flex;flex-direction:column;gap:4px;overflow:hidden;min-height:0}
+  .log div{font-size:8.7px;line-height:1.19;color:#b9c2cc;border-bottom:1px dashed #28303d;padding-bottom:4px}.log b{color:var(--ink)}
+
+  .statusloot{display:grid;grid-template-columns:1fr 1fr;gap:7px;min-height:0}
+  .minihead{font-size:7.5px;color:#697584;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+  .statuslist,.inventory{display:grid;gap:3px;align-content:start;min-height:0}
+  .inventory{grid-template-columns:1fr 1fr}
+  .statuschip,.item{border:1px solid #343d4d;background:#0c1016;padding:4px 5px;font-size:7.6px;line-height:1.12;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .statuschip.bad{border-color:#713445;color:#ffafbd}.statuschip.good{border-color:#2d604b;color:#9cf0c4}.statuschip.weird{border-color:#64477c;color:#ddbfff}
+  .item{border-color:#5a476c;color:#d8c8e9}.item.rare{border-color:#8d6a25;color:#ffe3a0}.item.legendary{border-color:#a94688;color:#ffc4ec}
+  .item.spent{opacity:.58;border-style:dashed}.item.spent:after{content:' · USED';font-size:.82em;color:#7f8b98}
+  .emptyslot{border:1px dashed #28303d;color:#4e5966;padding:4px 5px;font-size:7.2px;line-height:1.1}
+
+  .achievements{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;align-content:start;overflow:hidden;min-height:0}
+  .chip{font-size:7.9px;line-height:1.1;padding:4px 5px;border:1px solid #8051b6;color:#eadbff;background:#1c1328;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .chip.secret{border-color:#8d6a25;color:#ffe3a0;background:#211b0f}
+  .achievement-empty{font-size:8px;color:#596471;line-height:1.3;border:1px dashed #28303d;padding:7px;min-height:36px;display:flex;align-items:center}
+  .footer{color:#6f7a86;font-size:7.5px;text-align:center;line-height:1;min-height:8px}
+  .pulse{animation:pulse .35s ease}@keyframes pulse{50%{filter:brightness(1.5)}}
+  .boss{color:var(--danger)!important}.win{color:var(--good)!important}.death{color:var(--danger)!important}
+  .raretext{color:var(--rare)!important}.bigscore{font-size:31px;font-weight:900;color:white;letter-spacing:-.06em;margin:3px 0}.tiny{font-size:8.5px!important;color:var(--muted)}
+
+  /* overlays never affect document flow */
+  .overlayLayer{position:fixed;inset:0;pointer-events:none;z-index:50;display:flex;align-items:center;justify-content:center;padding:18px;transition:background .12s ease}
+  .overlayLayer.active{pointer-events:auto;background:rgba(3,4,7,.46);backdrop-filter:blur(1.5px);cursor:pointer}
+  .pop{width:min(560px,calc(100% - 28px));background:rgba(8,10,15,.985);border:1px solid var(--accent);box-shadow:0 0 0 1px rgba(255,59,184,.18),0 24px 70px rgba(0,0,0,.72);padding:18px 20px;text-align:center;opacity:0;transform:scale(.94);animation:popin .22s ease forwards;cursor:pointer}
+  .pop.loot,.pop.secret{border-color:var(--rare)}.pop.systempop{border-color:var(--accent2)}.pop.curse{border-color:var(--danger)}.pop.spell{border-color:var(--good)}
+  .pop .overline{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:6px}.pop.loot .overline,.pop.secret .overline{color:var(--rare)}.pop.curse .overline{color:var(--danger)}.pop.spell .overline{color:var(--good)}
+  .pop .poptitle{font-size:24px;font-weight:900;letter-spacing:-.035em}.pop .popdetail{font-size:10px;color:#aeb8c3;margin-top:6px;line-height:1.45}.pop .pophint{font-size:8px;color:#8894a1;margin-top:12px;letter-spacing:.11em;text-transform:uppercase}
+  @keyframes popin{0%{opacity:0;transform:scale(.92)}100%{opacity:1;transform:scale(1)}}
+
+  @media(max-height:650px){
+    .shell{padding-top:6px;padding-bottom:5px;gap:5px}.sub{display:none}.eyebrow{font-size:7.5px;margin-bottom:2px}h1{font-size:18px}.moodbox{min-width:130px;padding:4px 6px}.moodbox small{font-size:7px}.moodbox b{font-size:8.5px}
+    .stat{padding:3px 6px}.stat label{font-size:7.5px;margin-bottom:2px}.bar{height:5px}.game{gap:6px;grid-template-columns:minmax(0,1fr) minmax(290px,30%)}
+    .scene{padding:9px 13px 3px}.kicker{font-size:7.5px}.scene h2{font-size:17px;margin:3px 0 5px}.scene p{font-size:9.7px;line-height:1.22;margin-bottom:4px}.system{font-size:8.5px;padding:5px 7px;margin:5px 0;line-height:1.18}
+    .choices{padding:4px 13px 8px;gap:4px}button{font-size:9px;padding:6px 8px;min-height:28px;line-height:1.16}
+    .side{padding:7px;gap:6px;grid-template-rows:minmax(0,.64fr) auto minmax(0,1.16fr)}.sideblock + .sideblock{padding-top:5px}.side h3{font-size:7px;margin-bottom:4px}.log{gap:2px}.log div{font-size:7.4px;line-height:1.1;padding-bottom:2px}
+    .statusloot{gap:5px}.minihead{font-size:6.8px;margin-bottom:3px}.statuschip,.item,.emptyslot{font-size:6.7px;padding:3px 4px}.achievements{gap:3px}.chip{font-size:6.8px;padding:3px 4px}.achievement-empty{font-size:7px;min-height:28px;padding:5px}.bigscore{font-size:26px}.footer{font-size:6.5px}.overlayLayer{padding:12px}.pop{padding:12px 14px}.pop .poptitle{font-size:18px}
+  }
+  @media(max-height:520px){
+    .shell{padding-top:4px;padding-bottom:3px;gap:4px}.moodbox{display:none}h1{font-size:16px}.hud{gap:4px}.game{grid-template-columns:minmax(0,1fr) 286px;gap:5px}
+    .scene{padding:7px 10px 2px}.scene h2{font-size:15px}.scene p{font-size:8.8px}.system{font-size:7.8px}.choices{padding:3px 10px 6px}button{font-size:8.3px;min-height:25px}
+    .side{padding:6px;gap:5px}.statuschip,.item,.emptyslot{font-size:6.2px}.chip{font-size:6.2px}.footer{display:none}
+  }
+  .exitDungeon{flex:0 0 auto;border:1px solid #343d4d;background:#0d0b13;color:#9aa6b2;padding:6px 8px;font-size:8px;letter-spacing:.1em;text-decoration:none;text-transform:uppercase;box-shadow:2px 2px 0 #251436}
+  .exitDungeon:hover{color:#fff;border-color:var(--accent)}
+
+  @media(max-width:760px){
+    .shell{width:calc(100% - 10px);padding:5px 0;gap:4px}.sub,.moodbox{display:none}.eyebrow{font-size:7.5px}h1{font-size:15px;white-space:normal}.hud{grid-template-columns:1fr 1fr;gap:3px}.game{grid-template-columns:minmax(0,1fr) 39%;gap:4px}.scene{padding-left:8px;padding-right:8px}.choices{padding-left:8px;padding-right:8px}.side{padding:5px}.statusloot{grid-template-columns:1fr}.statusloot>div:nth-child(2){display:none}.achievements{grid-template-columns:1fr}.chip:nth-child(n+8){display:none}
+  }
+</style>
+</head>
+<body data-mood="0">
+<div class="shell">
+  <div class="titlebar">
+    <div class="titlecopy">
+      <div class="eyebrow">Mandatory Weekly Quest · V2</div>
+      <h1>Wednesday Dungeon: Return to Office</h1>
+      <div class="sub">A corporate survival simulator where the dungeon has started enjoying this a little too much.</div>
+    </div>
+    <a class="exitDungeon" href="./index.html">Exit dungeon</a>
+    <div class="moodbox"><small>System mood</small><b id="mood">OBSERVING</b></div>
+  </div>
+
+  <div class="hud">
+    <div class="stat"><label><span>Energy</span><span id="energyN">100</span></label><div class="bar"><div id="energy" class="fill energy"></div></div></div>
+    <div class="stat"><label><span>Sanity</span><span id="sanityN">100</span></label><div class="bar"><div id="sanity" class="fill sanity"></div></div></div>
+    <div class="stat"><label><span>Productivity</span><span id="productivityN">100</span></label><div class="bar"><div id="productivity" class="fill productivity"></div></div></div>
+    <div class="stat"><label><span>Wallet</span><span id="moneyN">100</span></label><div class="bar"><div id="money" class="fill money"></div></div></div>
+  </div>
+
+  <div class="game">
+    <main class="screen" id="screen">
+      <section class="scene">
+        <div class="kicker" id="kicker">Floor 0 · Home</div>
+        <h2 id="title">THE SUMMONING</h2>
+        <div id="body"></div>
+      </section>
+      <section class="choices" id="choices"></section>
+    </main>
+
+    <aside class="side">
+      <section class="sideblock">
+        <h3><span>Run log</span><span>latest 5</span></h3>
+        <div class="log" id="log"></div>
+      </section>
+
+      <section class="sideblock">
+        <h3><span>Current build</span><span>live</span></h3>
+        <div class="statusloot">
+          <div><div class="minihead">Status effects</div><div class="statuslist" id="statusList"></div></div>
+          <div><div class="minihead">Loot</div><div class="inventory" id="inventory"></div></div>
+        </div>
+      </section>
+
+      <section class="sideblock" id="achWrap">
+        <h3><span>Achievements unlocked</span><span id="achCount">0 / 12 slots</span></h3>
+        <div class="achievements" id="achievements"></div>
+        <div class="achievement-empty" id="achEmpty">Nothing unlocked yet. The dungeon is merely observing you.</div>
+      </section>
+    </aside>
+  </div>
+  <div class="footer">No corporations were harmed in the making of this game. Several calendar invitations were.</div>
+</div>
+<div class="overlayLayer" id="overlayLayer" aria-live="polite"></div>
+
+<script>
+const state={
+  energy:100,sanity:100,productivity:100,money:100,score:0,stage:0,pain:0,mood:0,
+  flags:{},ach:new Set(),inventory:[],spentItems:new Set(),effects:new Map(),seenEvents:new Set(),eventsTriggered:0,rareSeen:false,toastBusy:false,toastQueue:[]
+};
+const $=id=>document.getElementById(id);
+const moodNames=['OBSERVING','CURIOUS','INVESTED','DELIGHTED','THRIVING','DEEPLY INVESTED'];
+const achievementNames={
+  road_bard:'Rush Hour Bard',road_brood:'Road Rage Ascetic',parking_pilgrim:'Pilgrim of Parking Lot C',parking_miracle:'Chosen by Asphalt',parking_loop:'Parking Lot Ouroboros',
+  desk_exile:'Open-Space Exile',desk_legend:'Adjacent to Teammates (Legendary)',desk_safari:'Desk Safari Veteran',coffee_drink:'Bean Betrayal',coffee_refuse:'Standards Maintained',
+  plague_distance:'Personal Space Paladin',plague_polite:'HVAC Believer',interrupt_escape:'Calendar Defender',interrupt_endure:'Five-Minute Call Survivor',canteen_buy:'Luxury Lunch Victim',
+  canteen_pack:'Meal-Prep Min-Maxer',headphones_on:'Together, Separately',headphones_off:'Open-Space Hard Mode',boss_async:'Async Exorcist',boss_resisted:'Counterspell Resisted',
+  boss_tank:'Alignment Damage Sponge',escape:'Wednesday Completed',rare_silence:'Found: Actual Silence',rare_remote:'Presence Culture Witness',secret_cake:'Buffet Goblin',pvp_truce:'Thermostat Treaty',pvp_win:'Climate Dominance',pvp_retreat:'Layered Defense',printer_whisperer:'Printer Whisperer',printer_reboot:'Power-Cycle Cleric',printer_delegate:'Quest Returned to Sender',printer_cursed:'PC LOAD LETTER Survivor'
+};
+const achievementFlavor={
+  road_bard:'Turned rush hour into a private audio instance.',road_brood:'Converted traffic directly into usable resentment.',parking_pilgrim:'Reached the building from a parking spot technically within the same region.',
+  parking_miracle:'Observed a parking space within normal walking distance. Evidence remains disputed.',parking_loop:'Completed a full orbit of corporate real estate.',desk_exile:'Sat near colleagues. Just not the relevant ones.',
+  desk_legend:'Spawned next to an actual teammate. Legendary drop rate confirmed.',desk_safari:'Explored three neighborhoods in search of a chair.',coffee_drink:'Consumed a beverage despite available evidence.',coffee_refuse:'Refused to lower standards below machine output.',
+  plague_distance:'Remembered that infectious disease has range mechanics.',plague_polite:'Placed faith in airflow and social convention.',interrupt_escape:'Successfully used a calendar as defensive equipment.',
+  interrupt_endure:'Survived a five-minute conversation with a thirty-minute hitbox.',canteen_buy:'Paid premium currency for common-tier food.',canteen_pack:'Brought supplies from the safe zone.',
+  headphones_on:'Recreated remote work while physically present.',headphones_off:'Attempted concentration without protective equipment.',boss_async:'Successfully banished a synchronous meeting into text.',
+  boss_resisted:'The phrase “quickly align” resisted your counterspell.',boss_tank:'Accepted full synergy damage without mitigation.',escape:'Extracted from Wednesday with measurable resources remaining.',
+  rare_silence:'Located a pocket of silence inside an open-plan office.',rare_remote:'Witnessed leadership promoting presence from a remote location.',secret_cake:'Abandoned all strategy because someone brought cake.',
+  pvp_truce:'Negotiated a temporary ceasefire in the Thermostat War.',pvp_win:'Established one-degree dominance over the climate biome.',pvp_retreat:'Survived PvP by equipping another layer instead of another opinion.',printer_whisperer:'Solved a paper jam that existed mainly as a philosophical concept.',printer_reboot:'Applied the ancient rite of OFF, WAIT, ON.',printer_delegate:'Located the original quest giver and restored ownership of the problem.',printer_cursed:'Read every tray, opened every door, and still received PC LOAD LETTER.'
+};
+const itemData={
+  audio_armor:{name:'Audio Armor',rarity:'rare',desc:'Next SANITY hit reduced by 5.',consumable:'sanity'},
+  sanitizer:{name:'Sanitizer of Suspicion',rarity:'rare',desc:'Cuts delayed plague risk to 12%.',consumable:'plague'},
+  noise_crown:{name:'Noise-Cancelling Crown',rarity:'legendary',desc:'Reduces final boss SANITY damage by 7.',consumable:'boss'},
+  tupperware:{name:'Tupperware of Foresight',rarity:'rare',desc:'Proof that preparation can still hurt the canteen economy.'},
+  silence_shard:{name:'Shard of Actual Silence',rarity:'legendary',desc:'A material previously thought mythical.'},
+  parking_pebble:{name:'Parking Pebble +1',rarity:'common',desc:'Useless. Emotionally significant.'},
+  stapler_relic:{name:'Stapler of Binding',rarity:'rare',desc:'Binds up to 20 sheets. Cannot bind accountability.'}
+};
+
+function clamp(v){return Math.max(0,Math.min(100,v))}
+function log(t){const box=$('log');const d=document.createElement('div');d.innerHTML=t;box.prepend(d);while(box.children.length>5)box.removeChild(box.lastElementChild)}
+function queuePop(kind,title,detail){state.toastQueue.push({kind,title,detail});runPopQueue()}
+function runPopQueue(){
+  if(state.toastBusy||!state.toastQueue.length)return;
+  state.toastBusy=true;const p=state.toastQueue.shift();const layer=$('overlayLayer');const el=document.createElement('div');
+  const labels={loot:'Loot acquired',secret:'Secret achievement',systempop:'System update',curse:'Curse received',spell:'Spell acquired'};
+  el.className=`pop ${p.kind||''}`;el.innerHTML=`<div class="overline">${labels[p.kind]||'Achievement unlocked'}</div><div class="poptitle">${p.title}</div><div class="popdetail">${p.detail||''}</div><div class="pophint">click anywhere to continue</div>`;
+  layer.classList.add('active');layer.appendChild(el);
+  let done=false;const finish=()=>{if(done)return;done=true;layer.onclick=null;el.remove();state.toastBusy=false;if(!state.toastQueue.length)layer.classList.remove('active');runPopQueue()};
+  layer.onclick=finish;
+}
+function moodFromPain(){return state.pain<28?0:state.pain<70?1:state.pain<120?2:state.pain<175?3:state.pain<235?4:5}
+function updateMood(){
+  const old=state.mood;state.mood=moodFromPain();$('mood').textContent=moodNames[state.mood];document.body.dataset.mood=String(state.mood);
+  if(state.mood>old){
+    const comments=['The system has begun paying attention.','Your discomfort is producing excellent telemetry.','The system would like you to know it is having a wonderful Wednesday.','This is now statistically more entertaining than expected.','The system has become emotionally invested in your attendance.'];
+    queuePop('systempop',`SYSTEM MOOD: ${moodNames[state.mood]}`,comments[state.mood-1]||'The system is fine. This is fine.');
+  }
+}
+const effectFlavor={
+  road:'Movement speed reduced. Existential questioning increased.',resentment:'Stores emotional damage for later use.',caffeine:'Energy increased. Beverage standards compromised.',exposed:'Delayed plague roll pending.',boundary:'Improves the final async counterspell chance.',tangent:'Focus defense breached by unsolicited lore.',bunker:'Open-space audio damage partially contained.',climate_aggro:'You raised the thermostat by one degree. Someone noticed.',climate_war:'Office factions are now forming around your one-degree warmer setting.',climate_truce:'Hostilities suspended at a fragile half-degree compromise.',toner_hex:'Black dust has entered your inventory, your hands, and possibly your soul.',paper_ward:'You have briefly demonstrated dominance over office machinery.'
+};
+function hasItem(id){return state.inventory.includes(id)}
+function hasUsableItem(id){return hasItem(id)&&!state.spentItems.has(id)}
+function consumeItem(id){if(!hasItem(id))return;state.spentItems.add(id);renderInventory()}
+function giveItem(id){
+  if(hasItem(id)||!itemData[id])return;
+  state.inventory.push(id);renderInventory();const it=itemData[id];queuePop('loot',it.name,`${it.rarity.toUpperCase()} · ${it.desc}`);log(`🎁 <b>Loot:</b> ${it.name}`);
+}
+function renderInventory(){
+  const box=$('inventory');const items=state.inventory.map(id=>{const it=itemData[id];const spent=state.spentItems.has(id)?' spent':'';return `<div class="item ${it.rarity}${spent}" title="${it.desc}">◆ ${it.name}</div>`}).join('');
+  const blanks=Math.max(0,6-state.inventory.length);box.innerHTML=items+Array.from({length:blanks},()=>'<div class="emptyslot">empty slot</div>').join('');
+}
+function addEffect(id,label,tone='weird'){
+  const isNew=!state.effects.has(id);state.effects.set(id,{label,tone});renderStatus();
+  if(isNew){const kind=tone==='good'?'spell':'curse';queuePop(kind,label,effectFlavor[id]||'A new status effect has attached itself to your Wednesday.');}
+}
+function removeEffect(id){state.effects.delete(id);renderStatus()}
+function renderStatus(){
+  const box=$('statusList');const vals=[...state.effects.values()].slice(0,4);const active=vals.map(e=>`<div class="statuschip ${e.tone}">${e.label}</div>`).join('');const blanks=Math.max(0,4-vals.length);box.innerHTML=active+Array.from({length:blanks},(_,i)=>`<div class="emptyslot">${i===0&&vals.length===0?'no active debuffs yet':'empty status slot'}</div>`).join('');
+}
+function change(stat,delta,label){
+  let actual=delta;
+  if(stat==='sanity'&&delta<0&&hasUsableItem('audio_armor')){const reduced=Math.min(5,Math.abs(delta));actual=delta+reduced;consumeItem('audio_armor');log(`🎧 <b>Audio Armor charge spent:</b> blocked ${reduced} SANITY damage.`)}
+  if(delta<0){state.pain+=Math.abs(actual);updateMood()}
+  state[stat]=clamp(state[stat]+actual);log(`${actual<0?'−':'+'}${Math.abs(actual)} ${stat.toUpperCase()} · ${label}`);
+}
+function updateHud(){for(const s of ['energy','sanity','productivity','money']){$(s).style.width=state[s]+'%';$(s+'N').textContent=state[s]}}
+function unlock(id,secret=false){
+  if(state.ach.has(id))return;state.ach.add(id);renderAch();const name=achievementNames[id]||id;queuePop(secret?'secret':'',name,achievementFlavor[id]||'The system has recorded this behavior.');log(`🏆 <b>Achievement:</b> ${name}`);
+}
+function renderAch(){
+  const list=$('achievements'),empty=$('achEmpty'),count=$('achCount');list.innerHTML=[...state.ach].slice(0,12).map(id=>`<span class="chip ${id.startsWith('rare_')||id.startsWith('secret_')?'secret':''}">✓ ${achievementNames[id]||id}</span>`).join('');empty.hidden=state.ach.size>0;count.textContent=`${Math.min(state.ach.size,12)} / 12 slots`;
+}
+function flash(){$('screen').classList.remove('pulse');void $('screen').offsetWidth;$('screen').classList.add('pulse')}
+function setScene(kicker,title,html,choices){
+  $('kicker').textContent=kicker;$('title').innerHTML=title;$('body').innerHTML=html;$('choices').innerHTML='';
+  choices.forEach(c=>{const b=document.createElement('button');b.innerHTML=c.label;b.onclick=()=>{flash();c.go();updateHud();if((state.sanity<=0||state.energy<=0)&&!state.flags.finished)checkCollapse()};$('choices').appendChild(b)});
+}
+function system(msg){return `<div class="system"><strong>SYSTEM · ${moodNames[state.mood]}:</strong> ${msg}</div>`}
+function risk(){return Math.random()}
+function checkCollapse(){
+  if(state.flags.finished)return false;
+  if(state.sanity<=0||state.energy<=0){state.flags.finished=true;setScene('Run terminated','CORPORATE FATALITY',`<p class="death">You have been defeated by a workplace arrangement described in a slide deck as “best of both worlds.”</p>${system('Please complete the employee engagement survey before respawning. Your feedback is important and will be summarized into a pie chart.')}`,[{label:'↻ <strong>Respawn next Wednesday</strong>',go:reset}]);return true}return false;
+}
+
+function randomEvent(next,forcedId=null){
+  const pool=[
+    {id:'deskmsg',title:'THE THREE-DESK TEAMS MESSAGE',body:'A colleague sitting three desks away sends you a Teams message: <strong>“Quick question?”</strong> You can see each other. Both of you are wearing headsets.',sys:'PHYSICAL PROXIMITY HAS FAILED TO REDUCE DIGITAL COMMUNICATION.',choices:[
+      {label:'💬 <strong>Reply on Teams.</strong> Respect the ecosystem.',act:()=>{change('productivity',-6,'chat about something visible from here');change('sanity',-4,'proximity paradox')}},
+      {label:'👋 <strong>Look up and wave.</strong> Attempt analog networking.',act:()=>{change('energy',-2,'human gesture');change('sanity',3,'tiny act of rebellion')}}]},
+    {id:'thermostat',title:'THE TEMPERATURE WAR',body:'A ceiling vent has been blowing refrigerated air at your desk for forty minutes. <strong>You are freezing.</strong> Across the open space, someone in a T-shirt insists the office is already too warm.',sys:'PLAYER TEMPERATURE: COLD. OFFICE CONSENSUS: IMPOSSIBLE.',choices:[
+      {label:'🧥 <strong>Add another layer.</strong> Accept the polar biome.',act:()=>{change('sanity',-5,'office freezer conditions');change('energy',-2,'thermal adaptation')}},
+      {label:'🌡️ <strong>Turn the thermostat up by 1°C.</strong> Trigger PvP.',go:(next)=>{change('sanity',-4,'first move in climate war');state.score+=8;addEffect('climate_aggro','THERMOSTAT AGGRO','weird');thermostatPvP(next)}}]},
+    {id:'room',title:'MEETING ROOM MIMIC',body:'The room you booked is occupied by one person on a call. They point at their headset as if this explains ownership law.',sys:'RESOURCE CONFLICT DETECTED. COLLABORATION SPACE CURRENTLY SUPPORTS ONE COLLABORATOR.',choices:[
+      {label:'🚪 <strong>Surrender the room.</strong> Wander the map.',act:()=>{change('productivity',-11,'room hunt');change('energy',-4,'corridor expedition')}},
+      {label:'📅 <strong>Show the booking.</strong> Invoke calendar law.',act:()=>{change('sanity',-6,'social friction');change('productivity',3,'territory reclaimed')}}]},
+    {id:'printer',title:'SIDE QUEST: THE PRINTER',body:'Someone notices you walking past and says: <strong>“Since you’re going that way…”</strong> You were not, in fact, going that way. They hand you three sheets of paper and point toward a printer with a blinking red light.',sys:'OPTIONAL QUEST MARKED MANDATORY BY SOCIAL EXPECTATION. QUEST REWARD: CURRENTLY UNDISCLOSED.',choices:[
+      {label:'🖨️ <strong>Accept the side quest.</strong> Enter the Printer Catacombs.',go:(next)=>{change('productivity',-6,'printer pilgrimage');change('sanity',-3,'paper-based detour');printerQuest(next)}},
+      {label:'🧭 <strong>Claim directional incompatibility.</strong> Return the quest to sender.',act:()=>{change('sanity',5,'boundary micro-win');state.score+=7;unlock('printer_delegate')}}]},
+    {id:'cake',title:'UNEXPECTED BUFF: CAKE',body:'Someone brought cake. The office briefly reveals the strongest argument anyone has made for physical presence all day.',sys:'WARNING: A LEGITIMATE BENEFIT HAS BEEN DETECTED. PLEASE REMAIN CALM.',choices:[
+      {label:'🍰 <strong>Take cake.</strong> Abandon ideological consistency.',act:()=>{change('energy',9,'sugar buff');change('sanity',8,'actual joy');unlock('secret_cake',true)}},
+      {label:'🛡️ <strong>Resist.</strong> You are here to suffer with principles.',act:()=>{change('sanity',3,'principled refusal')}}]}
+  ].filter(e=>!state.seenEvents.has(e.id));
+  if(!pool.length){next();return}
+  const ev=forcedId ? pool.find(e=>e.id===forcedId) : pool[Math.floor(Math.random()*pool.length)];
+  if(!ev){next();return}
+  state.seenEvents.add(ev.id);state.eventsTriggered++;
+  setScene('⚠ Random Wednesday Event',ev.title,`<p>${ev.body}</p>${system(ev.sys)}`,ev.choices.map(c=>({label:c.label,go:()=>{if(c.go)c.go(next);else{c.act();next()}}})));
+}
+function printerQuest(next){
+  setScene('Side quest · Printer Catacombs','THE PAPER JAM THAT ISN’T THERE',`<p>The printer display reads <strong>PAPER JAM — TRAY 2</strong>.</p><p>Tray 2 is innocent. Tray 3 is empty. The rear door reveals one warm sheet of paper and no explanation. The colleague who gave you the quest has already vanished.</p>${system('SIDE QUEST UPDATED: APPEASE THE OFFICE MACHINE. DIFFICULTY: VENDOR-SPECIFIC. DOCUMENTATION: SOMEWHERE ON SHAREPOINT, PROBABLY.')}`,[
+    {label:'🧙 <strong>Open every tray.</strong> Negotiate directly with the machine.',go:()=>{change('productivity',-7,'printer archaeology');change('energy',-3,'crouching beside office machinery');if(risk()<.65){change('sanity',6,'the printer finally prints');state.score+=12;addEffect('paper_ward','PAPER JAM WARD','good');giveItem('stapler_relic');unlock('printer_whisperer');printerResolution(next,'success')}else{change('sanity',-9,'the jam migrates to an impossible location');addEffect('toner_hex','TONER HEX','bad');unlock('printer_cursed');printerResolution(next,'cursed')}}},
+    {label:'🔌 <strong>Perform the ancient ritual:</strong> OFF. WAIT. ON.',go:()=>{change('productivity',-5,'power-cycle ceremony');change('energy',-2,'waiting for corporate firmware');if(risk()<.78){change('sanity',5,'technology fears ritual');state.score+=10;giveItem('stapler_relic');unlock('printer_reboot');printerResolution(next,'reboot')}else{change('sanity',-7,'printer wakes angrier');addEffect('toner_hex','TONER HEX','bad');unlock('printer_cursed');printerResolution(next,'cursed')}}},
+    {label:'📣 <strong>Summon the quest giver.</strong> “It needs your badge/code/whatever this is.”',go:()=>{change('productivity',-3,'ownership restoration ceremony');change('sanity',7,'problem successfully returned to source');state.score+=9;unlock('printer_delegate');printerResolution(next,'delegate')}}
+  ]);
+}
+function printerResolution(next,outcome){
+  const copy={
+    success:`<p>The printer coughs, thinks about its choices, and produces all three pages.</p><p>The original quest giver reappears instantly, as if summoned by successful output. <strong>“Oh great, thanks!”</strong> No XP is verbally awarded.</p>${system('SIDE QUEST COMPLETE. REWARD FOUND INSIDE NEARBY STATIONERY CUPBOARD: STAPLER OF BINDING.')}`,
+    reboot:`<p>The printer restarts for long enough to make you question whether it has a BIOS, a personality, or both. Then the job emerges perfectly.</p><p>Nobody learns anything from this.</p>${system('SIDE QUEST COMPLETE. ROOT CAUSE: RESOLVED BY TRADITION. PLEASE DO NOT DOCUMENT.')}`,
+    cursed:`<p>The printer changes its message to <strong>PC LOAD LETTER</strong>, although nobody is entirely certain what that means anymore.</p><p>You eventually extract the pages from another printer one floor away. Your hands are now lightly dusted with toner.</p>${system('SIDE QUEST COMPLETE* · *THE ASTERISK IS DOING SIGNIFICANT WORK. CURSE PERSISTS.')}`,
+    delegate:`<p>The quest giver returns, taps their badge against a panel you were never told existed, and the printer immediately works.</p><p>You have solved the incident by restoring the missing dependency: <strong>the person who actually owns the problem.</strong></p>${system('SIDE QUEST COMPLETE. ADVANCED TECHNIQUE UNLOCKED: DELEGATION.')}`
+  };
+  setScene('Side quest complete · Printer',outcome==='cursed'?'THE PRINTER CLAIMS A DRAW':'QUEST COMPLETE',copy[outcome],[
+    {label:'↩️ <strong>Return to the main dungeon.</strong>',go:next}
+  ]);
+}
+function thermostatPvP(next){
+  setScene('⚔ PvP encounter · Climate War','COLLEAGUE CLIMATE PALADIN',`<p>You raise the thermostat by one degree. It clicks.</p><p>A nearby colleague slowly turns their chair. <strong>“Did you just turn the temperature UP?”</strong></p><p>They are wearing a T-shirt. You are considering gloves. A red health bar appears over a relationship that was previously neutral.</p>${system('PVP ENABLED. OBJECTIVE: GAIN ONE DEGREE OF WARMTH WITHOUT CREATING A TEAMS CHANNEL ABOUT IT.')}`,[
+    {label:'🤝 <strong>Cast Diplomacy:</strong> “Just one degree. My hands are freezing.”',go:()=>{removeEffect('climate_aggro');addEffect('climate_truce','UNEASY CLIMATE TRUCE','good');change('sanity',5,'climate diplomacy');state.score+=10;unlock('pvp_truce');pvpResolution(next,'truce')}},
+    {label:'🔥 <strong>Counterattack:</strong> “It was 21°C. I am not requesting a sauna.”',go:()=>{removeEffect('climate_aggro');addEffect('climate_war','OPEN-SPACE COLD WAR','bad');change('sanity',-7,'temperature facts become personal');state.score+=14;pvpEscalation(next)}},
+    {label:'🧥 <strong>Retreat.</strong> Turn it back down, add another layer, disengage.',go:()=>{removeEffect('climate_aggro');change('energy',-2,'layer management');change('sanity',2,'strategic withdrawal');unlock('pvp_retreat');pvpResolution(next,'retreat')}}
+  ]);
+}
+function pvpEscalation(next){
+  setScene('⚔ PvP phase 2 · Factions form','THE GREAT OFFICE CLIMATE WAR',`<p>The dispute instantly recruits bystanders.</p><p>The <strong>Freezer Faction</strong> wants the office warmer. The <strong>Tropical Faction</strong> wants your new setting reversed immediately. Someone opens a window, introducing a third ideology that pleases nobody.</p>${system('MULTIPLAYER EVENT DETECTED. NOBODY IS WORKING. COLLABORATION METRIC: TECHNICALLY EXCELLENT.')}`,[
+    {label:'🏳️ <strong>Offer a compromise:</strong> split the difference — half a degree back, then nobody touches it for an hour.',go:()=>{removeEffect('climate_war');addEffect('climate_truce','UNEASY CLIMATE TRUCE','good');change('productivity',-5,'climate summit');change('sanity',3,'hostilities paused');unlock('pvp_truce');pvpResolution(next,'truce')}},
+    {label:'⚔️ <strong>Hold the line.</strong> Defend the +1°C warmer setting.',go:()=>{removeEffect('climate_war');change('productivity',-8,'thermostat frontline');change('sanity',-9,'passive-aggressive retaliation');change('energy',-3,'combat fatigue');state.score+=18;unlock('pvp_win');pvpResolution(next,'win')}}
+  ]);
+}
+function pvpResolution(next,outcome){
+  const text=outcome==='win'?'<p>You retain the +1°C warmer setting for approximately eleven minutes, until an unknown player quietly turns it back down while nobody is looking.</p>':outcome==='truce'?'<p>A temporary treaty is signed at +0.5°C above the original setting. It has no enforcement mechanism and will expire the moment someone opens a window.</p>':'<p>You restore the thermostat to its original colder setting, equip another layer, and let your social aggro meter return to zero.</p>';
+  setScene('PvP resolved · Climate War','HOSTILITIES SUSPENDED',`${text}${system('PVP SESSION COMPLETE. WINNER: THE BUILDING MANAGEMENT SYSTEM. CASUALTIES: FOCUS, TIME, AND ONE DEGREE CELSIUS.')}`,[
+    {label:'▶ <strong>Return to the Wednesday dungeon.</strong>',go:next}
+  ]);
+}
+function rareEncounter(next){
+  state.rareSeen=true;
+  const which=risk()<.58?'silence':'remote';
+  if(which==='silence'){
+    setScene('✦ Rare encounter','<span class="raretext">THE EMPTY PHONE BOOTH</span>',`<p>Behind a half-open door you discover the impossible: an empty, quiet booth with a functioning chair and no one coughing nearby.</p>${system('RARE BIOME DISCOVERED: ACTUAL SILENCE. DROP RATE: 3%. PLEASE DO NOT TELL FACILITIES.')}`,[
+      {label:'🔒 <strong>Occupy it immediately.</strong> Become unavailable.',go:()=>{change('sanity',14,'silence');change('productivity',16,'uninterrupted work');giveItem('silence_shard');unlock('rare_silence',true);next()}},
+      {label:'🕊️ <strong>Leave it for someone else.</strong> Impossible nobility.',go:()=>{change('sanity',6,'moral superiority');next()}}
+    ]);
+  }else{
+    setScene('✦ Rare encounter','<span class="raretext">PRESENCE CULTURE: REMOTE EDITION</span>',`<p>A senior leader appears on Teams from home and says how valuable it is that <em>everyone</em> is together in the office today.</p><p>The system pauses to process this.</p>${system('LOGIC EXCEPTION. LOGIC EXCEPTION. LOGIC EXCEPTION. THIS IS EXCELLENT.')}`,[
+      {label:'👁️ <strong>Stare into the middle distance.</strong>',go:()=>{change('sanity',-7,'irony overload');state.score+=25;unlock('rare_remote',true);next()}},
+      {label:'📝 <strong>Write it down.</strong> Preserve the artifact for science.',go:()=>{change('productivity',-3,'anthropological documentation');state.score+=30;unlock('rare_remote',true);next()}}
+    ]);
+  }
+}
+function advance(next){
+  state.stage++;
+  if(checkCollapse())return;
+  // The Temperature War is a signature quest: random early, guaranteed by stage 5.
+  if(!state.seenEvents.has('thermostat')&&state.stage===5){randomEvent(next,'thermostat');return}
+  if(!state.rareSeen&&state.stage>=2&&state.stage<=8&&risk()<.12){rareEncounter(next);return}
+  if(state.eventsTriggered<3&&state.stage>=2&&state.stage<=8&&risk()<.34){randomEvent(next);return}
+  next();
+}
+
+function start(){
+  setScene('Floor 0 · Home','THE SUMMONING',`<p>It is Wednesday. Your laptop is already on. Your internet works. Your chair is adjusted exactly right.</p><p>Unfortunately, a darker force has awakened.</p>${system('QUEST RECEIVED: Travel to the office and prove your physical presence near other people who will mostly be wearing headphones.')}`,[
+    {label:'🚗 <strong>Accept fate.</strong> Begin the commute.',go:commute},
+    {label:'🛡️ <strong>Cast “Maybe I’m getting a cold?”</strong> (cowardly but tempting)',go:()=>{change('sanity',10,'fantasy of freedom');change('productivity',5,'brief imaginary focus');setScene('Secret ending','THE FORBIDDEN HOME OFFICE',`<p>You imagine staying home. The coffee is good. Nobody interrupts you. A meeting takes exactly five minutes.</p>${system('Unfortunately this is a fantasy sequence. Wednesday policy remains active. The system appreciates your creativity.')}`,[{label:'Fine. <strong>Enter the dungeon.</strong>',go:commute}])}}
+  ]);
+}
+function commute(){
+  change('energy',-18,'long drive');change('sanity',-12,'traffic');change('money',-8,'fuel and the privilege of attendance');addEffect('road','ROAD FATIGUE','bad');
+  setScene('Floor 1 · The Motorway','THE COMMUTE OF DESTINY',`<p>The route is long enough to reconsider several life decisions. Every red light adds +1 to the ancient question: <em>“Why am I doing this?”</em></p>${system('TRAVEL BONUS: You are now physically closer to coworkers you will contact digitally. This metric has been classified as success.')}`,[
+    {label:'🎧 <strong>Listen to something good</strong> and pretend this is personal time.',go:()=>{change('sanity',8,'audio armor');if(risk()<.72)giveItem('audio_armor');unlock('road_bard');advance(parking)}},
+    {label:'😑 <strong>Drive in silence</strong> and cultivate resentment for later.',go:()=>{change('sanity',-10,'advanced brooding');state.score+=20;addEffect('resentment','STORED RESENTMENT','weird');unlock('road_brood');advance(parking)}}
+  ]);
+}
+function parking(){
+  removeEffect('road');setScene('Floor 2 · Exterior Zone','THE PARKING PILGRIMAGE',`<p>The building is visible. This is misleading. Your parking spot is not.</p><p>You circle the area until the game finally spawns a legal rectangle of asphalt somewhere near another postal code.</p>${system('NEW OBJECTIVE: Reach the entrance without aging visibly. The system believes in you mostly because this is funny.')}`,[
+    {label:'🥾 <strong>Take the distant spot</strong> and begin the pilgrimage.',go:()=>{change('energy',-14,'parking pilgrimage');change('sanity',-5,'entrance receding into the distance');if(risk()<.38)giveItem('parking_pebble');unlock('parking_pilgrim');advance(desk)}},
+    {label:'🌀 <strong>Circle once more</strong> in search of mythical closer parking.',go:()=>{change('energy',-5,'another parking lap');change('money',-2,'fuel sacrificed to the parking gods');if(risk()<.30){change('sanity',10,'miracle spot');unlock('parking_miracle');log('✨ <b>Rare parking spawn:</b> legal asphalt within civilized walking distance.')}else{change('sanity',-15,'false hope');change('energy',-5,'still walking from far away');unlock('parking_loop')}advance(desk)}}
+  ]);
+}
+function desk(){
+  change('sanity',-8,'seating roulette');change('productivity',-6,'unpacking life at a random workstation');
+  setScene('Floor 3 · Open Space','THE SEAT LOTTERY',`<p>You arrive. Your teammates are technically here.</p><p>Not next to you, obviously. That would imply the office had been designed around collaboration rather than availability roulette.</p>${system('TEAM PROXIMITY: 23 meters. DIGITAL PROXIMITY: 0 milliseconds. THE SYSTEM LOVES A MULTI-CHANNEL EXPERIENCE.')}`,[
+    {label:'🪑 <strong>Take the random free desk</strong> and accept exile.',go:()=>{change('productivity',-7,'wrong zone, wrong people, wrong chair');unlock('desk_exile');advance(coffee)}},
+    {label:'🧭 <strong>Search for a seat near the team</strong> and test the legend.',go:()=>{change('energy',-8,'desk expedition');if(risk()<.20){change('sanity',10,'a seat near the team actually exists');change('productivity',-5,'setup delay');unlock('desk_legend');log('✨ <b>Legendary spawn:</b> a free seat next to a teammate. Nobody knows how long it will last.')}else{change('sanity',-10,'the legend was false');change('productivity',-13,'desk safari');unlock('desk_safari')}advance(coffee)}}
+  ]);
+}
+function coffee(){
+  setScene('Floor 4 · Beverage Station','THE COFFEE TRAP',`<p>You approach the machine with hope. The machine interprets this as weakness.</p><p>The resulting liquid has notes of burnt cardboard, vague despair and an aftertaste of procurement.</p>${system('CONSUMABLE IDENTIFIED: “Coffee” [quality: disputed]. The system recommends lowering expectations rather than replacing beans.')}`,[
+    {label:'☕ <strong>Drink it anyway.</strong> You need the caffeine.',go:()=>{change('energy',12,'chemical assistance');change('sanity',-13,'coffee crime');addEffect('caffeine','CAFFEINATED / CURSED','weird');unlock('coffee_drink');advance(plague)}},
+    {label:'🚫 <strong>Refuse the potion.</strong> Retain dignity, lose caffeine.',go:()=>{change('energy',-10,'caffeine deficit');change('sanity',6,'standards preserved');unlock('coffee_refuse');advance(plague)}}
+  ]);
+}
+function plague(){
+  change('sanity',-5,'hearing the cough before seeing its owner');
+  setScene('Floor 5 · Biohazard Corridor','THE PLAGUE NPC',`<p>A colleague appears. Pale. Coughing. Heroically committed to “showing up.”</p><p>Behind them, the boss is explaining that it is “probably just a cold.”</p>${system('STATUS EFFECT DETECTED: PRESENCE CULTURE. AIRBORNE RANGE: YES. ACHIEVEMENT OPPORTUNITY: IMMUNE SYSTEM ENGAGEMENT.')}`,[
+    {label:'😷 <strong>Activate distancing protocol.</strong> Retreat two meters and look antisocial.',go:()=>{change('sanity',-7,'social awkwardness tax');change('productivity',-4,'route recalculation');if(risk()<.68)giveItem('sanitizer');unlock('plague_distance');advance(interruption)}},
+    {label:'🦠 <strong>Stay polite.</strong> Trust fate and the HVAC system.',go:()=>{state.flags.exposed=true;addEffect('exposed','EXPOSED','bad');change('sanity',-13,'biological roulette');unlock('plague_polite');advance(interruption)}}
+  ]);
+}
+function interruption(){
+  change('productivity',-14,'ambient interruptions');change('sanity',-6,'open-space chatter entering the bloodstream');
+  setScene('Floor 6 · Focus Zone','THE FIVE-MINUTE CONVERSATION',`<p>You start actual work. A coworker approaches with the phrase every deep-focus session fears:</p><p><strong>“Quick question...”</strong></p><p>The issue could be solved in a five-minute Teams call. The live version expands to thirty minutes and includes three tangents, a story from 2019, and two people nearby learning things they never asked to know.</p>${system('BATTLE MODE: DEFEND THE CALENDAR. THE SYSTEM HAS ORDERED POPCORN.')}`,[
+    {label:'⚔️ <strong>Use “I have a call in five.”</strong> Tactical escape.',go:()=>{change('sanity',10,'successful boundary');change('productivity',-6,'context switch anyway');addEffect('boundary','BOUNDARY MOMENTUM','good');unlock('interrupt_escape');advance(canteen)}},
+    {label:'🗣️ <strong>Engage.</strong> Surely this will stay brief.',go:()=>{change('energy',-7,'standing there for thirty minutes');change('sanity',-20,'thirty-minute bla bla');change('productivity',-23,'deep work obliterated');state.score+=20;addEffect('tangent','TANGENT DAMAGE','bad');unlock('interrupt_endure');advance(canteen)}}
+  ]);
+}
+function canteen(){
+  removeEffect('caffeine');setScene('Floor 7 · Canteen','THE PREMIUM MEDIOCRE LUNCH',`<p>Hunger arrives. The canteen offers a bold proposition: pay restaurant-adjacent money for food with the emotional range of a printer manual.</p>${system('MERCHANT OFFER: “TODAY’S SPECIAL” — premium currency — satisfaction sold separately.')}`,[
+    {label:'🍽️ <strong>Buy lunch.</strong> Spend money, regain some energy.',go:()=>{change('money',-25,'canteen transaction');change('energy',13,'calories acquired');change('sanity',-11,'value-for-money damage');unlock('canteen_buy');advance(headphones)}},
+    {label:'🥪 <strong>Eat emergency food.</strong> You planned ahead like a professional.',go:()=>{change('money',-4,'home-packed lunch');change('energy',10,'functional meal');change('sanity',9,'small but meaningful victory');giveItem('tupperware');unlock('canteen_pack');advance(headphones)}}
+  ]);
+}
+function headphones(){
+  change('productivity',-8,'collaboration-hub noise floor');change('sanity',-5,'everyone speaking into microphones within earshot');
+  setScene('Floor 8 · Collaboration Hub','TOGETHER, SEPARATELY',`<p>After lunch, you survey the great collaborative office.</p><p>Everyone is wearing headphones. One person is on Teams with someone three desks away. Another is presenting to a client while six unrelated people absorb the entire conversation through the air.</p>${system('COLLABORATION BONUS: +0. NOISE BONUS: +18. THE SYSTEM IS NOW THRILLED BY THE ARCHITECTURE.')}`,[
+    {label:'🎧 <strong>Put on headphones.</strong> Simulate the home-office experience at lower quality.',go:()=>{change('productivity',11,'noise shielding');change('sanity',5,'temporary auditory bunker');change('energy',-2,'headset fatigue');if(risk()<.78)giveItem('noise_crown');addEffect('bunker','AUDITORY BUNKER','good');unlock('headphones_on');advance(boss)}},
+    {label:'🧠 <strong>Attempt focus without headphones.</strong> Hard mode.',go:()=>{change('sanity',-17,'open-space acoustics');change('productivity',-18,'overheard meetings');unlock('headphones_off');advance(boss)}}
+  ]);
+}
+function boss(){
+  setScene('Final Floor · 16:32','<span class="boss">BOSS FIGHT: SYNERGY</span>',`<p>You are almost free. Then someone says:</p><p><strong>“Since we’re all here, can we just quickly align?”</strong></p><p>The room darkens. Somewhere, a calendar slot expands by itself.</p>${system('FINAL ENCOUNTER INITIATED. Estimated duration: “five minutes.” Actual duration: unknowable. THE SYSTEM HAS BEEN WAITING ALL DAY FOR THIS.')}`,[
+    {label:'🗓️ <strong>Counterspell: “Can you send me the points on Teams?”</strong>',go:()=>{const boundary=state.effects.has('boundary');const chance=boundary ? 0.80 : 0.65;if(risk()<chance){change('sanity',13,'alignment avoided');change('productivity',9,'async victory');unlock('boss_async')}else{let sanityHit=-19;if(hasUsableItem('noise_crown')){sanityHit+=7;consumeItem('noise_crown');log('👑 <b>Noise-Cancelling Crown charge spent:</b> reduced boss damage by 7.')}change('sanity',sanityHit,'counterspell resisted');change('energy',-13,'forced alignment');change('productivity',-11,'late-day context destruction');unlock('boss_resisted')}ending()}},
+    {label:'💀 <strong>Accept the alignment.</strong> Face the boss directly.',go:()=>{let sanityHit=-22;if(hasUsableItem('noise_crown')){sanityHit+=7;consumeItem('noise_crown');log('👑 <b>Noise-Cancelling Crown charge spent:</b> reduced boss damage by 7.')}change('energy',-19,'meeting creep');change('sanity',sanityHit,'synergy damage');change('productivity',-14,'late-day derailment');state.score+=30;unlock('boss_tank');ending()}}
+  ]);
+}
+function ending(){
+  if(checkCollapse())return;
+  if(state.flags.exposed){const plagueRisk=hasUsableItem('sanitizer')?.12:.45;if(hasUsableItem('sanitizer'))consumeItem('sanitizer');if(risk()<plagueRisk){change('energy',-12,'post-exposure doom spiral');change('sanity',-8,'thinking about the cough');log('🦠 <b>Delayed debuff:</b> You are now suspicious of every throat tickle.');if(checkCollapse())return}else{removeEffect('exposed');log('🧼 <b>Exposure check passed.</b> Immune system remains off the project plan.')}}
+  unlock('escape');state.flags.finished=true;const average=Math.round((state.energy+state.sanity+state.productivity+state.money)/4);const bonus=state.ach.size*5+state.score;const final=average+bonus;let rank='C';if(final>155)rank='A';else if(final>118)rank='B';else if(final<72)rank='D';
+  const narrator=state.mood>=4?'The system would like to congratulate you, but this means the entertainment is over.':'The system has recorded your survival as an actionable insight.';
+  setScene('Extraction · Homeward Bound','<span class="win">WEDNESDAY CLEARED</span>',`<p>You leave the building carrying fewer resources than you entered with, but one priceless reward:</p><div class="bigscore">RANK ${rank}</div><p>You completed tasks that were fully possible from home while physically surrounded by people doing calls through headphones.</p>${system(`RUN COMPLETE. Remaining sanity: ${state.sanity}%. Energy: ${state.energy}%. Productivity integrity: ${state.productivity}%. ${narrator}`)}<p class="tiny">Next dungeon reset: Wednesday, 00:00. System mood persists only spiritually.</p>`,[
+    {label:'📊 <strong>View the totally scientific post-run report</strong>',go:report},{label:'↻ <strong>Play again</strong> and make worse choices.',go:reset}
+  ]);
+}
+function report(){
+  const irony=Math.round(((100-state.productivity)+(100-state.sanity)+(100-state.money))/3);const loot=state.inventory.length?state.inventory.map(id=>itemData[id].name).join(', '):'nothing but experience';
+  setScene('Post-run analytics','MANAGEMENT DASHBOARD',`<p><strong>On-site collaboration:</strong> mostly digital.</p><p><strong>Spontaneous interaction:</strong> abundant, whether desired or not.</p><p><strong>Focus quality:</strong> ${state.productivity}%.</p><p><strong>System mood at extraction:</strong> ${moodNames[state.mood]}.</p><p><strong>Loot extracted:</strong> ${loot}.</p><p><strong>Estimated Office Irony Index:</strong> ${irony}/100.</p>${system('RECOMMENDATION: Repeat exactly one week from now for reasons. Confidence: institutionally high. Evidence: spiritually low.')}`,[{label:'↻ <strong>Reset the dungeon</strong>',go:reset}]);
+}
+function reset(){
+  const layer=$('overlayLayer');
+  layer.onclick=null;layer.innerHTML='';layer.classList.remove('active');
+  Object.assign(state,{energy:100,sanity:100,productivity:100,money:100,score:0,stage:0,pain:0,mood:0,flags:{},ach:new Set(),inventory:[],spentItems:new Set(),effects:new Map(),seenEvents:new Set(),eventsTriggered:0,rareSeen:false,toastBusy:false,toastQueue:[]});
+  $('log').innerHTML='';document.body.dataset.mood='0';$('mood').textContent='OBSERVING';updateHud();renderAch();renderInventory();renderStatus();start();
+}
+renderAch();renderInventory();renderStatus();updateHud();start();
+</script>
+</body>
+</html>
