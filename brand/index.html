@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en" data-theme="core"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#17141B"><title>Valentina Contini / Brand System v2</title><meta name="description" content="A reusable editorial technofuturist design system: Core, CT LAB, Collision Lab, tokens, components, interactions and voice."><style>
+/* Offline-safe: font-family stacks only; no font binaries or remote requests. */
+/* Valentina Contini — generated from tokens.json */
+:root, [data-theme="core"] {
+  --purple: #6d23c8; /* Signature purple (source `--purple`, assets/styles.css :root). Accent text, links, eyebrows and selected-control fills on `paper`, `lavender` and `white` (7.08:1 on `paper`, 5.89:1 on `lavender`). Never normal-size text on `ink` (2.36:1) — use `violet-on-dark` there. */
+  --purple-deep: #3c166d; /* Deep purple (assets/styles.css :root), the core secondary purple. Fills and large display blocks; text on it: `paper` 12.63:1, `violet-on-dark` 7.26:1, `muted-dark` 8.99:1. */
+  --ink: #17141b; /* Near-black ink (assets/styles.css :root). Headings and body text on `paper` (16.75:1) and `lavender` (13.93:1); the dark section ground. */
+  --paper: #f7f5f2; /* Off-white paper (assets/styles.css :root). Default light canvas; text on `ink` (16.75:1) and on `purple-deep` (12.63:1). */
+  --lavender: #e7ddf4; /* Lavender (assets/styles.css :root). Softer sections, selected and hover surfaces; `ink` text 13.93:1, `purple` text 5.89:1, `muted-light` text 5.07:1. */
+  --violet-gray: #b8aac9; /* Violet-gray (assets/styles.css :root), the supporting neutral. Fills, rules and chips. As text: only on `ink` (8.36:1); on `paper` it is 2.00:1, so never text there. */
+  --white: #ffffff; /* White (assets/styles.css :root). Text on `purple` fills (7.71:1) and on `lab-magenta-on-light` fills (7.92:1); Collision Lab hero text on `ink` (18.22:1). */
+  --muted-light: #615a67; /* Muted body text on light grounds (ct-lab/index.html :root): 6.09:1 on `paper`, 6.63:1 on `white`, 5.07:1 on `lavender`. */
+  --muted-dark: #d6cedd; /* Muted body text on dark grounds (ct-lab/index.html :root): 11.92:1 on `ink`, 8.99:1 on `purple-deep`. */
+  --violet-on-dark: #cfaff4; /* Lighter violet for links, meta and actions on `ink` and on inverted core tiles (assets/styles.css .rabbit-card:hover): 9.63:1 on `ink` (the v1 notes print 9.14:1; recomputed here), 7.26:1 on `purple-deep`. */
+  --collision-violet: #b86cff; /* Collision Lab hero accent (collision-lab/index.html .collision-hero h1 span). Contextual, not a replacement for `purple`. Large and small text on `ink` (5.75:1); `ink` text on it also 5.75:1. */
+  --collision-eyebrow: #caa9f7; /* Collision Lab hero eyebrow on `ink` (collision-lab/index.html .collision-hero .eyebrow): 9.14:1. */
+  --lab-magenta: #ff38d1; /* CT LAB magenta (ct-lab/index.html :root). Use on `ink` only: 5.85:1. `ink` text on a magenta fill is 5.85:1. Never on `paper`. */
+  --lab-magenta-on-light: #9d006c; /* CT LAB darker magenta for light grounds (ct-lab/index.html :root): 7.28:1 on `paper`, 6.05:1 on `lavender`; `white` text on it 7.92:1. */
+  --lab-magenta-hover: #ff93e5; /* CT LAB hover tone on `ink` (ct-lab/index.html .track:hover): 9.16:1 on `ink`. Used when a light track tile inverts to `ink`. */
+  --error: #8b0d45; /* Error messages and the invalid-field border on paper and white (v1 manual .ds-contrast-error): 8.61:1 on `paper`, 9.37:1 on `white`. Always paired with the word "Error", never colour alone; close in hue to CT LAB's `lab-magenta-on-light`, so the word matters there. On ink surfaces errors use `paper` text. */
+  --lavender-hover: #d5c6e6; /* Hover ground of an unselected ModeSwitch option on paper (v1 manual .ds-mode-button:hover). `ink` text 11.32:1, `purple` 4.79:1, `lab-magenta-on-light` 4.92:1. */
+  --scrim: rgba(23,20,27,0.8); /* Backdrop behind a modal dialog: `ink` at 80% over any ground, so the dialog panel stands clear of the page. Not text; a v1 addition (no scrim in the source files). */
+  --accent-paper: var(--purple); /* The expression's accent on a paper surface (`data-surface="paper"`): eyebrows, meta, text actions, nav underline, focus ring, selected fills. Core and Collision Lab `purple` 7.08:1 on `paper`; CT LAB `lab-magenta-on-light` 7.28:1. Text on its fill: `on-accent-paper`. */
+  --accent-ink: var(--violet-on-dark); /* The expression's accent on an ink surface (`data-surface="ink"`): core `violet-on-dark` 9.63:1 on `ink`, CT LAB `lab-magenta` 5.85:1, Collision Lab `collision-violet` 5.75:1. Text on its fill: `on-accent-ink`. */
+  --accent-ink-inverse: var(--violet-on-dark); /* The accent on a paper tile that has inverted to ink on hover or focus: CT LAB uses its hover magenta `lab-magenta-hover` (9.16:1 on `ink`, ct-lab/index.html .track:hover); core and Collision Lab keep their ink accent. */
+  --on-accent-paper: var(--white); /* Text on an accent fill on a paper surface: `white` on `purple` 7.71:1, on `lab-magenta-on-light` 7.92:1. */
+  --on-accent-ink: var(--ink); /* Text on an accent fill on an ink surface: `ink` on `violet-on-dark` 9.63:1, on `lab-magenta` 5.85:1, on `collision-violet` 5.75:1. */
+  --line-paper: rgba(23,20,27,0.18); /* Hairline rules and dividers on a paper surface (foundations.css `--vc-line`). Decorative separation only, about 1.4:1; a control boundary uses the text colour. */
+  --line-ink: rgba(255,255,255,0.18); /* Hairline rules and dividers on an ink surface (foundations.css `--vc-line-dark`). Decorative separation only; a control boundary uses the text colour. */
+}
+[data-theme="ct-lab"] {
+  --accent-paper: var(--lab-magenta-on-light);
+  --accent-ink: var(--lab-magenta);
+  --accent-ink-inverse: var(--lab-magenta-hover);
+  --on-accent-paper: var(--white);
+  --on-accent-ink: var(--ink);
+}
+[data-theme="collision-lab"] {
+  --accent-paper: var(--purple);
+  --accent-ink: var(--collision-violet);
+  --accent-ink-inverse: var(--collision-violet);
+  --on-accent-paper: var(--white);
+  --on-accent-ink: var(--ink);
+}
+:root {
+  --space-1: 4px; /* Icon gaps, tight inline gaps. Normalized v1 spacing ramp for new work (source key `01`); proposed, not a literal scale of the existing site. */
+  --space-2: 8px; /* Small gaps between related labels. Normalized v1 spacing ramp for new work (source key `02`); proposed, not a literal scale of the existing site. */
+  --space-3: 12px; /* Button vertical padding, nav link gaps. Normalized v1 spacing ramp for new work (source key `03`); proposed, not a literal scale of the existing site. */
+  --space-4: 16px; /* Default gap between sibling elements. Normalized v1 spacing ramp for new work (source key `04`); proposed, not a literal scale of the existing site. */
+  --space-5: 24px; /* Row padding in ruled lists, nav gaps. Normalized v1 spacing ramp for new work (source key `05`); proposed, not a literal scale of the existing site. */
+  --space-6: 32px; /* Space between a tile's meta and title. Normalized v1 spacing ramp for new work (source key `06`); proposed, not a literal scale of the existing site. */
+  --space-7: 48px; /* Section sub-spacing. Normalized v1 spacing ramp for new work (source key `07`); proposed, not a literal scale of the existing site. */
+  --space-8: 64px; /* Maximum gutter; section padding on large screens. Normalized v1 spacing ramp for new work (source key `08`); proposed, not a literal scale of the existing site. */
+  --space-9: 96px; /* Section padding between editorial blocks. Normalized v1 spacing ramp for new work (source key `09`); proposed, not a literal scale of the existing site. */
+  --space-10: 128px; /* Hero and chapter spacing. Normalized v1 spacing ramp for new work (source key `10`); proposed, not a literal scale of the existing site. */
+  --radius-none: 0px; /* Every button, tile, card, input and row. No rounded cards; no soft shadows. */
+  --layout-max-width: 1500px; /* Maximum width of the page shell (`.vc-shell`). */
+  --layout-gutter: clamp(20px, 4vw, 64px); /* Horizontal page gutter, left and right of the shell. */
+  --section-padding: clamp(92px, 10vw, 165px); /* Top and bottom padding of a page section (`.vc-section`, v1 manual .ds-section); 82px below 620px. */
+  --breakpoint-nav: 900px; /* Navigation collapses to the dark full-screen menu at or below this width; two-column grids drop to two. */
+  --breakpoint-compact: 560px; /* Grids and ruled rows go to a single column at or below this width. */
+  --breakpoint-narrow: 360px; /* Tightest mobile rules in the main stylesheet. */
+  --duration-fast: 180ms; /* Buttons and filter controls (collision-lab/index.html .lab-button). */
+  --duration-default: 220ms; /* Tile inversion, nav underline growth and the 5px arrow shift (assets/styles.css .rabbit-card). */
+  --duration-visual: 280ms; /* Project image scale on hover (assets/styles.css .project-visual). */
+  --duration-reveal: 650ms; /* Optional reveal on scroll ([data-reveal]); never hide essential content in it. */
+  --easing-default: ease; /* Every transition. A generalized alias for the source's `ease` transitions (proposed). */
+  --font-display: "Glacial Indifference", "Avenir Next", "Century Gothic", "Trebuchet MS", sans-serif;
+  --font-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --text-display-xl: 700 10.9rem/0.83 var(--font-display); /* The page hero headline only, uppercase (v1 manual .ds-hero h1: clamp(4.8rem, 9.6vw, 10.9rem)); one per page. */
+  --text-display-hero: 700 8.6rem/0.9 var(--font-display); /* Section-lead and hero headlines, set uppercase (v1 manual: clamp(3.7rem, 7.8vw, 8.6rem)). Scale down with the viewport; tracking runs -0.035em to -0.057em at the largest sizes. */
+  --text-display-l: 700 4.4rem/0.94 var(--font-display); /* Editorial tile titles, set uppercase (components.css .vc-tile h3: clamp(2rem, 4vw, 4.4rem)). */
+  --text-display-m: 700 2.7rem/1 var(--font-display); /* Field file row titles, set uppercase (components.css .vc-file-row h3: clamp(1.5rem, 2.8vw, 2.7rem)). */
+  --text-display-s: 700 1.7rem/1.2 var(--font-display); /* Group and palette headings inside a page (manual palette headings: clamp(1.1rem, 2.1vw, 1.7rem)). */
+  --text-readout: 700 5rem/1 var(--font-display); /* Large measured values in a Readout (v1 manual .ds-stats-number: clamp(2.5rem, 4.8vw, 5rem)). Units sit inside at 0.32em with no tracking. */
+  --text-eyebrow: 700 0.72rem/1.3 var(--font-display); /* Eyebrows above headlines, uppercase, tracked out. Source tracking is 0.22em (assets/styles.css .eyebrow); the v1 .vc-eyebrow normalization uses 0.18em. */
+  --text-meta: 700 0.69rem/1.3 var(--font-display); /* Tile meta lines, uppercase; also the `Status` label. */
+  --text-button-label: 700 0.76rem/1.3 var(--font-display); /* Button text, uppercase. */
+  --text-wordmark: 700 0.83rem/1.3 var(--font-display); /* The text wordmark in navigation, uppercase. There is no logo file. */
+  --text-index-number: 700 0.68rem/1.3 var(--font-display); /* Field file numbers, uppercase. Lifecycle status beside it uses the `Status` component. */
+  --text-field-label: 700 0.7rem/1.3 var(--font-display); /* Form field labels, uppercase (v1 manual .ds-contrast-inputs label). */
+  --text-hero-lead: 400 1.55rem/1.46 var(--font-body); /* The paragraph under the hero headline, up to about 780px wide (v1 manual .ds-hero-lead: clamp(1.18rem, 1.8vw, 1.55rem)). */
+  --text-body-lead: 400 1.22rem/1.58 var(--font-body); /* Lead paragraph under a section headline; keep to about 520px wide. */
+  --text-body: 400 1rem/1.55 var(--font-body); /* Default running text. Line height 1.55 is a representative v1 value, not a single global rule in the source. */
+  --text-body-small: 400 0.9rem/1.55 var(--font-body); /* Navigation links and short descriptions. */
+  --text-caption: 400 0.88rem/1.55 var(--font-body); /* Captions and small muted notes: `muted-light` on paper, `muted-dark` on ink. */
+  --text-mono: 400 0.91rem/1.5 var(--font-mono); /* Technical detail: signal chains, code, hex values in running text. Mono marks raw data: what a person types or an instrument reports, never headings or prose. */
+  --text-mono-input: 500 0.97rem/1.3 var(--font-mono); /* Values typed into a Field (v1 manual .ds-contrast-inputs input). */
+  --text-mono-small: 400 0.78rem/1.5 var(--font-mono); /* Codes, IDs and hex values beside a label, in the muted text colour (v1 manual .ds-swatch-info code). */
+}
+.display-xl {
+  font-family: var(--font-display);
+  font-size: 10.9rem;
+  line-height: 0.83;
+  font-weight: 700;
+  letter-spacing: -0.066em;
+}
+.display-hero {
+  font-family: var(--font-display);
+  font-size: 8.6rem;
+  line-height: 0.9;
+  font-weight: 700;
+  letter-spacing: -0.057em;
+}
+.display-l {
+  font-family: var(--font-display);
+  font-size: 4.4rem;
+  line-height: 0.94;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.display-m {
+  font-family: var(--font-display);
+  font-size: 2.7rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.display-s {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.readout {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+}
+.meta {
+  font-family: var(--font-display);
+  font-size: 0.69rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+.button-label {
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+}
+.wordmark {
+  font-family: var(--font-display);
+  font-size: 0.83rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+.index-number {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+.field-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+.hero-lead {
+  font-family: var(--font-body);
+  font-size: 1.55rem;
+  line-height: 1.46;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.body-lead {
+  font-family: var(--font-body);
+  font-size: 1.22rem;
+  line-height: 1.58;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.body-small {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.caption {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.91rem;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.mono-input {
+  font-family: var(--font-mono);
+  font-size: 0.97rem;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.mono-small {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* Valentina Contini components: CSS classes, vc- prefix.
+   Two settings: data-theme = the expression (core | ct-lab | collision-lab), from tokens.json;
+   data-surface = paper | ink, on the data-theme element or inside it. Components read only the
+   --vc-* variables below, which each surface maps to tokens. */
+[data-surface="paper"] {
+  --vc-canvas: var(--paper); --vc-fg: var(--ink); --vc-fg-muted: var(--muted-light);
+  --vc-accent: var(--accent-paper); --vc-on-accent: var(--on-accent-paper); --vc-line: var(--line-paper);
+  --vc-field: var(--white); --vc-error: var(--error); --vc-hover: var(--lavender-hover); --vc-readout: var(--ink);
+  --vc-inv-canvas: var(--ink); --vc-inv-fg: var(--paper); --vc-inv-fg-muted: var(--muted-dark); --vc-inv-accent: var(--accent-ink-inverse);
+}
+[data-surface="ink"] {
+  --vc-canvas: var(--ink); --vc-fg: var(--paper); --vc-fg-muted: var(--muted-dark);
+  --vc-accent: var(--accent-ink); --vc-on-accent: var(--on-accent-ink); --vc-line: var(--line-ink);
+  --vc-field: var(--ink); --vc-error: var(--paper); --vc-hover: transparent; --vc-readout: var(--accent-ink);
+  --vc-inv-canvas: var(--paper); --vc-inv-fg: var(--ink); --vc-inv-fg-muted: var(--muted-light); --vc-inv-accent: var(--accent-paper);
+}
+[data-surface] { background: var(--vc-canvas); color: var(--vc-fg); font-family: var(--font-body); line-height: 1.55; }
+[data-surface] *, [data-surface] *::before, [data-surface] *::after { box-sizing: border-box; }
+.vc-shell { width: 100%; max-width: var(--layout-max-width); margin-inline: auto; padding-inline: var(--layout-gutter); }
+.vc-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+:where([data-surface] a, [data-surface] button):focus-visible { outline: 3px solid var(--vc-accent); outline-offset: 4px; }
+
+/* Navigation */
+.vc-navigation { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-5); min-height: 72px; }
+.vc-wordmark { font: 700 0.83rem/1.3 var(--font-display); letter-spacing: 0.16em; text-transform: uppercase; color: inherit; text-decoration: none; }
+.vc-nav-list { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4) 28px; margin: 0; padding: 0; list-style: none; }
+.vc-nav-list a { position: relative; display: inline-block; font-size: 0.9rem; text-decoration: none; color: inherit; }
+.vc-nav-list a::after { content: ""; position: absolute; left: 0; right: 100%; height: 2px; bottom: -5px; background: var(--vc-accent); transition: right var(--duration-default) var(--easing-default); }
+.vc-nav-list a:is(:hover, :focus-visible, [aria-current="page"])::after { right: 0; }
+
+/* Text action */
+.vc-link-arrow { display: inline-flex; align-items: center; gap: 0.65rem; color: var(--vc-accent); font-weight: 700; text-decoration: none; text-transform: uppercase; letter-spacing: 0.04em; min-height: 44px; }
+.vc-link-arrow::after { content: "\2192"; display: inline-block; transition: transform var(--duration-default) var(--easing-default); }
+.vc-link-arrow[target="_blank"]::after { content: "\2197"; }
+.vc-link-arrow:is(:hover, :focus-visible)::after { transform: translateX(5px); }
+
+/* Button and filter */
+.vc-button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: var(--space-3) 17px; border: 1px solid currentColor; border-radius: var(--radius-none); color: var(--vc-fg); background: transparent; font: 700 0.76rem/1.3 var(--font-display); letter-spacing: 0.09em; text-transform: uppercase; cursor: pointer; transition: background-color var(--duration-fast) var(--easing-default), color var(--duration-fast) var(--easing-default), transform var(--duration-fast) var(--easing-default); }
+.vc-button:is(:hover, :focus-visible) { transform: translateY(-2px); background: var(--vc-fg); color: var(--vc-canvas); }
+.vc-button[aria-pressed="true"] { background: var(--vc-accent); color: var(--vc-on-accent); border-color: var(--vc-accent); }
+.vc-button[disabled] { opacity: 0.45; cursor: not-allowed; transform: none; }
+.vc-button[data-vc-variant="accent"] { border-color: var(--vc-accent); color: var(--vc-accent); }
+.vc-button[data-vc-variant="accent"]:is(:hover, :focus-visible) { background: var(--vc-accent); color: var(--vc-on-accent); }
+
+/* Ruled grid and editorial tile */
+.vc-rule-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--vc-line); border-left: 1px solid var(--vc-line); }
+.vc-rule-grid > * { min-width: 0; border-right: 1px solid var(--vc-line); border-bottom: 1px solid var(--vc-line); }
+.vc-tile { display: flex; flex-direction: column; min-height: 280px; padding: clamp(25px, 3vw, 44px); background: var(--vc-canvas); color: var(--vc-fg); transition: background-color var(--duration-default) var(--easing-default), color var(--duration-default) var(--easing-default); }
+.vc-tile .vc-meta { color: var(--vc-accent); font: 700 0.69rem/1.3 var(--font-display); letter-spacing: 0.15em; text-transform: uppercase; }
+.vc-tile h3 { font: 700 clamp(2rem, 4vw, 4.4rem)/0.94 var(--font-display); letter-spacing: -0.04em; margin: 35px 0 18px; text-transform: uppercase; }
+.vc-tile p { max-width: 550px; margin: 0; line-height: 1.5; color: var(--vc-fg-muted); }
+.vc-tile .vc-tile-action { margin-top: auto; padding-top: 25px; color: var(--vc-accent); font-weight: 700; }
+.vc-tile:is(:hover, :focus-within) { --vc-canvas: var(--vc-inv-canvas); --vc-fg: var(--vc-inv-fg); --vc-fg-muted: var(--vc-inv-fg-muted); --vc-accent: var(--vc-inv-accent); }
+
+/* Field file row */
+.vc-file-row { display: grid; grid-template-columns: 110px minmax(0, 1fr) minmax(200px, 0.85fr) auto; gap: clamp(12px, 2vw, 30px); align-items: start; padding: var(--space-5) 0; border-top: 1px solid var(--vc-line); }
+.vc-file-row:last-child { border-bottom: 1px solid var(--vc-line); }
+.vc-file-row .vc-file-meta { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); }
+.vc-file-row .vc-file-number { color: var(--vc-accent); font: 700 0.68rem/1.3 var(--font-display); letter-spacing: 0.12em; text-transform: uppercase; }
+.vc-file-row h3 { font: 700 clamp(1.5rem, 2.8vw, 2.7rem)/1 var(--font-display); letter-spacing: -0.04em; margin: 0; text-transform: uppercase; }
+.vc-file-row p { color: var(--vc-fg-muted); line-height: 1.5; margin: 0; }
+.vc-file-row button { white-space: nowrap; }
+
+@media (max-width: 900px) { .vc-rule-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .vc-file-row { grid-template-columns: 90px minmax(0, 1fr); } .vc-file-row button { grid-column: 2; justify-self: start; } .vc-file-row p { grid-column: 2; } }
+@media (max-width: 560px) { .vc-rule-grid { grid-template-columns: 1fr; } .vc-file-row { grid-template-columns: 1fr; gap: 10px; } .vc-file-row p, .vc-file-row button { grid-column: auto; } .vc-tile { min-height: 300px; } }
+@media (prefers-reduced-motion: reduce) { [data-surface] *, [data-surface] *::before, [data-surface] *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+
+/* Dialog: native <dialog> opened with showModal() */
+.vc-dialog { padding: 0; margin: auto; border: 1px solid var(--vc-fg-muted); border-radius: var(--radius-none); width: min(920px, calc(100% - 2 * var(--layout-gutter))); max-height: calc(100dvh - 2 * var(--space-5)); font-family: var(--font-body); line-height: 1.55; box-sizing: border-box; }
+.vc-dialog *, .vc-dialog *::before, .vc-dialog *::after { box-sizing: border-box; }
+.vc-dialog[open] { display: flex; flex-direction: column; }
+.vc-dialog::backdrop { background: var(--scrim); }
+.vc-dialog-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: var(--space-3) var(--space-5) var(--space-3) clamp(25px, 3vw, 44px); border-bottom: 1px solid var(--vc-line); }
+.vc-dialog-head .vc-meta { color: var(--vc-accent); font: 700 0.69rem/1.3 var(--font-display); letter-spacing: 0.15em; text-transform: uppercase; }
+.vc-dialog-body { overflow: auto; padding: clamp(25px, 3vw, 44px); }
+.vc-dialog-body h2 { font: 700 clamp(1.5rem, 2.8vw, 2.7rem)/1 var(--font-display); letter-spacing: -0.04em; margin: 0 0 18px; text-transform: uppercase; }
+.vc-dialog-body p { max-width: 620px; margin: 0 0 var(--space-4); color: var(--vc-fg-muted); }
+.vc-dialog-body p:last-child { margin-bottom: 0; }
+.vc-dialog-foot { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-4) var(--space-6); padding: var(--space-3) clamp(25px, 3vw, 44px); border-top: 1px solid var(--vc-line); }
+.vc-dialog[data-vc-static] { position: static; width: 100%; max-height: none; margin: 0; }
+
+/* Status: a fixed lifecycle vocabulary. The word carries the meaning; the square marker repeats it by shape, not hue. */
+.vc-status { display: inline-flex; align-items: flex-start; gap: var(--space-2); color: var(--vc-fg); font: 700 0.69rem/1.3 var(--font-display); letter-spacing: 0.15em; text-transform: uppercase; }
+.vc-status:is([data-status="planned"], [data-status="hardware-ordered"], [data-status="in-progress"], [data-status="completed"], [data-status="optional"])::before { content: ""; flex: none; width: 10px; height: 10px; margin-top: calc(0.65em - 5px); border: 1.5px solid var(--vc-accent); }
+.vc-status[data-status="hardware-ordered"]::before { padding: 2px; background: var(--vc-accent); background-clip: content-box; }
+.vc-status[data-status="in-progress"]::before { background: linear-gradient(90deg, var(--vc-accent) 50%, transparent 50%); }
+.vc-status[data-status="completed"]::before { background: var(--vc-accent); }
+.vc-status[data-status="optional"]::before { border-style: dashed; }
+
+/* Instrument parts: Field, ModeSwitch, Readout (v1 manual contrast checker, mode switch and metrics) */
+.vc-field { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.vc-field label { font: 700 0.7rem/1.3 var(--font-display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--vc-fg); }
+.vc-field input { min-width: 0; width: 100%; min-height: 44px; border: 1px solid var(--vc-fg-muted); border-radius: var(--radius-none); background: var(--vc-field); color: var(--vc-fg); padding: 14px 13px; font: 500 0.97rem/1.3 var(--font-mono); }
+.vc-field input:focus-visible { outline: 3px solid var(--vc-accent); outline-offset: 0; }
+.vc-field input[aria-invalid="true"] { border: 2px solid var(--vc-error); padding: 13px 12px; }
+.vc-field-hint { margin: 0; font-size: 0.88rem; line-height: 1.5; color: var(--vc-fg-muted); }
+.vc-field-error { margin: 0; min-height: 1.5em; font-size: 0.9rem; line-height: 1.5; color: var(--vc-error); }
+.vc-field-error:not(:empty)::before { content: "Error: "; font-weight: 700; }
+
+.vc-mode-switch { display: flex; flex-wrap: wrap; border: 1px solid var(--vc-fg-muted); }
+.vc-mode-switch button { flex: 1 1 0; min-width: 0; min-height: 68px; padding: 14px 25px; display: flex; gap: 18px; align-items: center; border: 0; border-right: 1px solid var(--vc-line); border-bottom: 2px solid transparent; background: transparent; color: var(--vc-fg); font: 700 0.87rem/1.3 var(--font-display); letter-spacing: 0.12em; text-transform: uppercase; text-align: left; cursor: pointer; transition: background-color var(--duration-fast) var(--easing-default), color var(--duration-fast) var(--easing-default); }
+.vc-mode-switch button:last-child { border-right: 0; }
+.vc-mode-switch button span { color: var(--vc-accent); font: 700 0.7rem/1.3 var(--font-display); }
+.vc-mode-switch button:not([aria-pressed="true"]):is(:hover, :focus-visible) { background: var(--vc-hover); border-bottom-color: var(--vc-accent); }
+.vc-mode-switch button[aria-pressed="true"] { background: var(--vc-inv-canvas); color: var(--vc-inv-fg); }
+.vc-mode-switch button[aria-pressed="true"] span { color: var(--vc-inv-accent); }
+.vc-mode-switch button:focus-visible { outline-offset: -6px; }
+
+.vc-readout-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.vc-readout { display: flex; flex-direction: column; gap: 5px; min-width: 0; padding: 35px clamp(14px, 2.6vw, 38px); border-right: 1px solid var(--vc-line); }
+.vc-readout:first-child { padding-left: 0; }
+.vc-readout:last-child { border-right: 0; }
+.vc-readout-value { font: 700 clamp(2.5rem, 4.8vw, 5rem)/1 var(--font-display); letter-spacing: -0.05em; color: var(--vc-readout); }
+.vc-readout-unit { font-size: 0.32em; letter-spacing: 0; }
+.vc-readout-label { font-size: 0.85rem; line-height: 1.5; color: var(--vc-fg-muted); }
+@media (max-width: 900px) { .vc-readout-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .vc-readout { border-bottom: 1px solid var(--vc-line); padding: 20px 14px 22px; } .vc-readout:nth-child(2n) { border-right: 0; } .vc-readout:nth-child(2n+1) { padding-left: 0; } .vc-mode-switch button { padding: 12px; min-height: 57px; flex-direction: column; align-items: flex-start; gap: 6px; font-size: 0.7rem; } }
+
+/* Page patterns: Section, Hero, SectionLead (v1 manual .ds-section, .ds-hero, .ds-section-lead) */
+.vc-section { padding: var(--section-padding) 0; }
+.vc-kicker { margin: 0; color: var(--vc-accent); font: 700 0.71rem/1.4 var(--font-display); letter-spacing: 0.2em; text-transform: uppercase; }
+.vc-hero { padding: clamp(70px, 9vw, 145px) 0 clamp(75px, 8vw, 130px); }
+.vc-hero-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(250px, 0.42fr); gap: clamp(35px, 4vw, 80px); align-items: end; }
+.vc-hero-grid > * { min-width: 0; }
+.vc-hero h1 { font: 700 clamp(4.8rem, 9.6vw, 10.9rem)/0.83 var(--font-display); letter-spacing: -0.066em; text-transform: uppercase; margin: 42px 0 30px; max-width: 1100px; }
+.vc-hero h1 em { font-style: normal; color: var(--vc-accent); }
+.vc-hero-lead { max-width: 780px; font-size: clamp(1.18rem, 1.8vw, 1.55rem); line-height: 1.46; margin: 30px 0 0; }
+.vc-hero-aside { border-top: 1px solid var(--vc-line); padding-top: 18px; }
+.vc-hero-mark { font: 700 clamp(5rem, 8vw, 8rem)/0.86 var(--font-display); letter-spacing: -0.075em; white-space: nowrap; }
+.vc-hero-mark span { font-size: 0.5em; color: var(--vc-accent); }
+.vc-hero-rule { height: 2px; width: 58px; background: var(--vc-accent); margin: 28px 0; }
+.vc-hero-aside p { color: var(--vc-fg-muted); max-width: 300px; font-size: 0.95rem; line-height: 1.55; }
+.vc-hero-aside b { color: var(--vc-accent); font: 700 0.7rem/1.3 var(--font-display); letter-spacing: 0.15em; text-transform: uppercase; }
+.vc-section-lead { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.65fr); align-items: end; gap: clamp(35px, 6vw, 110px); margin-bottom: clamp(48px, 7vw, 90px); }
+.vc-section-lead > * { min-width: 0; }
+.vc-section-lead h2 { font: 700 clamp(3.7rem, 7.8vw, 8.6rem)/0.9 var(--font-display); letter-spacing: -0.057em; text-transform: uppercase; margin: 14px 0 0; }
+.vc-section-lead > p { margin: 0 0 5px; font-size: clamp(1rem, 1.45vw, 1.22rem); line-height: 1.58; max-width: 520px; color: var(--vc-fg-muted); }
+@media (max-width: 900px) { .vc-hero-grid { grid-template-columns: 1fr; } .vc-hero-aside { display: grid; grid-template-columns: auto 1fr; gap: 12px 35px; align-items: center; } .vc-hero-mark { font-size: 5rem; grid-row: span 2; } .vc-hero-rule { display: none; } .vc-hero-aside p { max-width: none; margin: 0; } .vc-section-lead { grid-template-columns: 1fr; gap: 20px; margin-bottom: 45px; } .vc-section-lead > p { max-width: 700px; } }
+@media (max-width: 620px) { .vc-section { padding: 82px 0; } .vc-hero { padding-top: 60px; } .vc-hero h1 { font-size: clamp(3rem, 12.5vw, 6.1rem); margin-top: 30px; } .vc-hero-lead { font-size: 1.08rem; } .vc-hero-mark { font-size: 3.7rem; } .vc-section-lead h2 { font-size: clamp(3.4rem, 12vw, 5.6rem); } }
+@media (max-width: 360px) { .vc-hero h1 { font-size: 12vw; } .vc-section-lead h2 { font-size: 11.5vw; } }
+
+/* Manual-specific layout, not part of the component library */
+:root{--manual-ink:#17141B;--manual-paper:#F7F5F2;--manual-purple:#6D23C8;--manual-line:rgba(23,20,27,.18)}
+*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--manual-paper);color:var(--manual-ink);font-family:var(--font-body),Inter,system-ui,sans-serif;line-height:1.55}
+a{color:inherit;text-decoration:none}a:hover{text-decoration-color:currentColor}
+button,input,select{font:inherit}button{cursor:pointer}
+a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #6D23C8;outline-offset:4px}
+.skip-link{position:absolute;left:12px;top:-80px;z-index:200;color:#17141B;background:#F7F5F2;padding:12px 16px}.skip-link:focus{top:12px}
+.shell{width:min(100%,1560px);margin:auto;padding-inline:clamp(20px,4vw,64px)}
+.site-nav{background:#17141B;color:#F7F5F2;border-bottom:1px solid rgba(255,255,255,.22)}.site-nav .shell{display:flex;gap:28px;align-items:center;justify-content:space-between;min-height:80px}
+.wordmark{font:700 .78rem var(--font-display);letter-spacing:.18em;text-transform:uppercase}.wordmark span{color:#CFAFF4}
+.nav-list{display:flex;gap:clamp(12px,1.8vw,30px);flex-wrap:wrap;align-items:center}.nav-list a{font-size:.86rem}.nav-list a:hover{color:#FF93E5}
+.hero-manual{background:#17141B;color:#F7F5F2;padding:clamp(100px,12vw,180px) 0 clamp(72px,10vw,140px);border-bottom:8px solid #6D23C8}
+.micro{font:700 .72rem var(--font-display);letter-spacing:.16em;text-transform:uppercase}.hero-manual .micro{color:#CFAFF4}
+.hero-manual h1{font:700 clamp(3.8rem,10vw,10rem)/.89 var(--font-display);letter-spacing:-.06em;text-transform:uppercase;max-width:1140px;margin:28px 0}.hero-manual h1 em{font-style:normal;color:#CFAFF4}
+.hero-manual p{font-size:clamp(1.16rem,1.65vw,1.5rem);max-width:700px;color:#D6CEDD}
+.hero-stats{margin-top:56px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid rgba(255,255,255,.27)}
+.hero-stat{border-right:1px solid rgba(255,255,255,.27);padding:22px 24px 10px 0}.hero-stat:last-child{border:0}.hero-stat strong{display:block;font:700 clamp(2rem,4vw,4rem)/1 var(--font-display)}.hero-stat span{display:block;color:#D6CEDD;text-transform:uppercase;font-size:.73rem;letter-spacing:.11em}
+.theme-panel{background:#E7DDF4;border-bottom:1px solid var(--manual-line);padding:24px 0}.theme-panel .shell{display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.theme-controls{display:flex;gap:8px;flex-wrap:wrap}.theme-button{border:1px solid #17141B;background:transparent;color:#17141B;text-transform:uppercase;letter-spacing:.08em;font:700 .75rem var(--font-display);min-height:44px;padding:10px 17px}.theme-button[aria-pressed=true]{background:#17141B;color:#F7F5F2}.theme-button:hover{background:#6D23C8;color:#fff}
+.docs{padding:clamp(72px,8vw,120px) 0}.section-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,.4fr);gap:20px 64px;align-items:end;margin-bottom:42px}
+.section-head h2{font:700 clamp(2.7rem,6vw,6.5rem)/.91 var(--font-display);letter-spacing:-.052em;text-transform:uppercase;margin:12px 0 0;overflow-wrap:break-word}
+.section-head p{color:#615A67;font-size:1.04rem;margin:0 0 10px}.micro.section-mark{color:#6D23C8}
+.library-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--manual-line);border-left:1px solid var(--manual-line)}
+.library-grid a{padding:24px;min-height:130px;border-right:1px solid var(--manual-line);border-bottom:1px solid var(--manual-line);display:flex;flex-direction:column;justify-content:space-between;transition:background .22s,color .22s}.library-grid a:hover,.library-grid a:focus-visible{background:#17141B;color:#fff}.library-grid span{font:700 .7rem var(--font-display);color:#6D23C8;letter-spacing:.12em}.library-grid a:hover span{color:#FF93E5}.library-grid b{font:700 clamp(1.2rem,2vw,2rem)/1.1 var(--font-display);text-transform:uppercase}
+.palette{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--manual-line);border-left:1px solid var(--manual-line)}.swatch{border:0;border-right:1px solid var(--manual-line);border-bottom:1px solid var(--manual-line);background:transparent;text-align:left;padding:16px;min-width:0;display:grid;gap:7px}.swatch:hover,.swatch:focus-visible{background:#E7DDF4}.swatch-sample{display:block;height:85px;border:1px solid rgba(23,20,27,.12)}.swatch-name{font:700 .78rem var(--font-display);letter-spacing:.07em;text-transform:uppercase;overflow-wrap:anywhere}.swatch code{color:#615A67;font-size:.75rem}
+.specimen{border-top:1px solid var(--manual-line);padding:36px 0 45px}.specimen-head{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:18px;align-items:center;margin-bottom:25px}.specimen-head h3{font:700 clamp(1.5rem,3vw,2.8rem)/1 var(--font-display);margin:0;text-transform:uppercase}.source-link{color:#6D23C8;font-size:.85rem;font-weight:700}
+.specimen-stage{border:1px solid var(--manual-line);padding:clamp(12px,2vw,28px);overflow-x:auto;min-width:0}.specimen-stage [data-surface]{background:var(--vc-canvas);color:var(--vc-fg)}.specimen-stage .wrap{padding:clamp(16px,2.4vw,32px)}
+.specimen-stage > section+section{margin-top:14px}.specimen-stage .vc-section{padding:35px 15px}
+.note-box{border-left:5px solid #6D23C8;padding:10px 20px;color:#514857;max-width:850px}.note-box strong{color:#17141B}
+.site-footer{padding:66px 0;background:#17141B;color:#F7F5F2}.site-footer .shell{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap}.site-footer p{max-width:670px;color:#D6CEDD}
+.toast{position:fixed;bottom:24px;right:24px;background:#17141B;color:#fff;padding:12px 16px;z-index:300}
+@media(max-width:1000px){.palette{grid-template-columns:repeat(3,minmax(0,1fr))}.library-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.section-head{grid-template-columns:1fr}.specimen-head{grid-template-columns:100px 1fr}.specimen-head .source-link{grid-column:2}}
+@media(max-width:650px){.site-nav .shell{flex-direction:column;align-items:flex-start;padding-top:22px;padding-bottom:18px;gap:16px}.nav-list{gap:16px}.hero-stats{grid-template-columns:1fr}.hero-stat{border:0;border-bottom:1px solid rgba(255,255,255,.27);padding:16px 0}.palette{grid-template-columns:repeat(2,minmax(0,1fr))}.library-grid{grid-template-columns:1fr}.specimen-head{grid-template-columns:1fr}.specimen-head .source-link{grid-column:1}.specimen-stage{padding:10px}.docs{padding-block:65px}.hero-manual h1{font-size:clamp(2.15rem,10vw,5.2rem);overflow-wrap:anywhere}.section-head h2{font-size:clamp(2.1rem,9vw,4rem);overflow-wrap:anywhere}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style></head><body><a href="#content" class="skip-link">Skip to content</a>
+<header class="site-nav"><div class="shell"><a class="wordmark" href="#top">VALENTINA CONTINI <span>/ BRAND SYSTEM</span></a><nav class="nav-list" aria-label="Manual"><a href="#identity">Identity</a><a href="#tokens">Tokens</a><a href="#components">Components</a><a href="#implementation">Implementation</a></nav></div></header>
+<main id="content"><section class="hero-manual" id="top"><div class="shell"><span class="micro">One personal identity / Three expressions</span><h1>Built to <em>be unmistakable.</em></h1><p>Editorial technofuturism, documented as tokens, interactions, component patterns and a voice. Source-derived, carefully normalized, and practical to reuse.</p><div class="hero-stats"><div class="hero-stat"><strong>03</strong><span>Visual expressions</span></div><div class="hero-stat"><strong>13</strong><span>Component patterns</span></div><div class="hero-stat"><strong>02</strong><span>Surface modes</span></div></div></div></section>
+<div class="theme-panel" id="identity"><div class="shell"><div><span class="micro section-mark">EXPRESSION / ACTIVE</span><div id="theme-description">Core identity · purple, paper, ink</div></div><div class="theme-controls" role="group" aria-label="Choose expression"><button class="theme-button" type="button" data-expression="core" aria-pressed="true">Core</button><button class="theme-button" type="button" data-expression="ct-lab" aria-pressed="false">CT LAB</button><button class="theme-button" type="button" data-expression="collision-lab" aria-pressed="false">Collision Lab</button></div></div></div>
+<section class="docs" id="tokens"><div class="shell"><div class="section-head"><div><span class="micro section-mark">01 / FOUNDATION</span><h2>Color is a system, not a guess.</h2></div><p>One palette with semantic expression and surface mappings. Click any swatch to copy its source value.</p></div><div class="palette"><button class="swatch" type="button" data-copy="#6D23C8" aria-label="Copy purple #6D23C8"><span class="swatch-sample" style="background:#6D23C8"></span><span class="swatch-name">purple</span><code>#6D23C8</code></button><button class="swatch" type="button" data-copy="#3C166D" aria-label="Copy purple-deep #3C166D"><span class="swatch-sample" style="background:#3C166D"></span><span class="swatch-name">purple-deep</span><code>#3C166D</code></button><button class="swatch" type="button" data-copy="#17141B" aria-label="Copy ink #17141B"><span class="swatch-sample" style="background:#17141B"></span><span class="swatch-name">ink</span><code>#17141B</code></button><button class="swatch" type="button" data-copy="#F7F5F2" aria-label="Copy paper #F7F5F2"><span class="swatch-sample" style="background:#F7F5F2"></span><span class="swatch-name">paper</span><code>#F7F5F2</code></button><button class="swatch" type="button" data-copy="#E7DDF4" aria-label="Copy lavender #E7DDF4"><span class="swatch-sample" style="background:#E7DDF4"></span><span class="swatch-name">lavender</span><code>#E7DDF4</code></button><button class="swatch" type="button" data-copy="#B8AAC9" aria-label="Copy violet-gray #B8AAC9"><span class="swatch-sample" style="background:#B8AAC9"></span><span class="swatch-name">violet-gray</span><code>#B8AAC9</code></button><button class="swatch" type="button" data-copy="#FFFFFF" aria-label="Copy white #FFFFFF"><span class="swatch-sample" style="background:#FFFFFF"></span><span class="swatch-name">white</span><code>#FFFFFF</code></button><button class="swatch" type="button" data-copy="#615A67" aria-label="Copy muted-light #615A67"><span class="swatch-sample" style="background:#615A67"></span><span class="swatch-name">muted-light</span><code>#615A67</code></button><button class="swatch" type="button" data-copy="#D6CEDD" aria-label="Copy muted-dark #D6CEDD"><span class="swatch-sample" style="background:#D6CEDD"></span><span class="swatch-name">muted-dark</span><code>#D6CEDD</code></button><button class="swatch" type="button" data-copy="#CFAFF4" aria-label="Copy violet-on-dark #CFAFF4"><span class="swatch-sample" style="background:#CFAFF4"></span><span class="swatch-name">violet-on-dark</span><code>#CFAFF4</code></button><button class="swatch" type="button" data-copy="#B86CFF" aria-label="Copy collision-violet #B86CFF"><span class="swatch-sample" style="background:#B86CFF"></span><span class="swatch-name">collision-violet</span><code>#B86CFF</code></button><button class="swatch" type="button" data-copy="#CAA9F7" aria-label="Copy collision-eyebrow #CAA9F7"><span class="swatch-sample" style="background:#CAA9F7"></span><span class="swatch-name">collision-eyebrow</span><code>#CAA9F7</code></button><button class="swatch" type="button" data-copy="#FF38D1" aria-label="Copy lab-magenta #FF38D1"><span class="swatch-sample" style="background:#FF38D1"></span><span class="swatch-name">lab-magenta</span><code>#FF38D1</code></button><button class="swatch" type="button" data-copy="#9D006C" aria-label="Copy lab-magenta-on-light #9D006C"><span class="swatch-sample" style="background:#9D006C"></span><span class="swatch-name">lab-magenta-on-light</span><code>#9D006C</code></button><button class="swatch" type="button" data-copy="#FF93E5" aria-label="Copy lab-magenta-hover #FF93E5"><span class="swatch-sample" style="background:#FF93E5"></span><span class="swatch-name">lab-magenta-hover</span><code>#FF93E5</code></button><button class="swatch" type="button" data-copy="#8B0D45" aria-label="Copy error #8B0D45"><span class="swatch-sample" style="background:#8B0D45"></span><span class="swatch-name">error</span><code>#8B0D45</code></button><button class="swatch" type="button" data-copy="#D5C6E6" aria-label="Copy lavender-hover #D5C6E6"><span class="swatch-sample" style="background:#D5C6E6"></span><span class="swatch-name">lavender-hover</span><code>#D5C6E6</code></button></div><div class="note-box" style="margin-top:28px"><strong>Contrast boundary:</strong> Core purple on near-black fails normal-text contrast. Use violet-on-dark there. CT LAB magenta changes to darker magenta on paper. Keep the two surface modes explicit.</div></div></section>
+<section class="docs" id="components" style="background:#fff"><div class="shell"><div class="section-head"><div><span class="micro section-mark">02 / INTERACTIVE COMPONENTS</span><h2>Behavior is part of the brand.</h2></div><p>The examples below come from the upgraded component fragments. Switch the expression above and hover or focus the examples to see the difference.</p></div><div class="library-grid"><a href="#component-navigation"><span>01 / Navigation</span><b>Navigation</b></a><a href="#component-hero"><span>02 / Hero</span><b>Text-first hero</b></a><a href="#component-sectionlead"><span>03 / SectionLead</span><b>Section heading</b></a><a href="#component-editorialtile"><span>04 / EditorialTile</span><b>Editorial tile</b></a><a href="#component-button"><span>05 / Button</span><b>Buttons and filters</b></a><a href="#component-textaction"><span>06 / TextAction</span><b>Text action</b></a><a href="#component-status"><span>07 / Status</span><b>Lifecycle status</b></a><a href="#component-fieldfilerow"><span>08 / FieldFileRow</span><b>Field file row</b></a><a href="#component-dialog"><span>09 / Dialog</span><b>Dialog</b></a><a href="#component-field"><span>10 / Field</span><b>Instrument field</b></a><a href="#component-modeswitch"><span>11 / ModeSwitch</span><b>Mode switch</b></a><a href="#component-readout"><span>12 / Readout</span><b>Readout</b></a><a href="#component-pageexample"><span>13 / PageExample</span><b>Page composition</b></a></div><div style="height:55px"></div><article class="specimen" id="component-navigation" aria-labelledby="h-navigation"><div class="specimen-head"><span class="micro">01 / COMPONENT</span><h3 id="h-navigation">Navigation</h3><a class="source-link" href="components/Navigation/README.md">Read specification ↗</a></div><div class="specimen-stage">
+<style>html,body{margin:0}.wrap{padding:24px 32px}.cap{font:700 .69rem/1.3 var(--font-display);letter-spacing:.15em;text-transform:uppercase;color:var(--vc-fg-muted);margin:0 0 10px}.row{margin:0;display:flex;gap:12px 24px;flex-wrap:wrap;align-items:center}</style>
+<section data-surface="paper"><div class="wrap"><p class="cap" data-vc-cap="paper surface"></p><nav class="vc-navigation" aria-label="Main"><a class="vc-wordmark" href="#components">Valentina Contini</a><ul class="vc-nav-list"><li><a href="#components" aria-current="page">Work</a></li><li><a href="#components">Research</a></li><li><a href="#components">About</a></li><li><a href="#components">Speaking</a></li></ul></nav></div></section>
+<section data-surface="ink"><div class="wrap"><p class="cap" data-vc-cap="ink surface"></p><nav class="vc-navigation" aria-label="Main"><a class="vc-wordmark" href="#components">Valentina Contini</a><ul class="vc-nav-list"><li><a href="#components" aria-current="page">Work</a></li><li><a href="#components">Research</a></li><li><a href="#components">About</a></li><li><a href="#components">Speaking</a></li></ul></nav></div></section>
+<script>(function(){var n={"core":"Core","ct-lab":"CT LAB","collision-lab":"Collision Lab"};function u(){var t=document.documentElement.getAttribute("data-theme")||"core";document.querySelectorAll("[data-vc-cap]").forEach(function(e){e.textContent=(n[t]||t)+" / "+e.getAttribute("data-vc-cap")})}u();new MutationObserver(u).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]})})()</script>
+</div></article><article class="specimen" id="component-hero" aria-labelledby="h-hero"><div class="specimen-head"><span class="micro">02 / COMPONENT</span><h3 id="h-hero">Text-first hero</h3><a class="source-link" href="components/Hero/README.md">Read specification ↗</a></div><div class="specimen-stage">
+<style>html,body{margin:0}</style>
+<section class="vc-hero" data-surface="paper" aria-labelledby="h1a"><div class="vc-shell vc-hero-grid">
+<div><p class="vc-kicker">Personal brand / design system / 2026</p>
+<h1 id="h1a">One<br>identity.<br><em>Three</em><br>expressions.</h1>
+<p class="vc-hero-lead">A shared visual language for research, experiments and the things I build to understand technology. Source-grounded. Sharp-edged. Deliberately personal.</p></div>
+<aside class="vc-hero-aside" aria-label="Version details"><div class="vc-hero-mark">01<span>/</span>VC</div><div class="vc-hero-rule"></div>
+<p><b>Review draft</b><br>Extracted from the living website, CT LAB and Collision Lab. Not yet a production-wide refactor.</p>
+<a class="vc-link-arrow" href="#components">Explore the system</a></aside></div></section>
+<section class="vc-hero" data-surface="ink" aria-labelledby="h1b"><div class="vc-shell vc-hero-grid">
+<div><p class="vc-kicker">Personal portfolio / selected work</p>
+<h1 id="h1b">I research<br><em>the future.</em><br>Then I build<br>bits of it.</h1>
+<p class="vc-hero-lead">Professional identity, foresight, engineering and selected work.</p></div>
+<aside class="vc-hero-aside" aria-label="Next step"><p>Research, prototypes and talks, each with what it actually found.</p><a class="vc-link-arrow" href="#components">View selected work</a></aside></div></section>
+</div></article><article class="specimen" id="component-sectionlead" aria-labelledby="h-sectionlead"><div class="specimen-head"><span class="micro">03 / COMPONENT</span><h3 id="h-sectionlead">Section heading</h3><a class="source-link" href="components/SectionLead/README.md">Read specification ↗</a></div><div class="specimen-stage">
+<style>html,body{margin:0}</style>
+<section class="vc-section" data-surface="paper"><div class="vc-shell"><div class="vc-section-lead"><div><p class="vc-kicker">02 / Foundations</p><h2>Color with<br>a reason.</h2></div><p>These colors were extracted from current website CSS. The chosen foreground and background pair matters more than the swatch alone.</p></div></div></section>
+<section class="vc-section" data-surface="ink"><div class="vc-shell"><div class="vc-section-lead"><div><p class="vc-kicker">05 / Behavior</p><h2>Less motion.<br>More intent.</h2></div><p>Small, purposeful transitions communicate affordance. They never carry content that is unavailable to keyboard users or people who prefer reduced motion.</p></div></div></section>
+</div></article><article class="specimen" id="component-editorialtile" aria-labelledby="h-editorialtile"><div class="specimen-head"><span class="micro">04 / COMPONENT</span><h3 id="h-editorialtile">Editorial tile</h3><a class="source-link" href="components/EditorialTile/README.md">Read specification ↗</a></div><div class="specimen-stage">
+<style>html,body{margin:0}.wrap{padding:24px 32px}.cap{font:700 .69rem/1.3 var(--font-display);letter-spacing:.15em;text-transform:uppercase;color:var(--vc-fg-muted);margin:0 0 10px}.row{margin:0;display:flex;gap:12px 24px;flex-wrap:wrap;align-items:center}</style>
+<section data-surface="paper"><div class="wrap"><p class="cap" data-vc-cap="paper surface"></p><div class="vc-rule-grid"><article class="vc-tile"><span class="vc-meta">Research / 01</span><h3>Useful questions.</h3><p>On hover or keyboard focus the tile inverts to the opposite surface; every label recolours with it.</p><p style="margin-top:16px"><span class="vc-status" data-status="completed">Completed</span></p><a class="vc-link-arrow vc-tile-action" href="#components">Explore</a></article><article class="vc-tile" data-surface="ink"><span class="vc-meta">Track / 02</span><h3>Field notes.</h3><p>A paper tile on an ink section: set data-surface on the tile itself.</p><p style="margin-top:16px"><span class="vc-status" data-status="in-progress">In progress</span></p><a class="vc-link-arrow vc-tile-action" href="#components">Open field file</a></article></div></div></section>
+<section data-surface="ink"><div class="wrap"><p class="cap" data-vc-cap="ink surface"></p><div class="vc-rule-grid"><article class="vc-tile"><span class="vc-meta">Experiment / 01</span><h3>Machines that notice.</h3><p>Ink tile; inverts to paper.</p><p style="margin-top:16px"><span class="vc-status" data-status="hardware-ordered">Hardware ordered</span></p><a class="vc-link-arrow vc-tile-action" href="#components">Explore project</a></article><article class="vc-tile" data-surface="paper"><span class="vc-meta">Track / 02</span><h3>Field notes.</h3><p>Paper tile on ink; inverts to ink with the hover accent.</p><p style="margin-top:16px"><span class="vc-status" data-status="planned">Planned</span></p><a class="vc-link-arrow vc-tile-action" href="#components">Open field file</a></article></div></div></section>
+<script>(function(){var n={"core":"Core","ct-lab":"CT LAB","collision-lab":"Collision Lab"};function u(){var t=document.documentElement.getAttribute("data-theme")||"core";document.querySelectorAll("[data-vc-cap]").forEach(function(e){e.textContent=(n[t]||t)+" / "+e.getAttribute("data-vc-cap")})}u();new MutationObserver(u).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]})})()</script>
+</div></article><article class="specimen" id="component-button" aria-labelledby="h-button"><div class="specimen-head"><span class="micro">05 / COMPONENT</span><h3 id="h-button">Buttons and filters</h3><a class="source-link" href="components/Button/README.md">Read specification ↗</a></div><div class="specimen-stage">
+<style>html,body{margin:0}.wrap{padding:24px 32px}.cap{font:700 .69rem/1.3 var(--font-display);letter-spacing:.15em;text-transform:uppercase;color:var(--vc-fg-muted);margin:0 0 10px}.row{margin:0;display:flex;gap:12px 24px;flex-wrap:wrap;align-items:center}</style>
+<section data-surface="paper"><div class="wrap"><p class="cap" data-vc-cap="paper surface"></p><p class="row"><button class="vc-button" type="button">Read the sources</button><button class="vc-button" data-vc-variant="accent" type="button">Say hello</button><button class="vc-button" type="button" aria-pressed="true" data-toggle>Wearables</button><button class="vc-button" type="button" aria-pressed="false" data-toggle>Robotics</button><button class="vc-button" type="button" disabled>Unavailable</button></p></div></section>
+<section data-surface="ink"><div class="wrap"><p class="cap" data-vc-cap="ink surface"></p><p class="row"><button class="vc-button" type="button">Read the sources</button><button class="vc-button" data-vc-variant="accent" type="button">Say hello</button><button class="vc-button" type="button" aria-pressed="true" data-toggle>Wearables</button><button class="vc-button" type="button" aria-pressed="false" data-toggle>Robotics</button><button class="vc-button" type="button" disabled>Unavailable</button></p></div></section>
+<script>(function(){var n={"core":"Core","ct-lab":"CT LAB","collision-lab":"Collision Lab"};function u(){var t=document.documentElement.getAttribute("data-theme")||"core";document.querySelectorAll("[data-vc-cap]").forEach(function(e){e.textContent=(n[t]||t)+" / "+e.getAttribute("data-vc-cap")})}u();new MutationObserver(u).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]})})()</script>
+<script>document.querySelectorAll("[data-toggle]").forEach(function(b){b.addEventListener("click",function(){b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")==="true"?"false":"true")})})</script>
+</div></article><article class="specimen" id="component-textaction" aria-labelledby="h-textaction"><div class="specimen-head"><span class="micro">06 / COMPONENT</span><h3 id="h-textaction">Text action</h3><a class="source-link" href="components/TextAction/README.md">Read specification ↗</a></div><div class="specimen-stage">
+<style>html,body{margin:0}.wrap{padding:24px 32px}.cap{font:700 .69rem/1.3 var(--font-display);letter-spacing:.15em;text-transform:uppercase;color:var(--vc-fg-muted);margin:0 0 10px}.row{margin:0;display:flex;gap:12px 24px;flex-wrap:wrap;align-items:center}</style>
+<section data-surface="paper"><div class="wrap"><p class="cap" data-vc-cap="paper surface"></p><p class="row"><a class="vc-link-arrow" href="#components">Explore project</a><a class="vc-link-arrow" href="#components">Open field file</a><a class="vc-link-arrow" href="#components" target="_blank" rel="noopener" aria-label="See build on GitHub (opens in a new tab)">See build</a></p></div></section>
+<section data-surface="ink"><div class="wrap"><p class="cap" data-vc-cap="ink surface"></p><p class="row"><a class="vc-link-arrow" href="#components">Explore project</a><a class="vc-link-arrow" href="#components">Open field file</a><a class="vc-link-arrow" href="#components" target="_blank" rel="noopener" aria-label="See build on GitHub (opens in a new tab)">See build</a></p></div></section>
+<script>(function(){var n={"core":"Core","ct-lab":"CT LAB","collision-lab":"Collision Lab"};function u(){var t=document.documentElement.getAttribute("data-theme")||"core";document.querySelectorAll("[data-vc-cap]").forEach(function(e){e.textContent=(n[t]||t)+" / "+e.getAttribute("data-vc-cap")})}u();new MutationObserver(u).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]})})()</script>
+</div></article><article class="specimen" id="component-status" aria-labelledby="h-status"><div class="specimen-head"><span class="micro">07 / COMPONENT</span><h3 id="h-status">Lifecycle status</h3><a class="source-link" href="components/Status/README.md">Read specification ↗</a></div><div class="specimen-stage">
+<style>html,body{margin:0}.wrap{padding:24px 32px}.cap{font:700 .69rem/1.3 var(--font-display);letter-spacing:.15em;text-transform:uppercase;color:var(--vc-fg-muted);margin:0 0 10px}.row{margin:0;display:flex;gap:12px 24px;flex-wrap:wrap;align-items:center}</style>
+<section data-surface="paper"><div class="wrap"><p class="cap" data-vc-cap="paper surface"></p><p class="row"><span class="vc-status" data-status="planned">Planned</span><span class="vc-status" data-status="hardware-ordered">Hardware ordered</span><span class="vc-status" data-status="in-progress">In progress</span><span class="vc-status" data-status="completed">Completed</span><span class="vc-status" data-status="optional">Optional</span></p></div></section>
+<section data-surface="ink"><div class="wrap"><p class="cap" data-vc-cap="ink surface"></p><p class="row"><span class="vc-status" data-status="planned">Planned</span><span class="vc-status" data-status="hardware-ordered">Hardware ordered</span><span class="vc-status" data-status="in-progress">In progress</span><span class="vc-status" data-status="completed">Completed</span><span class="vc-status" data-status="optional">Optional</span></p></div></section>
+<script>(function(){var n={"core":"Core","ct-lab":"CT LAB","collision-lab":"Collision Lab"};function u(){var t=document.documentElement.getAttribute("data-theme")||"core";document.querySelectorAll("[data-vc-cap]").forEach(function(e){e.textContent=(n[t]||t)+" / "+e.getAttribute("data-vc-cap")})}u();new MutationObserver(u).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]})})()</script>
+</div></article><article class="specimen" id="component-fieldfilerow" aria-labelledby="h-fieldfilerow"><div class="specimen-head"><span class="micro">08 / COMPONENT</span><h3 id="h-fieldfilerow">Field file row</h3><a class="source-link" href="components/FieldFileRow/README.md">Read specification ↗</a></div><div class="specimen-stage">
+<style>html,body{margin:0}.wrap{padding:24px 32px}.cap{font:700 .69rem/1.3 var(--font-display);letter-spacing:.15em;text-transform:uppercase;color:var(--vc-fg-muted);margin:0 0 10px}.row{margin:0;display:flex;gap:12px 24px;flex-wrap:wrap;align-items:center}</style>
+<section data-surface="paper"><div class="wrap"><p class="cap" data-vc-cap="paper surface"></p><div class="vc-file-row"><div class="vc-file-meta"><span class="vc-file-number">N.01</span><span class="vc-status" data-status="completed">Completed</span></div><h3>Aura / Eclipse</h3><p>EEG-driven generative wearable. Concise context here; full technical anatomy belongs in its field file.</p><button class="vc-button" type="button">Open field file</button></div><div class="vc-file-row"><div class="vc-file-meta"><span class="vc-file-number">N.02</span><span class="vc-status" data-status="hardware-ordered">Hardware ordered</span></div><h3>Kinetic textile</h3><p>Parts on the way; no results recorded yet.</p><button class="vc-button" type="button">Open field file</button></div></div></section>
+<section data-surface="ink"><div class="wrap"><p class="cap" data-vc-cap="ink surface"></p><div class="vc-file-row"><div class="vc-file-meta"><span class="vc-file-number">N.01</span><span class="vc-status" data-status="completed">Completed</span></div><h3>Aura / Eclipse</h3><p>EEG-driven generative wearable. Concise context here; full technical anatomy belongs in its field file.</p><button class="vc-button" type="button">Open field file</button></div><div class="vc-file-row"><div class="vc-file-meta"><span class="vc-file-number">N.02</span><span class="vc-status" data-status="hardware-ordered">Hardware ordered</span></div><h3>Kinetic textile</h3><p>Parts on the way; no results recorded yet.</p><button class="vc-button" type="button">Open field file</button></div></div></section>
+<script>(function(){var n={"core":"Core","ct-lab":"CT LAB","collision-lab":"Collision Lab"};function u(){var t=document.documentElement.getAttribute("data-theme")||"core";document.querySelectorAll("[data-vc-cap]").forEach(function(e){e.textContent=(n[t]||t)+" / "+e.getAttribute("data-vc-cap")})}u();new MutationObserver(u).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]})})()</script>
+</div></article><article class="specimen" id="component-dialog" aria-labelledby="h-dialog"><div class="specimen-head"><span class="micro">09 / COMPONENT</span><h3 id="h-dialog">Dialog</h3><a class="source-link" href="components/Dialog/README.md">Read specification ↗</a></div><div class="specimen-stage">
+<style>html,body{margin:0}.wrap{padding:24px 32px}.cap{font:700 .69rem/1.3 var(--font-display);letter-spacing:.15em;text-transform:uppercase;color:var(--vc-fg-muted);margin:0 0 10px}.row{margin:0;display:flex;gap:12px 24px;flex-wrap:wrap;align-items:center}</style>
+<section data-surface="paper"><div class="wrap"><p class="cap" data-vc-cap="live modal"></p><button class="vc-button" type="button" data-vc-open="m-live">Explore project</button></div></section>
+<dialog id="m-live" class="vc-dialog" data-surface="paper" aria-labelledby="m-live-t" aria-describedby="m-live-d">
+<div class="vc-dialog-head"><span class="vc-meta">Selected work / 01</span><form method="dialog"><button class="vc-button">Close</button></form></div>
+<div class="vc-dialog-body"><h2 id="m-live-t">Aura / Eclipse</h2><p id="m-live-d">EEG-driven generative wearable. The overview: concept, why, intended behavior. Implementation and results live in the field file.</p><span class="vc-status" data-status="completed">Completed</span></div>
+<div class="vc-dialog-foot"><a class="vc-link-arrow" href="#components">Open field file</a></div></dialog>
+<section data-surface="paper"><div class="wrap"><p class="cap" data-vc-cap="paper surface"></p><dialog id="s-paper" class="vc-dialog" data-surface="paper" data-vc-static open aria-labelledby="s-paper-t" aria-describedby="s-paper-d">
+<div class="vc-dialog-head"><span class="vc-meta">Selected work / 01</span><button class="vc-button" type="button">Close</button></div>
+<div class="vc-dialog-body"><h2 id="s-paper-t">Aura / Eclipse</h2><p id="s-paper-d">EEG-driven generative wearable. The overview: concept, why, intended behavior. Implementation and results live in the field file.</p><span class="vc-status" data-status="completed">Completed</span></div>
+<div class="vc-dialog-foot"><a class="vc-link-arrow" href="#components">Open field file</a></div></dialog></div></section>
+<section data-surface="ink"><div class="wrap"><p class="cap" data-vc-cap="ink surface"></p><dialog id="s-ink" class="vc-dialog" data-surface="ink" data-vc-static open aria-labelledby="s-ink-t" aria-describedby="s-ink-d">
+<div class="vc-dialog-head"><span class="vc-meta">Selected work / 01</span><button class="vc-button" type="button">Close</button></div>
+<div class="vc-dialog-body"><h2 id="s-ink-t">Aura / Eclipse</h2><p id="s-ink-d">EEG-driven generative wearable. The overview: concept, why, intended behavior. Implementation and results live in the field file.</p><span class="vc-status" data-status="completed">Completed</span></div>
+<div class="vc-dialog-foot"><a class="vc-link-arrow" href="#components">Open field file</a></div></dialog></div></section>
+<script>(function(){var n={"core":"Core","ct-lab":"CT LAB","collision-lab":"Collision Lab"};function u(){var t=document.documentElement.getAttribute("data-theme")||"core";document.querySelectorAll("[data-vc-cap]").forEach(function(e){e.textContent=(n[t]||t)+" / "+e.getAttribute("data-vc-cap")})}u();new MutationObserver(u).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]})})()</script>
+<script>document.addEventListener("click",function(e){var o=e.target.closest("[data-vc-open]");if(o){document.getElementById(o.getAttribute("data-vc-open")).showModal();return}var d=e.target;if(d.matches&&d.matches("dialog.vc-dialog:not([data-vc-static])"))d.close()})</script>
+</div></article><article class="specimen" id="component-field" aria-labelledby="h-field"><div class="specimen-head"><span class="micro">10 / COMPONENT</span><h3 id="h-field">Instrument field</h3><a class="source-link" href="components/Field/README.md">Read specification ↗</a></div><div class="specimen-stage">
+<style>html,body{margin:0}.wrap{padding:24px 32px}.cap{font:700 .69rem/1.3 var(--font-display);letter-spacing:.15em;text-transform:uppercase;color:var(--vc-fg-muted);margin:0 0 14px}.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}</style>
+<section data-surface="paper"><div class="wrap"><p class="cap" data-vc-cap="paper surface"></p><div class="two">
+<div class="vc-field"><label for="fg-p">Foreground hex</label><input id="fg-p" data-hex value="#6D23C8" maxlength="7" spellcheck="false" autocomplete="off" aria-describedby="fg-p-h fg-p-e"><p class="vc-field-hint" id="fg-p-h">Six-digit hex, with the #.</p><p class="vc-field-error" id="fg-p-e" aria-live="polite"></p></div>
+<div class="vc-field"><label for="bg-p">Background hex</label><input id="bg-p" data-hex value="#F7F5" maxlength="7" spellcheck="false" autocomplete="off" aria-invalid="true" aria-describedby="bg-p-h bg-p-e"><p class="vc-field-hint" id="bg-p-h">Six-digit hex, with the #.</p><p class="vc-field-error" id="bg-p-e" aria-live="polite">Use six hex digits, for example #F7F5F2.</p></div></div></div></section>
+<section data-surface="ink"><div class="wrap"><p class="cap" data-vc-cap="ink surface"></p><div class="two">
+<div class="vc-field"><label for="fg-i">Foreground hex</label><input id="fg-i" data-hex value="#6D23C8" maxlength="7" spellcheck="false" autocomplete="off" aria-describedby="fg-i-h fg-i-e"><p class="vc-field-hint" id="fg-i-h">Six-digit hex, with the #.</p><p class="vc-field-error" id="fg-i-e" aria-live="polite"></p></div>
+<div class="vc-field"><label for="bg-i">Background hex</label><input id="bg-i" data-hex value="#F7F5" maxlength="7" spellcheck="false" autocomplete="off" aria-invalid="true" aria-describedby="bg-i-h bg-i-e"><p class="vc-field-hint" id="bg-i-h">Six-digit hex, with the #.</p><p class="vc-field-error" id="bg-i-e" aria-live="polite">Use six hex digits, for example #F7F5F2.</p></div></div></div></section>
+<script>(function(){var n={"core":"Core","ct-lab":"CT LAB","collision-lab":"Collision Lab"};function u(){var t=document.documentElement.getAttribute("data-theme")||"core";document.querySelectorAll("[data-vc-cap]").forEach(function(e){e.textContent=(n[t]||t)+" / "+e.getAttribute("data-vc-cap")})}u();new MutationObserver(u).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]})})()</script>
+<script>document.querySelectorAll("[data-hex]").forEach(function(i){i.addEventListener("input",function(){var ok=/^#[0-9a-fA-F]{6}$/.test(i.value);i.setAttribute("aria-invalid",ok?"false":"true");document.getElementById(i.id+"-e").textContent=ok?"":"Use six hex digits, for example #F7F5F2."})})</script>
+</div></article><article class="specimen" id="component-modeswitch" aria-labelledby="h-modeswitch"><div class="specimen-head"><span class="micro">11 / COMPONENT</span><h3 id="h-modeswitch">Mode switch</h3><a class="source-link" href="components/ModeSwitch/README.md">Read specification ↗</a></div><div class="specimen-stage">
+<style>html,body{margin:0}.wrap{padding:24px 32px}.cap{font:700 .69rem/1.3 var(--font-display);letter-spacing:.15em;text-transform:uppercase;color:var(--vc-fg-muted);margin:0 0 14px}.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}</style>
+<section data-surface="paper"><div class="wrap"><p class="cap" data-vc-cap="paper surface"></p><div class="vc-mode-switch" role="group" aria-label="View"><button type="button" aria-pressed="true"><span>01</span>Overview</button><button type="button" aria-pressed="false"><span>02</span>Pairs</button><button type="button" aria-pressed="false"><span>03</span>Sources</button></div></div></section>
+<section data-surface="ink"><div class="wrap"><p class="cap" data-vc-cap="ink surface"></p><div class="vc-mode-switch" role="group" aria-label="View"><button type="button" aria-pressed="true"><span>01</span>Overview</button><button type="button" aria-pressed="false"><span>02</span>Pairs</button><button type="button" aria-pressed="false"><span>03</span>Sources</button></div></div></section>
+<script>(function(){var n={"core":"Core","ct-lab":"CT LAB","collision-lab":"Collision Lab"};function u(){var t=document.documentElement.getAttribute("data-theme")||"core";document.querySelectorAll("[data-vc-cap]").forEach(function(e){e.textContent=(n[t]||t)+" / "+e.getAttribute("data-vc-cap")})}u();new MutationObserver(u).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]})})()</script>
+<script>document.querySelectorAll(".vc-mode-switch").forEach(function(g){g.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;g.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false")})})})</script>
+</div></article><article class="specimen" id="component-readout" aria-labelledby="h-readout"><div class="specimen-head"><span class="micro">12 / COMPONENT</span><h3 id="h-readout">Readout</h3><a class="source-link" href="components/Readout/README.md">Read specification ↗</a></div><div class="specimen-stage">
+<style>html,body{margin:0}.wrap{padding:24px 32px}.cap{font:700 .69rem/1.3 var(--font-display);letter-spacing:.15em;text-transform:uppercase;color:var(--vc-fg-muted);margin:0 0 14px}.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}</style>
+<section data-surface="paper"><div class="wrap"><p class="cap" data-vc-cap="paper surface"></p><div class="vc-readout-grid"><div class="vc-readout"><strong class="vc-readout-value">1500<span class="vc-readout-unit">px</span></strong><span class="vc-readout-label">Max shell width</span></div><div class="vc-readout"><strong class="vc-readout-value">20–64<span class="vc-readout-unit">px</span></strong><span class="vc-readout-label">Responsive gutter</span></div><div class="vc-readout"><strong class="vc-readout-value">900<span class="vc-readout-unit">px</span></strong><span class="vc-readout-label">Navigation breakpoint</span></div><div class="vc-readout"><strong class="vc-readout-value">0<span class="vc-readout-unit">px</span></strong><span class="vc-readout-label">Corner radius</span></div></div></div></section>
+<section data-surface="ink"><div class="wrap"><p class="cap" data-vc-cap="ink surface"></p><div class="vc-readout-grid"><div class="vc-readout"><strong class="vc-readout-value">180<span class="vc-readout-unit">ms</span></strong><span class="vc-readout-label">Controls</span></div><div class="vc-readout"><strong class="vc-readout-value">220<span class="vc-readout-unit">ms</span></strong><span class="vc-readout-label">Tile inversion and arrows</span></div><div class="vc-readout"><strong class="vc-readout-value">280<span class="vc-readout-unit">ms</span></strong><span class="vc-readout-label">Project visual scale</span></div><div class="vc-readout"><strong class="vc-readout-value">650<span class="vc-readout-unit">ms</span></strong><span class="vc-readout-label">Optional scroll reveal</span></div></div></div></section>
+<script>(function(){var n={"core":"Core","ct-lab":"CT LAB","collision-lab":"Collision Lab"};function u(){var t=document.documentElement.getAttribute("data-theme")||"core";document.querySelectorAll("[data-vc-cap]").forEach(function(e){e.textContent=(n[t]||t)+" / "+e.getAttribute("data-vc-cap")})}u();new MutationObserver(u).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]})})()</script>
+</div></article><article class="specimen" id="component-pageexample" aria-labelledby="h-pageexample"><div class="specimen-head"><span class="micro">13 / COMPONENT</span><h3 id="h-pageexample">Page composition</h3><a class="source-link" href="components/PageExample/README.md">Read specification ↗</a></div><div class="specimen-stage">
+<style>html,body{margin:0}</style>
+<header data-surface="ink"><div class="vc-shell"><nav class="vc-navigation" aria-label="Main"><a class="vc-wordmark" href="#components">Valentina Contini</a><ul class="vc-nav-list"><li><a href="#components" aria-current="page">Work</a></li><li><a href="#components">Research</a></li><li><a href="#components">CT LAB</a></li><li><a href="#components">About</a></li><li><a href="#components">Speaking</a></li></ul></nav></div></header>
+<section class="vc-hero" data-surface="paper" aria-labelledby="h1p"><div class="vc-shell vc-hero-grid">
+<div><p class="vc-kicker">Personal portfolio / selected work</p>
+<h1 id="h1p">I research<br><em>the future.</em><br>Then I build<br>bits of it.</h1>
+<p class="vc-hero-lead">Professional identity, foresight, engineering and selected work.</p></div>
+<aside class="vc-hero-aside" aria-label="Next step"><p>Research, prototypes and talks, each with what it actually found.</p><a class="vc-link-arrow" href="#components">View selected work</a></aside></div></section>
+<section class="vc-section" data-surface="ink"><div class="vc-shell"><div class="vc-section-lead"><div><p class="vc-kicker">01 / Research</p><h2>Useful<br>questions.</h2></div><p>Each piece says what it investigates and what it found. Concepts, experiments and deployed work stay labelled as what they are.</p></div>
+<div class="vc-rule-grid"><article class="vc-tile"><span class="vc-meta">Research / 01</span><h3>Machines that notice.</h3><p>What a wearable can sense without pretending to read minds.</p><p style="margin-top:16px"><span class="vc-status" data-status="in-progress">In progress</span></p><a class="vc-link-arrow vc-tile-action" href="#components">Explore</a></article>
+<article class="vc-tile"><span class="vc-meta">Research / 02</span><h3>Where fields collide.</h3><p>A foresight instrument for emerging-technology intersections.</p><p style="margin-top:16px"><span class="vc-status" data-status="planned">Planned</span></p><a class="vc-link-arrow vc-tile-action" href="#components">Open</a></article></div></div></section>
+<section class="vc-section" data-surface="paper"><div class="vc-shell"><div class="vc-section-lead"><div><p class="vc-kicker">02 / Field files</p><h2>The build<br>record.</h2></div><p>Implementation, observed results, failures and decisions. A field file is the technical record, not the overview.</p></div>
+<div class="vc-file-row"><div class="vc-file-meta"><span class="vc-file-number">N.01</span><span class="vc-status" data-status="completed">Completed</span></div><h3>Aura / Eclipse</h3><p>EEG-driven generative wearable. It transforms EEG-derived artistic variables, not thoughts.</p><button class="vc-button" type="button">Open field file</button></div>
+<div class="vc-file-row"><div class="vc-file-meta"><span class="vc-file-number">N.02</span><span class="vc-status" data-status="hardware-ordered">Hardware ordered</span></div><h3>Kinetic textile</h3><p>Parts on the way; no results recorded yet.</p><button class="vc-button" type="button">Open field file</button></div></div></section>
+</div></article></div></section>
+<section class="docs" id="implementation"><div class="shell"><div class="section-head"><div><span class="micro section-mark">03 / APPLICATION</span><h2>One rulebook. Multiple personalities.</h2></div><p>Core, CT LAB and Collision Lab use the same underlying layout, typography and accessible interaction logic; accent is chosen by expression and surface.</p></div><div class="note-box"><strong>Use in your work:</strong> start with <code>tokens.json</code> as the source, <code>tokens.css</code> and <code>components/bundle.css</code> as the implementation, and <code>voice.md</code> for written language. Detailed integration instructions are in <a href="INTEGRATION.md">INTEGRATION.md</a>. All component API docs are local.</div></div></section>
+</main><footer class="site-footer"><div class="shell"><div><strong class="micro">VALENTINA CONTINI / BRAND SYSTEM</strong><p>This manual contains no external runtime dependencies and no font files. Glacial Indifference is the preferred display face; your device uses the fallback when it is unavailable.</p></div><a href="README.md">Read documentation ↗</a></div></footer><div class="toast" id="copy-toast" role="status" aria-live="polite" hidden></div>
+<script>
+(function(){var labels={"core":"Core identity · purple, paper, ink","ct-lab":"CT LAB · magenta on dark, deep magenta on paper","collision-lab":"Collision Lab · research violet on dark, core purple on paper"};document.querySelectorAll('[data-expression]').forEach(function(b){b.addEventListener('click',function(){var val=b.getAttribute('data-expression');document.documentElement.setAttribute('data-theme',val);document.querySelectorAll('[data-expression]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});document.getElementById('theme-description').textContent=labels[val];});});document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){var value=b.dataset.copy;var t=document.getElementById('copy-toast');function notify(v){t.hidden=false;t.textContent=v;}if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(value).then(function(){notify('Copied '+value);}).catch(function(){notify('Copy manually: '+value);});}else{notify('Copy value: '+value);}});});})();
+</script></body></html>

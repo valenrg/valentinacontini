@@ -1,0 +1,17 @@
+<!-- @dsCard group="Content" height=760 subtitle="Native modal dialog: focus kept inside, Escape closes, focus returns" -->
+<style>html,body{margin:0}.wrap{padding:24px 32px}.cap{font:700 .69rem/1.3 var(--font-display);letter-spacing:.15em;text-transform:uppercase;color:var(--vc-fg-muted);margin:0 0 10px}.row{margin:0;display:flex;gap:12px 24px;flex-wrap:wrap;align-items:center}</style>
+<section data-surface="paper"><div class="wrap"><p class="cap" data-vc-cap="live modal"></p><button class="vc-button" type="button" data-vc-open="m-live">Explore project</button></div></section>
+<dialog id="m-live" class="vc-dialog" data-surface="paper" aria-labelledby="m-live-t" aria-describedby="m-live-d">
+<div class="vc-dialog-head"><span class="vc-meta">Selected work / 01</span><form method="dialog"><button class="vc-button">Close</button></form></div>
+<div class="vc-dialog-body"><h2 id="m-live-t">Aura / Eclipse</h2><p id="m-live-d">EEG-driven generative wearable. The overview: concept, why, intended behavior. Implementation and results live in the field file.</p><span class="vc-status" data-status="completed">Completed</span></div>
+<div class="vc-dialog-foot"><a class="vc-link-arrow" href="#">Open field file</a></div></dialog>
+<section data-surface="paper"><div class="wrap"><p class="cap" data-vc-cap="paper surface"></p><dialog id="s-paper" class="vc-dialog" data-surface="paper" data-vc-static open aria-labelledby="s-paper-t" aria-describedby="s-paper-d">
+<div class="vc-dialog-head"><span class="vc-meta">Selected work / 01</span><button class="vc-button" type="button">Close</button></div>
+<div class="vc-dialog-body"><h2 id="s-paper-t">Aura / Eclipse</h2><p id="s-paper-d">EEG-driven generative wearable. The overview: concept, why, intended behavior. Implementation and results live in the field file.</p><span class="vc-status" data-status="completed">Completed</span></div>
+<div class="vc-dialog-foot"><a class="vc-link-arrow" href="#">Open field file</a></div></dialog></div></section>
+<section data-surface="ink"><div class="wrap"><p class="cap" data-vc-cap="ink surface"></p><dialog id="s-ink" class="vc-dialog" data-surface="ink" data-vc-static open aria-labelledby="s-ink-t" aria-describedby="s-ink-d">
+<div class="vc-dialog-head"><span class="vc-meta">Selected work / 01</span><button class="vc-button" type="button">Close</button></div>
+<div class="vc-dialog-body"><h2 id="s-ink-t">Aura / Eclipse</h2><p id="s-ink-d">EEG-driven generative wearable. The overview: concept, why, intended behavior. Implementation and results live in the field file.</p><span class="vc-status" data-status="completed">Completed</span></div>
+<div class="vc-dialog-foot"><a class="vc-link-arrow" href="#">Open field file</a></div></dialog></div></section>
+<script>(function(){var n={"core":"Core","ct-lab":"CT LAB","collision-lab":"Collision Lab"};function u(){var t=document.documentElement.getAttribute("data-theme")||"core";document.querySelectorAll("[data-vc-cap]").forEach(function(e){e.textContent=(n[t]||t)+" / "+e.getAttribute("data-vc-cap")})}u();new MutationObserver(u).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]})})()</script>
+<script>document.addEventListener("click",function(e){var o=e.target.closest("[data-vc-open]");if(o){document.getElementById(o.getAttribute("data-vc-open")).showModal();return}var d=e.target;if(d.matches&&d.matches("dialog.vc-dialog:not([data-vc-static])"))d.close()})</script>
