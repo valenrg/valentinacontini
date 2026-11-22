@@ -279,6 +279,61 @@ main{overflow:clip}
 .footer .footer-inner{align-items:center}
 @media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:38px}.contact-cta h2{font-size:clamp(3.6rem,12vw,7rem)}}
 @media(max-width:560px){.contact-cta{padding-block:74px}.contact-cta h2{font-size:clamp(3.2rem,15vw,5.5rem)}.contact-copy p{margin-bottom:25px}}
+
+/* CT LAB hover parity with the main site's editorial research tiles. */
+.track, .experiment-card {
+  transition: background-color .22s ease, color .22s ease;
+}
+.track .track-no, .track p, .track a,
+.experiment-card .card-num, .experiment-card .card-state,
+.experiment-card p, .experiment-card .card-tags span,
+.experiment-card .project-link {
+  transition: color .22s ease, border-color .22s ease;
+}
+.experiment-card .project-link span {
+  display: inline-block;
+  transition: transform .22s ease;
+}
+/* Light boxes become ink, as on the main website. */
+.track:is(:hover, :focus-within) {
+  background-color: var(--ink);
+  color: var(--paper);
+}
+.track:is(:hover, :focus-within) .track-no,
+.track:is(:hover, :focus-within) a {
+  color: #FF93E5;
+}
+.track:is(:hover, :focus-within) a {
+  border-color: var(--lab-magenta);
+}
+.track:is(:hover, :focus-within) p {
+  color: #D8D2DB;
+}
+/* Inverse direction for the studio's ink-colored project gallery. */
+.experiment-card:is(:hover, :focus-within) {
+  background-color: var(--paper);
+  color: var(--ink);
+}
+.experiment-card:is(:hover, :focus-within) .card-num,
+.experiment-card:is(:hover, :focus-within) .card-state.state-completed,
+.experiment-card:is(:hover, :focus-within) .card-state.state-in-progress {
+  color: var(--lab-magenta-ink);
+}
+.experiment-card:is(:hover, :focus-within) .card-state:not(.state-completed):not(.state-in-progress),
+.experiment-card:is(:hover, :focus-within) p {
+  color: #625D67;
+}
+.experiment-card:is(:hover, :focus-within) .card-tags span {
+  color: #514857;
+  border-color: #9F96A3;
+}
+.experiment-card:is(:hover, :focus-within) .project-link {
+  color: var(--lab-magenta-ink);
+  border-color: var(--lab-magenta-ink);
+}
+.experiment-card:is(:hover, :focus-within) .project-link span {
+  transform: translate(3px, -3px);
+}
 </style>
 </head>
 <body>
