@@ -101,6 +101,14 @@ img { display: block; max-width: 100%; }
   transition: right .22s ease;
 }
 .nav-links a:not(.nav-hello):hover::after { right: 0; }
+.nav-links a.nav-lab { color: #9D006C; font-weight: 700; white-space: nowrap; }
+.nav-links a.nav-lab::after { background: #9D006C; }
+.nav-links a.nav-lab:hover { color: #760051; }
+@media (max-width: 900px) {
+  .nav-links a.nav-lab { color: #FF92E6; }
+  .nav-links a.nav-lab::after { background: #FF92E6; }
+  .nav-links a.nav-lab:hover { color: white; }
+}
 .nav-hello { color: var(--purple); font-weight: 700; }
 .menu-toggle { display: none; border: 0; background: none; color: inherit; font: 700 .9rem var(--display); letter-spacing: .12em; }
 

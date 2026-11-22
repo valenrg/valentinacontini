@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17141B">
+<meta name="description" content="CT LAB — an evolving experimental studio by Valentina Contini. Wearable machines, embodied intelligence and unconventional interfaces.">
+<title>CT LAB — An Experimental Studio · Valentina Contini</title>
+<link rel="canonical" href="https://www.valentinacontini.eu/ct-lab/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CT LAB — An Experimental Studio · Valentina Contini">
+<meta property="og:description" content="Machines that notice you back. Expressive wearables, embodied intelligence and experimental interfaces.">
+<meta property="og:url" content="https://www.valentinacontini.eu/ct-lab/">
+<meta name="twitter:card" content="summary">
+<style>
+:root{
+ --purple:#6D23C8;--purple-deep:#3C166D;--ink:#17141B;--lab-magenta:#FF38D1;--lab-magenta-ink:#9D006C;--paper:#F7F5F2;--lavender:#E7DDF4;--violet-gray:#B8AAC9;--white:#fff;
+ --muted:#615a67;--muted-dark:#d6cedd;--bright:#d4acff;--line:rgba(23,20,27,.18);--line-dark:rgba(255,255,255,.22);
+ --display:"Glacial Indifference","Avenir Next","Century Gothic","Trebuchet MS",sans-serif;
+ --body:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+ --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+ --max:1500px;--gutter:clamp(20px,4vw,64px)
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;scroll-padding-top:92px}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}button{font:inherit}button,a{touch-action:manipulation}
+button:focus-visible,a:focus-visible,summary:focus-visible,[tabindex="-1"]:focus-visible{outline:3px solid var(--bright);outline-offset:5px}
+.light :is(button,a,summary):focus-visible,.paper :is(button,a,summary):focus-visible,.lavender :is(button,a,summary):focus-visible{outline-color:var(--purple)}
+.site-header :is(button,a):focus-visible{outline-color:var(--lab-magenta)}
+::selection{background:var(--purple);color:#fff}
+.shell{width:100%;max-width:var(--max);margin:0 auto;padding-inline:var(--gutter)}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:fixed;left:var(--gutter);top:-100px;z-index:110;background:var(--purple);color:#fff;padding:13px 18px;font-weight:700}
+.skip-link:focus{top:8px}
+.eyebrow{font:700 .72rem/1.25 var(--display);letter-spacing:.20em;text-transform:uppercase}
+.display{font-family:var(--display);font-weight:700;letter-spacing:-.055em;text-transform:uppercase}
+.rule{border:0;border-top:1px solid var(--line);margin:0}
+.site-header{position:fixed;z-index:60;inset:0 0 auto;background:var(--ink);color:var(--paper);border-bottom:1px solid var(--line-dark)}
+.nav{max-width:var(--max);margin:auto;padding:0 var(--gutter);min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.brand{font:700 .80rem/1.15 var(--display);letter-spacing:.15em;white-space:nowrap;display:flex;align-items:center;gap:15px}
+.brand-divider{height:17px;width:1px;background:#736877}.brand-label{color:var(--lab-magenta)}
+.nav-links{display:flex;align-items:center;gap:24px;font-size:.86rem}
+.nav-links a{display:inline-flex;align-items:center;min-height:44px;position:relative}
+.nav-links a:not(.nav-out)::after{content:"";position:absolute;height:2px;left:0;right:100%;bottom:7px;background:var(--lab-magenta);transition:right .2s ease}
+.nav-links a:hover::after{right:0}
+.nav-out{color:var(--lab-magenta);font-weight:700}
+.menu-toggle{display:none;border:1px solid var(--line-dark);background:transparent;color:var(--paper);padding:11px 14px;font:700 .8rem var(--display);letter-spacing:.1em;min-height:44px;cursor:pointer}
+main{overflow:clip}
+.hero{background:var(--ink);color:var(--paper);min-height:760px;min-height:min(890px,100svh);padding:160px 0 54px;display:flex;align-items:end;position:relative;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,transparent 0,transparent 65%,rgba(255,255,255,.025) 65%,rgba(255,255,255,.025) 65.08%,transparent 65.08%);z-index:-1}
+.hero-inner{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(230px,.5fr);gap:clamp(35px,7vw,100px);align-items:end}
+.hero .eyebrow{color:var(--lab-magenta);margin-bottom:25px}
+.hero h1{font-size:clamp(4.8rem,9.2vw,10.5rem);line-height:.83;margin:0 0 28px;max-width:1160px}
+.hero h1 em{font-style:normal;color:var(--lab-magenta)}
+.hero-intro{max-width:670px;font-size:clamp(1.07rem,1.4vw,1.28rem);color:#e5dfea;margin:0}
+.hero-side{border-top:1px solid var(--line-dark);padding-top:25px;align-self:end}
+.hero-side .code{color:var(--bright);font:700 .65rem var(--mono);letter-spacing:.08em;margin-bottom:32px}
+.hero-side p{color:var(--muted-dark);font-size:.94rem;line-height:1.6;max-width:270px}
+.hero-actions{display:flex;gap:25px;flex-wrap:wrap;margin:38px 0 0}
+.link-arrow{display:inline-flex;align-items:center;gap:13px;padding:11px 0;min-height:44px;border-bottom:2px solid currentColor;font:700 .75rem var(--display);letter-spacing:.13em;text-transform:uppercase;transition:gap .2s ease}
+.link-arrow:hover{gap:20px}.link-arrow.primary{color:var(--lab-magenta)}
+.hero-bottom{margin-top:clamp(38px,9vh,100px);padding-top:22px;border-top:1px solid var(--line-dark);display:flex;gap:25px;align-items:center;justify-content:space-between}
+.hero-bottom p{margin:0;color:var(--muted-dark);font:700 .7rem var(--display);letter-spacing:.12em;text-transform:uppercase}
+.hero-counts{display:flex;gap:24px}.hero-counts span{font:700 .7rem var(--display);letter-spacing:.08em;text-transform:uppercase}.hero-counts b{color:var(--lab-magenta);font-size:1.3rem;margin-right:7px}
+.section{padding-block:clamp(82px,8.5vw,146px)}
+.section-head{display:grid;grid-template-columns:170px minmax(0,1fr);column-gap:clamp(20px,4vw,65px);align-items:start;margin-bottom:60px}
+.section-head .eyebrow{padding-top:9px;color:var(--purple)}
+.section-head h2{font:700 clamp(3.3rem,6.6vw,7rem)/.90 var(--display);letter-spacing:-.055em;text-transform:uppercase;max-width:1010px;margin:0 0 24px}
+.section-lead{font-size:1.14rem;max-width:650px;margin:0;color:var(--muted)}
+.lab-opening{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:7vw;padding-top:15px;align-items:end;margin-bottom:80px}
+.lab-opening .statement{font:700 clamp(1.65rem,3vw,3rem)/1.14 var(--display);letter-spacing:-.035em;margin:0}
+.lab-opening .copy{max-width:550px;color:var(--muted);margin:0;font-size:1.05rem}
+.track-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.track{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:28px clamp(20px,2.3vw,36px) 32px;display:flex;flex-direction:column;min-height:360px}
+.track-no{font:700 .70rem var(--display);color:var(--purple);letter-spacing:.17em;margin-bottom:76px}
+.track h3{font:700 clamp(1.5rem,2.3vw,2.7rem)/.99 var(--display);letter-spacing:-.04em;text-transform:uppercase;min-height:3.05em;margin:0 0 17px}
+.track p{color:var(--muted);font-size:.92rem;max-width:350px;margin:0 0 30px;flex:1}
+.track a{font:700 .70rem var(--display);text-transform:uppercase;letter-spacing:.12em;color:var(--purple);padding:12px 0;align-self:start;border-bottom:1px solid var(--purple)}
+.experiments{background:var(--ink);color:var(--paper)}
+.experiments .section-head .eyebrow{color:var(--lab-magenta)}
+.experiments .section-lead{color:var(--muted-dark)}
+.experiments h2{max-width:1100px}
+.filter-line{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:28px;align-items:center}
+.filter-line .filter-intro{margin-right:16px;font:700 .7rem var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--bright)}
+.filter{border:1px solid #77707f;background:transparent;color:var(--paper);padding:11px 15px;min-height:44px;font:700 .71rem var(--display);letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.filter:hover,.filter[aria-pressed="true"]{background:var(--lab-magenta);color:var(--ink);border-color:var(--lab-magenta)}
+.results-meta{font:.72rem var(--mono);color:var(--muted-dark);margin-bottom:23px}
+.experiment-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line-dark);border-left:1px solid var(--line-dark);align-items:stretch}
+.experiment-card{min-width:0;min-height:435px;border-right:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark);padding:30px clamp(22px,3vw,42px) 32px;display:flex;flex-direction:column}
+.card-top{display:flex;justify-content:space-between;gap:14px;align-items:start;min-height:36px}
+.card-num{font:700 .67rem var(--display);letter-spacing:.15em;text-transform:uppercase;color:var(--lab-magenta)}
+.card-state{font:700 .66rem var(--display);letter-spacing:.07em;text-transform:uppercase;color:#ded5e7;text-align:right}
+.state-completed,.state-in-progress{color:var(--lab-magenta)}
+.card-core{margin:50px 0 20px}
+.experiment-card h3{font:700 clamp(2.0rem,3.6vw,4.0rem)/.94 var(--display);letter-spacing:-.05em;text-transform:uppercase;margin:0 0 17px;max-width:650px;overflow-wrap:break-word}
+.experiment-card p{font-size:1rem;max-width:560px;color:var(--muted-dark);margin:0;line-height:1.5}
+.card-bottom{margin-top:auto}
+.card-tags{display:flex;flex-wrap:wrap;gap:7px;min-height:36px;align-items:center;margin-bottom:18px}
+.card-tags span{font:700 .65rem var(--display);color:#d4cbd9;border:1px solid #655d6c;text-transform:uppercase;letter-spacing:.07em;padding:7px 9px}
+.project-link{min-height:44px;border:0;border-bottom:2px solid var(--bright);padding:12px 0 11px;background:transparent;color:var(--bright);font:700 .73rem var(--display);letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.project-link span{margin-left:11px}
+.empty{display:none;padding:45px 0;color:var(--muted-dark)}
+.build-notes{background:var(--paper)}
+.notes-label{color:var(--purple);font:700 .7rem var(--display);letter-spacing:.16em;text-transform:uppercase}
+.note-list{border-top:1px solid var(--line)}
+.note{display:grid;grid-template-columns:160px minmax(0,1fr) minmax(220px,.8fr) 120px;gap:clamp(12px,2.5vw,38px);border-bottom:1px solid var(--line);padding:30px 0;align-items:start}
+.note-key{font:700 .67rem var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--purple)}
+.note h3{font:700 clamp(1.4rem,2.3vw,2.35rem)/1 var(--display);letter-spacing:-.035em;text-transform:uppercase;margin:0}
+.note p{font-size:.94rem;color:var(--muted);margin:0}
+.note button{align-self:start;border:0;background:none;border-bottom:2px solid var(--purple);color:var(--purple);padding:11px 0;font:700 .70rem var(--display);letter-spacing:.07em;text-transform:uppercase;cursor:pointer;min-height:44px}
+.note-method{margin-top:38px;max-width:890px;border-left:4px solid var(--purple);padding-left:20px;color:#4f4657}
+.future{background:var(--ink);color:var(--paper)}
+.future .section-head .eyebrow{color:var(--bright)}
+.future .section-lead{color:var(--muted-dark)}
+.future-lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--bright)}
+.future-lane{border-right:1px solid var(--line-dark);padding:30px 35px 10px 0;margin-right:35px;min-height:300px}
+.future-lane:last-child{border-right:0;margin-right:0}
+.future-lane .lane-id{font:700 .7rem var(--display);letter-spacing:.12em;color:var(--bright)}
+.future-lane h3{font:700 clamp(1.6rem,2.5vw,2.7rem)/1 var(--display);letter-spacing:-.045em;text-transform:uppercase;margin:40px 0 21px}
+.future-lane p{color:var(--muted-dark);font-size:.95rem;max-width:350px}
+.future-lane .lane-next{color:var(--bright);margin-top:33px;font:700 .67rem var(--display);letter-spacing:.12em;text-transform:uppercase}
+.method-strip{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line-dark);margin-top:80px}
+.method-strip span{border-right:1px solid var(--line-dark);padding:27px clamp(16px,1.4vw,26px) 24px;font:700 .71rem/1.5 var(--display);letter-spacing:.08em;text-transform:uppercase;color:#e5dceb;min-height:86px;display:flex;align-items:flex-start}
+.method-strip span:last-child{border:0}
+.hardware{background:var(--lavender);padding-block:90px}
+.hardware details{border-top:1px solid #b6a6c2;border-bottom:1px solid #b6a6c2}
+.hardware summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:18px;align-items:center;padding:28px 0;font:700 clamp(1.4rem,3vw,2.5rem)/1 var(--display);letter-spacing:-.03em;text-transform:uppercase}
+.hardware summary::-webkit-details-marker{display:none}
+.hardware summary:after{content:"+";font-size:2rem;color:var(--purple)}
+.hardware details[open] summary:after{content:"−"}
+.hardware-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:25px;padding-bottom:40px}
+.hardware-grid h3{font:700 .78rem var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--purple)}
+.hardware-grid ul{margin:0;padding:0;list-style:none}.hardware-grid li{padding:10px 0;border-top:1px solid #cbbfd1;font-size:.93rem}
+.footer{background:var(--paper);padding:55px 0 45px}
+.footer-inner{display:flex;justify-content:space-between;gap:35px;align-items:start}
+.footer-title{font:700 clamp(2rem,4vw,4rem)/.9 var(--display);letter-spacing:-.04em;text-transform:uppercase;margin:0 0 18px}
+.footer p{color:var(--muted);max-width:470px;margin:0}
+.footer-links{display:flex;gap:18px;align-items:center;flex-wrap:wrap;font-size:.86rem}
+.footer-links a{border-bottom:1px solid currentColor;padding:8px 0;min-height:44px}
+.footer-meta{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:70px;padding-top:20px;color:var(--muted);font:700 .7rem var(--display);text-transform:uppercase;letter-spacing:.09em}
+/* Native dialog retains keyboard focus and manages modal background inertness. */
+#projectDialog{color:var(--paper);background:var(--ink);border:1px solid #80758b;width:min(800px,calc(100vw - 32px));max-height:min(91svh,960px);padding:0;overflow:auto;box-shadow:0 25px 100px rgba(0,0,0,.45)}
+#projectDialog::backdrop{background:rgba(8,6,10,.78)}
+.dialog-inner{padding:clamp(24px,4vw,54px)}
+.dialog-head{display:flex;justify-content:space-between;gap:25px;align-items:start}
+.dialog-eyebrow{font:700 .69rem var(--display);text-transform:uppercase;letter-spacing:.15em;color:var(--bright)}
+.dialog-close{border:1px solid #877c92;background:none;color:var(--paper);width:48px;height:48px;font-size:1.5rem;cursor:pointer;flex:0 0 auto}
+#dialogTitle{font:700 clamp(2.9rem,6vw,5.3rem)/.9 var(--display);letter-spacing:-.05em;text-transform:uppercase;margin:35px 0 20px}
+.dialog-lead{font-size:1.15rem;color:var(--muted-dark);max-width:620px;margin:0 0 42px}
+.dialog-details{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line-dark);border-left:1px solid var(--line-dark)}
+.dialog-field{padding:21px;border-right:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark)}
+.dialog-field strong{display:block;color:var(--bright);font:700 .71rem var(--display);letter-spacing:.12em;text-transform:uppercase;margin-bottom:15px}
+.dialog-field p{color:var(--muted-dark);font-size:.92rem;margin:0}
+.dialog-note{margin-top:30px;border-left:4px solid var(--bright);padding-left:19px}
+.dialog-note h3{font:700 .76rem var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--bright);margin:0 0 9px}
+.dialog-note p{margin:0;color:var(--muted-dark);font-size:.92rem}
+
+/* AURA / ECLIPSE - technical field file in a dedicated accessible dialog. */
+/* Full field file reads as its own page, while keeping this HTML a single offline file. */
+#fieldFileDialog{border:1px solid #a99cae;background:var(--paper);color:var(--ink);width:min(1180px,calc(100vw - 32px));max-width:none;max-height:min(94dvh,1200px);padding:0;overflow-y:auto;overscroll-behavior:contain;box-shadow:0 30px 100px rgba(0,0,0,.45)}
+#fieldFileDialog::backdrop{background:rgba(8,6,12,.84)}
+.aura-dialog-bar{position:sticky;top:0;z-index:4;background:var(--paper);border-bottom:1px solid #c9bfce;display:flex;align-items:center;justify-content:space-between;gap:22px;padding:17px clamp(20px,4vw,54px)}
+.aura-dialog-identity{min-width:0}
+.aura-dialog-identity span{display:block;color:var(--lab-magenta-ink);font:700 .68rem/1.4 var(--display);letter-spacing:.13em;text-transform:uppercase;margin-bottom:4px}
+.aura-dialog-identity h2{font:700 clamp(1.1rem,2vw,1.55rem)/1 var(--display);letter-spacing:-.025em;margin:0;text-transform:uppercase}
+.aura-dialog-close{flex:0 0 auto;min-height:44px;border:1px solid var(--lab-magenta-ink);background:transparent;color:var(--lab-magenta-ink);font:700 .7rem var(--display);letter-spacing:.09em;padding:10px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:15px}
+.aura-dialog-close span{font:400 1.5rem/1 var(--body)}
+.aura-dialog-close:hover{background:var(--lab-magenta-ink);color:#fff}
+#fieldFileDialog button:focus-visible{outline-color:var(--lab-magenta-ink)}
+#fieldFileDialog .aura-report-top{margin:0 0 35px}
+#fieldFileDialog .aura-report-content{padding-inline:clamp(22px,5vw,62px);max-width:1180px}
+@media(max-width:560px){
+ #fieldFileDialog{width:100vw;max-height:100dvh;height:100dvh;border:0;margin:0}
+ .aura-dialog-bar{padding:14px 18px}
+ .aura-dialog-identity span{font-size:.58rem}
+ .aura-dialog-close{font-size:.65rem;padding:9px 11px;gap:8px}
+ #fieldFileDialog .aura-report-content{padding-inline:20px}
+}
+
+.aura-report{padding:0 0 70px}
+.aura-report-top{background:var(--ink);color:var(--paper);padding:clamp(26px,5vw,62px);margin:8px 0 38px}
+.aura-report-top .eyebrow{color:var(--lab-magenta);margin:0 0 18px;font-size:.68rem}
+.aura-report-top h3{font:700 clamp(2.5rem,5.2vw,5.4rem)/.91 var(--display);text-transform:uppercase;letter-spacing:-.045em;margin:0 0 24px;max-width:850px}
+.aura-report-top h3 span{color:var(--lab-magenta)}
+.aura-report-top p{max-width:750px;color:#e6dfe9;font-size:clamp(1.04rem,1.25vw,1.18rem);margin:0}
+.aura-report-content{max-width:1060px;margin:0 auto}
+.aura-report-section{padding:34px 0 38px;border-top:1px solid var(--line)}
+.aura-section-head{display:grid;grid-template-columns:minmax(140px,.32fr) minmax(0,1fr);gap:28px;margin-bottom:26px}
+.aura-section-head .label{font:700 .7rem var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--lab-magenta-ink)}
+.aura-section-head h3{font:700 clamp(1.45rem,2.35vw,2.3rem)/1 var(--display);letter-spacing:-.035em;text-transform:uppercase;margin:0;max-width:750px}
+.aura-prose{max-width:780px;margin:0 0 15px auto;color:#4f4755;font-size:1rem;line-height:1.65}
+.aura-prose:last-child{margin-bottom:0}
+.aura-mapping{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.aura-map{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px;min-width:0}
+.aura-map .map-id{font:700 .67rem var(--display);color:var(--lab-magenta-ink);letter-spacing:.13em;text-transform:uppercase}
+.aura-map h4{font:700 clamp(1.45rem,2.2vw,2.1rem)/1 var(--display);letter-spacing:-.04em;text-transform:uppercase;margin:12px 0 12px}
+.aura-map p{color:#514859;font-size:.92rem;line-height:1.6;margin:0 0 12px}
+.aura-map p:last-child{margin-bottom:0}
+.aura-map .equation{color:var(--purple);font:.79rem/1.5 var(--mono);overflow-wrap:anywhere}
+.aura-pipeline{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line);counter-reset:stage}
+.aura-pipeline li{counter-increment:stage;padding:22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-width:0}
+.aura-pipeline li:before{content:counter(stage,decimal-leading-zero);display:block;color:var(--lab-magenta-ink);font:700 .67rem var(--display);letter-spacing:.14em;margin-bottom:15px}
+.aura-pipeline strong{display:block;font:700 .88rem/1.3 var(--display);letter-spacing:.03em;text-transform:uppercase;margin-bottom:7px}
+.aura-pipeline span{display:block;color:#5d5364;font-size:.86rem;line-height:1.55}
+.aura-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}
+.aura-specs div{padding:20px 25px 20px 0;border-bottom:1px solid var(--line)}
+.aura-specs dt{font:700 .68rem var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--lab-magenta-ink);margin-bottom:7px}
+.aura-specs dd{margin:0;font-size:.93rem;color:#4f4755;line-height:1.55}
+.aura-swatches{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.aura-swatch{min-width:0}
+.aura-swatch .color{display:block;height:74px;border:1px solid #d1c6d3;margin-bottom:9px}
+.aura-swatch .hex{display:block;font:.7rem var(--mono);color:#4f4755;overflow-wrap:anywhere}
+.aura-swatch .color-name{display:block;font-size:.73rem;color:#5d5364}
+.aura-clarity{border-left:4px solid var(--lab-magenta-ink);background:var(--lavender);padding:22px 24px;margin:26px 0;color:#42364e;font-size:.95rem;line-height:1.6}
+.aura-clarity strong{display:block;font:700 .75rem var(--display);letter-spacing:.12em;text-transform:uppercase;margin-bottom:7px}
+.aura-next{margin-top:20px;display:grid;grid-template-columns:minmax(0,.38fr) minmax(0,1fr);gap:20px;align-items:start}
+.aura-next strong{font:700 .7rem var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--lab-magenta-ink)}
+.aura-next p{color:#544b5d;margin:0;max-width:720px}
+#dialogOpenFieldFile{margin-top:18px;min-height:44px;padding:10px 0;color:var(--bright);font:700 .73rem var(--display);letter-spacing:.09em;text-transform:uppercase;border:0;border-bottom:2px solid var(--bright);background:transparent;cursor:pointer}
+#dialogOpenFieldFile[hidden]{display:none}
+@media(max-width:780px){
+ .aura-section-head{grid-template-columns:1fr;gap:9px}.aura-prose{margin-left:0}
+ .aura-pipeline{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .aura-swatches{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .aura-next{grid-template-columns:1fr;gap:6px}
+}
+@media(max-width:560px){
+ .aura-mapping,.aura-pipeline,.aura-specs{grid-template-columns:1fr}
+ .aura-map{padding:20px}.aura-report-top{padding:28px 22px}.aura-report-top h3{font-size:clamp(2.6rem,11vw,4rem)}
+ .aura-report{padding-bottom:42px}.aura-report-section{padding-block:25px}
+}
+
+
+@media(max-width:1050px){.section-head{grid-template-columns:130px 1fr}.note{grid-template-columns:110px 1fr 1fr}.note button{grid-column:2;justify-self:start}.track{min-height:390px}}
+@media(max-width:900px){
+ .menu-toggle{display:block}.nav-links{display:none;position:fixed;top:0;left:0;right:0;height:100dvh;min-height:100vh;background:var(--ink);color:var(--paper);flex-direction:column;align-items:start;justify-content:center;gap:0;padding:100px var(--gutter) 60px;z-index:1}
+ .nav-links.open{display:flex}.nav-links a{font:700 clamp(1.85rem,8vw,4rem)/1 var(--display);text-transform:uppercase;letter-spacing:-.04em;min-height:70px}
+ .nav-links .nav-out{color:var(--lab-magenta)}.menu-toggle{position:relative;z-index:3}.site-header.menu-open{background:var(--ink);color:var(--paper)}.site-header.menu-open .brand-label{color:var(--lab-magenta)}.site-header.menu-open .menu-toggle{border-color:var(--line-dark);color:var(--paper)}
+ .hero-inner{grid-template-columns:1fr}.hero-side{display:none}.hero{min-height:680px}.track-grid{grid-template-columns:1fr 1fr}.track:last-child{grid-column:span 2;min-height:300px}.track h3{min-height:0}.future-lanes{grid-template-columns:1fr}.future-lane{margin:0;border-right:0;border-bottom:1px solid var(--line-dark);min-height:auto;padding:25px 0 40px}.future-lane h3{margin:16px 0}.future-lane:last-child{border-bottom:0}.method-strip{margin-top:45px}
+}
+@media(max-width:680px){
+ .nav{min-height:68px}.brand{font-size:.72rem;gap:9px}.hero{min-height:660px;padding:150px 0 40px}.hero h1{font-size:clamp(3.5rem,14.7vw,6.4rem)}.hero-bottom{align-items:start;flex-direction:column}.hero-counts{gap:18px}
+ .section{padding-block:75px}.section-head{grid-template-columns:1fr;gap:20px;margin-bottom:40px}.section-head h2{font-size:clamp(2.9rem,12vw,5.5rem)}.lab-opening{grid-template-columns:1fr;gap:20px;margin-bottom:50px}.track-grid{grid-template-columns:1fr}.track:last-child{grid-column:auto}.track{min-height:300px;padding:25px}.track-no{margin-bottom:28px}.track h3{min-height:0;font-size:2rem}.track p{flex:0 1 auto;margin-bottom:20px}
+ .experiment-grid{grid-template-columns:1fr}.experiment-card{min-height:400px;padding:26px 23px}.card-core{margin-top:50px}.experiment-card h3{font-size:clamp(2.25rem,8vw,3.2rem)}
+ .note{grid-template-columns:1fr;gap:10px;padding:25px 0}.note button{grid-column:1}
+ .hardware-grid{grid-template-columns:1fr}.dialog-details{grid-template-columns:1fr}.method-strip{grid-template-columns:1fr 1fr;row-gap:0}.method-strip span{padding:19px 16px;min-height:70px;border-bottom:1px solid var(--line-dark)}
+ .footer-inner{flex-direction:column}.footer-meta{gap:13px;flex-direction:column}
+}
+@media(max-width:360px){.brand-divider{display:none}.brand{font-size:.67rem}.hero h1{font-size:3.2rem}.hero-counts{flex-wrap:wrap}.card-top{flex-direction:column;gap:6px}.card-state{text-align:left}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+/* Field Files are separate reading surfaces; Experiments opens concise overviews. */
+.field-file-brief{padding-bottom:70px}
+.field-file-brief-head{background:var(--ink);color:var(--paper);padding:clamp(28px,5vw,62px)}
+.field-file-brief-head .eyebrow{color:var(--lab-magenta);margin-bottom:18px}
+.field-file-brief-head h3{font:700 clamp(2.5rem,5.1vw,5.4rem)/.92 var(--display);letter-spacing:-.05em;text-transform:uppercase;margin:0 0 24px;max-width:900px}
+.field-file-brief-head p{color:#e6dfe9;font-size:clamp(1.02rem,1.4vw,1.2rem);max-width:760px;margin:0}
+.field-file-brief-body{max-width:980px;margin:auto;padding:24px clamp(24px,5vw,62px)}
+.field-file-brief-body section{display:grid;grid-template-columns:minmax(140px,.3fr) minmax(0,.6fr) minmax(0,1fr);gap:clamp(12px,2vw,32px);border-top:1px solid var(--line);padding:30px 0 34px;align-items:start}
+.field-file-brief-body .eyebrow{color:var(--lab-magenta-ink)}
+.field-file-brief-body h4{font:700 clamp(1.25rem,2.1vw,2rem)/1 var(--display);letter-spacing:-.035em;text-transform:uppercase;margin:0}
+.field-file-brief-body p{color:#4f4755;line-height:1.65;margin:0}
+.field-file-brief-caveat{border-left:3px solid var(--lab-magenta-ink);margin:0 clamp(24px,5vw,62px);padding-left:17px;color:#4f4755;font-size:.89rem;max-width:880px}
+@media(max-width:790px){.field-file-brief-body section{grid-template-columns:1fr;gap:13px}.field-file-brief-body{padding-top:12px}}
+@media(max-width:560px){.field-file-brief-head{padding:32px 22px}.field-file-brief{padding-bottom:36px}}
+
+/* CT LAB contact section: one distinct closing invitation. */
+.contact-cta{background:var(--ink);color:var(--paper);padding:clamp(84px,10vw,150px) 0;border-top:1px solid var(--line-dark)}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.65fr);gap:clamp(30px,6vw,120px);align-items:end}
+.contact-cta .eyebrow{color:var(--lab-magenta);margin-bottom:35px}
+.contact-cta h2{font:700 clamp(3.8rem,7.8vw,9rem)/.89 var(--display);letter-spacing:-.055em;text-transform:uppercase;margin:0;max-width:900px}
+.contact-cta h2 span{color:var(--lab-magenta)}
+.contact-copy p{font-size:clamp(1.07rem,1.6vw,1.34rem);line-height:1.55;color:#e3dce7;margin:0 0 38px}
+.contact-link{display:inline-flex;min-height:52px;align-items:center;gap:30px;padding:15px 0;border-bottom:2px solid var(--lab-magenta);color:var(--lab-magenta);font:700 .9rem var(--display);letter-spacing:.12em;text-transform:uppercase}
+.contact-link:hover,.contact-link:focus-visible{color:var(--paper)}
+.contact-address{display:block;margin-top:22px;color:#ddd1e2;font-size:.96rem;overflow-wrap:anywhere}
+.footer .footer-identity{font:700 1rem var(--display);letter-spacing:.13em;text-transform:uppercase;margin:0 0 12px}
+.footer .footer-inner{align-items:center}
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:38px}.contact-cta h2{font-size:clamp(3.6rem,12vw,7rem)}}
+@media(max-width:560px){.contact-cta{padding-block:74px}.contact-cta h2{font-size:clamp(3.2rem,15vw,5.5rem)}.contact-copy p{margin-bottom:25px}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="brand" href="https://www.valentinacontini.eu/" title="Open main personal website"><span>VALENTINA CONTINI</span><span class="brand-divider" aria-hidden="true"></span><span class="brand-label">CT LAB</span></a>
+    <button class="menu-toggle" type="button" aria-controls="main-menu" aria-expanded="false">MENU</button>
+    <div class="nav-links" id="main-menu">
+      <a href="#lab">The lab</a><a href="#experiments">Experiments</a><a href="#notes">Field files</a><a href="#future">Future</a>
+      <a class="nav-out" href="https://www.valentinacontini.eu/">Main site ↗</a>
+    </div>
+  </nav>
+</header>
+<main id="main" tabindex="-1">
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="shell">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">CT LAB / An evolving experimental studio</div>
+        <h1 id="hero-title" class="display">Machines that <em>notice you</em> back.</h1>
+        <p class="hero-intro">I build strange, expressive things to explore how people and technologies relate: wearable organisms, embodied machines and interfaces that refuse to behave like ordinary interfaces.</p>
+        <div class="hero-actions"><a class="link-arrow primary" href="#notes">EXPLORE FIELD FILES <span aria-hidden="true">↗</span></a><a class="link-arrow" href="#experiments">EXPLORE THE EXPERIMENTS <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <aside class="hero-side" aria-label="Studio approach">
+        <div class="code">// FIELD FILES FROM A LAB IN MOTION</div>
+        <p>Some things work. Some things don't. The point is to build, observe and learn—not to make another shiny AI demo.</p>
+        <p>Three directions. Equal curiosity. One new capability with every experiment.</p>
+      </aside>
+    </div>
+    <div class="hero-bottom"><p>Currently / Studio log · November 2026</p><div class="hero-counts" aria-label="Project status counts"><span><b>01</b>Completed</span><span><b>02</b>Building</span><span><b>01</b>Ordered</span></div></div>
+  </div>
+</section>
+<section class="section paper" id="lab" aria-labelledby="lab-title">
+  <div class="shell">
+    <div class="section-head"><div class="eyebrow">01 / The lab</div><div><h2 id="lab-title">A place to try the unreasonable.</h2><p class="section-lead">I study emerging technologies professionally. Here I get my hands on them. CT LAB is the evolving record of what I build, what surprises me and what survives contact with reality.</p></div></div>
+    <div class="lab-opening"><p class="statement">Not a product roadmap.<br>Not a collection of AI wrappers.<br>A practice of making things behave.</p><p class="copy">The experiments aren't organized by industry or hype cycle. They're organized by the kinds of relationships they explore—between a person and a garment, a body and a robot, or a hand and a digital world.</p></div>
+    <div class="track-grid" aria-label="Three equally important studio directions">
+      <article class="track"><span class="track-no">01 / EXPRESSIVE</span><h3>Expressive & kinetic wearables</h3><p>Technology that lives on or near the body, sensing and reacting through visuals, motion or material change.</p><a href="#experiments" data-set-filter="wearables">EXPLORE WEARABLES ↗</a></article>
+      <article class="track"><span class="track-no">02 / EMBODIED</span><h3>Embodied intelligence & robotics</h3><p>Machines with character, learned movement, physical agency and behavior that can be observed—not just described.</p><a href="#experiments" data-set-filter="robotics">EXPLORE ROBOTICS ↗</a></article>
+      <article class="track"><span class="track-no">03 / INTERACTIVE</span><h3>Experimental interfaces & critical design</h3><p>Interfaces that make technology playful, strange or uncomfortable enough to question what it claims to know.</p><a href="#experiments" data-set-filter="interfaces">EXPLORE INTERFACES ↗</a></article>
+    </div>
+  </div>
+</section>
+<section class="section experiments" id="experiments" aria-labelledby="experiments-title">
+ <div class="shell">
+  <div class="section-head"><div class="eyebrow">02 / Experiments</div><div><h2 id="experiments-title">Different machines. Different questions.</h2><p class="section-lead">Eight core experiments and one optional study live across three equally important directions. Some are finished, some are being built, others are concepts worth pursuing.</p></div></div>
+  <div class="filter-line" role="group" aria-label="Filter experiments by track or status">
+   <span class="filter-intro">Show /</span>
+   <button class="filter" type="button" data-filter="all" aria-pressed="true">All experiments</button>
+   <button class="filter" type="button" data-filter="wearables" aria-pressed="false">Wearables</button>
+   <button class="filter" type="button" data-filter="robotics" aria-pressed="false">Robotics</button>
+   <button class="filter" type="button" data-filter="interfaces" aria-pressed="false">Interfaces</button>
+   <button class="filter" type="button" data-filter="active" aria-pressed="false">Current work</button>
+  </div>
+  <div class="results-meta" id="resultText" role="status" aria-live="polite" aria-atomic="true">Showing 9 experiments</div>
+  <div class="experiment-grid" id="experimentGrid">
+<article class="experiment-card" id="exp-00" data-track="wearables" data-state="COMPLETED" aria-labelledby="title-00">
+      <div class="card-top"><span class="card-num">00 / wearables</span><span class="card-state state-completed">Complete</span></div>
+      <div class="card-core"><h3 id="title-00">AURA / ECLIPSE</h3><p>A wearable generative brooch that turns invisible personal signals into a living visual surface.</p></div>
+      <div class="card-bottom"><div class="card-tags"><span>embedded</span><span>wearable</span><span>biosignals</span></div><button type="button" class="project-link" data-project="00" aria-label="Explore project overview for AURA / ECLIPSE">EXPLORE PROJECT <span aria-hidden="true">↗</span></button></div>
+    </article>
+<article class="experiment-card" id="exp-01" data-track="wearables" data-state="PLANNED" aria-labelledby="title-01">
+      <div class="card-top"><span class="card-num">01 / wearables</span><span class="card-state state-planned">Concept</span></div>
+      <div class="card-core"><h3 id="title-01">PERSONAL SPACE ORGANISM</h3><p>A wearable appendage notices nearby people, turns toward them and changes posture when they enter your space.</p></div>
+      <div class="card-bottom"><div class="card-tags"><span>mechatronics</span><span>ToF sensing</span><span>kinetic wearable</span></div><button type="button" class="project-link" data-project="01" aria-label="Explore project overview for PERSONAL SPACE ORGANISM">EXPLORE PROJECT <span aria-hidden="true">↗</span></button></div>
+    </article>
+<article class="experiment-card" id="exp-02" data-track="wearables" data-state="CAPSTONE" aria-labelledby="title-02">
+      <div class="card-top"><span class="card-num">02 / wearables</span><span class="card-state state-capstone">Capstone concept</span></div>
+      <div class="card-core"><h3 id="title-02">SYMBIOTIC CREATURE</h3><p>A wearable organism shaped by the wearer, nearby people and the environment at the same time.</p></div>
+      <div class="card-bottom"><div class="card-tags"><span>multimodal sensing</span><span>emergence</span><span>wearable robotics</span></div><button type="button" class="project-link" data-project="02" aria-label="Explore project overview for SYMBIOTIC CREATURE">EXPLORE PROJECT <span aria-hidden="true">↗</span></button></div>
+    </article>
+<article class="experiment-card" id="exp-03" data-track="wearables" data-state="LONG TERM" aria-labelledby="title-03">
+      <div class="card-top"><span class="card-num">03 / wearables</span><span class="card-state state-long-term">Long-term concept</span></div>
+      <div class="card-core"><h3 id="title-03">LIVING GARMENT</h3><p>A kinetic garment that appears to breathe, tense, retract and reorganize itself around the body.</p></div>
+      <div class="card-bottom"><div class="card-tags"><span>soft robotics</span><span>kinetic fashion</span><span>materials</span></div><button type="button" class="project-link" data-project="03" aria-label="Explore project overview for LIVING GARMENT">EXPLORE PROJECT <span aria-hidden="true">↗</span></button></div>
+    </article>
+<article class="experiment-card" id="exp-04" data-track="robotics" data-state="PLANNED" aria-labelledby="title-04">
+      <div class="card-top"><span class="card-num">04 / robotics</span><span class="card-state state-planned">Concept</span></div>
+      <div class="card-core"><h3 id="title-04">IDLY / ART CRITIC 3000™</h3><p>Cozmo becomes an expressive familiar with curiosity, moods and a strangely opinionated taste in art.</p></div>
+      <div class="card-bottom"><div class="card-tags"><span>Python</span><span>HRI</span><span>state machines</span></div><button type="button" class="project-link" data-project="04" aria-label="Explore project overview for IDLY / ART CRITIC 3000™">EXPLORE PROJECT <span aria-hidden="true">↗</span></button></div>
+    </article>
+<article class="experiment-card" id="exp-05" data-track="robotics" data-state="HARDWARE ORDERED" aria-labelledby="title-05">
+      <div class="card-top"><span class="card-num">05 / robotics</span><span class="card-state state-hardware-ordered">Hardware ordered</span></div>
+      <div class="card-core"><h3 id="title-05">MICRODUCK LAB</h3><p>An embodied intelligence playground for learned motion, autonomous behaviour and the messy gap between simulation and reality.</p></div>
+      <div class="card-bottom"><div class="card-tags"><span>physical AI</span><span>locomotion</span><span>sim-to-real</span></div><button type="button" class="project-link" data-project="05" aria-label="Explore project overview for MICRODUCK LAB">EXPLORE PROJECT <span aria-hidden="true">↗</span></button></div>
+    </article>
+<article class="experiment-card" id="exp-06" data-track="robotics" data-state="OPTIONAL" aria-labelledby="title-06">
+      <div class="card-top"><span class="card-num">06 / robotics</span><span class="card-state state-optional">Optional experiment</span></div>
+      <div class="card-core"><h3 id="title-06">€39 DIGITAL TWIN™</h3><p>A cheap robot, an expensive concept, and the measurable gap between the model and physical reality.</p></div>
+      <div class="card-bottom"><div class="card-tags"><span>telemetry</span><span>digital twin</span><span>uncertainty</span></div><button type="button" class="project-link" data-project="06" aria-label="Explore project overview for €39 DIGITAL TWIN™">EXPLORE PROJECT <span aria-hidden="true">↗</span></button></div>
+    </article>
+<article class="experiment-card" id="exp-07" data-track="interfaces" data-state="IN PROGRESS" aria-labelledby="title-07">
+      <div class="card-top"><span class="card-num">07 / interfaces</span><span class="card-state state-in-progress">In progress</span></div>
+      <div class="card-core"><h3 id="title-07">LIVING CANVAS / MANUAL OVERRIDE™</h3><p>A spatial generative system played with bare hands. The body is the controller.</p></div>
+      <div class="card-bottom"><div class="card-tags"><span>TouchDesigner</span><span>hand tracking</span><span>spatial UI</span></div><button type="button" class="project-link" data-project="07" aria-label="Explore project overview for LIVING CANVAS / MANUAL OVERRIDE™">EXPLORE PROJECT <span aria-hidden="true">↗</span></button></div>
+    </article>
+<article class="experiment-card" id="exp-08" data-track="interfaces" data-state="IN PROGRESS" aria-labelledby="title-08">
+      <div class="card-top"><span class="card-num">08 / interfaces</span><span class="card-state state-in-progress">In progress</span></div>
+      <div class="card-core"><h3 id="title-08">BRAIN KPI™</h3><p>My brain has a PR department: real personal data becomes an absurdly confident executive narrative.</p></div>
+      <div class="card-bottom"><div class="card-tags"><span>local AI</span><span>data pipeline</span><span>dashboard</span></div><button type="button" class="project-link" data-project="08" aria-label="Explore project overview for BRAIN KPI™">EXPLORE PROJECT <span aria-hidden="true">↗</span></button></div>
+    </article>
+  </div>
+  <p class="empty" id="emptyState">No experiments in this view.</p>
+ </div>
+</section>
+<section class="section build-notes" id="notes" aria-labelledby="notes-title">
+ <div class="shell">
+  <div class="section-head"><div class="eyebrow">03 / Field files</div><div><h2 id="notes-title">The good, the weird & the unfinished.</h2><p class="section-lead">A running record, organized around the experiments rather than a chronological blog. Observations, decisions, failures and technical discoveries belong here as they happen.</p></div></div>
+  <div class="note-list">
+   <article class="note"><div class="note-key">N·01 / Completed</div><h3>AURA / ECLIPSE</h3><p>Completed EEG-driven generative wearable. Its complete Field File covers the four artistic parameters, embedded signal processing and local rendering.</p><button type="button" data-field-id="00" aria-label="Open AURA / ECLIPSE field file">OPEN FIELD FILE &nearr;</button></article>
+
+
+
+   <article class="note"><div class="note-key">N·02 / In progress</div><h3>Living Canvas</h3><p>The hand-controlled visual system is underway. The interaction vocabulary and recorded behaviors will form its first technical field file.</p><button type="button" data-field-id="07">OPEN FIELD FILE ↗</button></article>
+   <article class="note"><div class="note-key">N·03 / In progress</div><h3>Brain KPI™</h3><p>Building the satirical data object. The critical-design question is established; implementation details and outcomes aren't published yet.</p><button type="button" data-field-id="08">OPEN FIELD FILE ↗</button></article>
+   <article class="note"><div class="note-key">N·04 / Ordered</div><h3>Microduck Lab</h3><p>Hardware ordered. Early investigations can focus on development tools and simulation; physical results must wait until the robot is in hand.</p><button type="button" data-field-id="05">OPEN FIELD FILE ↗</button></article>
+  </div>
+  
+ </div>
+</section>
+<section class="section future" id="future" aria-labelledby="future-title">
+ <div class="shell">
+  <div class="section-head"><div class="eyebrow">04 / Future experiments</div><div><h2 id="future-title">The next uncomfortable question.</h2><p class="section-lead">These are directions, not promises or dated milestones. Each track develops independently; capabilities can move between them.</p></div></div>
+  <div class="future-lanes">
+   <article class="future-lane"><div class="lane-id">TRACK 01 / WEARABLES</div><h3>From signal to movement</h3><p>Start with Personal Space Organism, then investigate multimodal wearable behavior in Symbiotic Creature and ultimately garment-scale actuation.</p><p class="lane-next">Next question / How should an object respond to someone entering your space?</p></article>
+   <article class="future-lane"><div class="lane-id">TRACK 02 / ROBOTICS</div><h3>From character to agency</h3><p>Develop IDLY's expressive behavior; use Microduck to explore learned physical movement. Keep the €39 Digital Twin as an optional side experiment.</p><p class="lane-next">Next question / When does movement start to look intentional?</p></article>
+   <article class="future-lane"><div class="lane-id">TRACK 03 / INTERFACES</div><h3>From gesture to critique</h3><p>Take Living Canvas and Brain KPI further—one uses the body as an input, the other interrogates the confidence of computational outputs.</p><p class="lane-next">Next question / What does interaction reveal that a screen hides?</p></article>
+  </div>
+  <div class="method-strip" aria-label="Studio method"><span>01 / Build</span><span>02 / Test</span><span>03 / Break</span><span>04 / Learn</span><span>05 / Iterate</span></div>
+ </div>
+</section>
+<section class="hardware" id="hardware" aria-labelledby="hardware-title">
+ <div class="shell">
+  <div class="notes-label">05 / The kit</div>
+  <details><summary id="hardware-title">Built from what I already have <span class="sr-only">Expand hardware inventory</span></summary>
+   <div class="hardware-grid"><div><h3>Wearable & sensing</h3><ul><li>M5Stack StopWatch C152</li><li>VIE EEG wearable</li><li>Oura Ring</li><li>Apple Watch</li></ul></div><div><h3>Robotics & compute</h3><ul><li>Anki Cozmo</li><li>Pollen Robotics Microduck — ordered</li><li>Makeblock mBot</li><li>Raspberry Pi 5 + touchscreen</li></ul></div><div><h3>Interfaces & spaces</h3><ul><li>Leap Motion Controller</li><li>Meta Quest 2</li><li>Mac / development computer</li></ul></div></div>
+  </details>
+ </div>
+</section>
+<section class="contact-cta" id="contact" aria-labelledby="contact-title">
+ <div class="shell contact-grid">
+  <div><div class="eyebrow">CT LAB / GET IN TOUCH</div><h2 id="contact-title">Have a <span>weird idea?</span></h2></div>
+  <div class="contact-copy"><p>An unusual interaction, an experimental collaboration, or a machine that probably shouldn't exist? I'd love to hear about it.</p>
+   <a class="contact-link" href="mailto:hello@valentinacontini.eu?subject=CT%20LAB%20%2F%20Collaboration">SAY HELLO <span aria-hidden="true">↗</span></a>
+   <span class="contact-address">hello@valentinacontini.eu</span>
+  </div>
+ </div>
+</section>
+</main>
+<footer class="footer"><div class="shell"><div class="footer-inner"><div><div class="footer-identity">Valentina Contini / CT LAB</div><p>Experimental studio for expressive machines and unconventional interactions. Collision Lab is a separate technology-foresight instrument.</p></div><nav class="footer-links" aria-label="More about this work"><a href="https://www.valentinacontini.eu/">Main website ↗</a><a href="https://www.valentinacontini.eu/collision-lab/">Collision Lab ↗</a><a href="https://www.valentinacontini.eu/imprint.html">Imprint</a><a href="https://www.valentinacontini.eu/privacy.html">Privacy</a><a href="#top">Back to top ↑</a></nav></div><div class="footer-meta"><span>VALENTINA CONTINI / CT LAB</span><span>An evolving experimental studio · 2026</span></div></div></footer>
+<dialog id="projectDialog" aria-labelledby="dialogTitle" aria-describedby="dialogLead">
+ <div class="dialog-inner"><div class="dialog-head"><span class="dialog-eyebrow" id="dialogEyebrow"></span><button class="dialog-close" type="button" aria-label="Close project details">×</button></div><h2 id="dialogTitle"></h2><p class="dialog-lead" id="dialogLead"></p>
+ <div class="dialog-details"><div class="dialog-field"><strong>Build</strong><p id="dialogBuild"></p></div><div class="dialog-field"><strong>Capabilities</strong><p id="dialogLearn"></p></div><div class="dialog-field"><strong>Hardware</strong><p id="dialogHardware"></p></div><div class="dialog-field"><strong>Intelligence</strong><p id="dialogAI"></p></div></div>
+ <div class="dialog-note"><h3>Portfolio evidence / planned or documented</h3><p id="dialogEvidence"></p></div>
+ <div class="dialog-note"><h3>Documentation status</h3><p id="dialogStatusNote"></p><button type="button" id="dialogOpenFieldFile" hidden>OPEN FIELD FILE &nearr;</button></div></div>
+</dialog>
+<dialog id="fieldFileDialog" aria-labelledby="fieldFileTitle" aria-describedby="fieldFileDescription">
+ <div class="aura-dialog-bar">
+  <div class="aura-dialog-identity"><span id="fieldFileEyebrow">FIELD FILE / 001 / COMPLETED</span><h2 id="fieldFileTitle">AURA / ECLIPSE</h2></div>
+  <button type="button" class="aura-dialog-close" aria-label="Close field file">CLOSE <span aria-hidden="true">&times;</span></button>
+ </div>
+ <p id="fieldFileDescription" class="sr-only">Technical record for the selected project.</p>
+    <div id="auraReport" class="aura-report">
+      <div class="aura-report-top">
+        <p class="eyebrow">Wearable / EEG-driven generative art / Local-first</p>
+        <h3>One void. <span>One luminous field.</span></h3>
+        <p>AURA transforms live EEG signals into ECLIPSE: a dark circular void surrounded by an evolving, organic purple corona. The artwork changes geometry, texture, luminosity and movement without claiming to read thoughts or emotions.</p>
+      </div>
+      <div class="aura-report-content">
+       <section class="aura-report-section" aria-labelledby="aura-mapping-title">
+        <div class="aura-section-head"><div class="label">01 / Behaviour</div><h3 id="aura-mapping-title">Four signals, four artistic dimensions.</h3></div>
+        <p class="aura-prose">Two EEG channels become four continuously varying control values. These are artistic parameters, not measures of cognitive or emotional state.</p>
+        <div class="aura-mapping">
+         <div class="aura-map"><div class="map-id">E / Presence</div><h4>Energy</h4><p>Combined RMS amplitude of the filtered channels, logarithmically compressed and adaptively normalized.</p><p class="equation">EEG amplitude &rarr; radius, thickness, luminous presence</p><p>Higher values give the corona more visual mass while preserving a minimum visible thickness.</p></div>
+         <div class="aura-map"><div class="map-id">C / Form</div><h4>Coherence</h4><p>Pearson correlation between the filtered channels, adaptively normalized. This is an artistic proxy, not a scientific EEG coherence measurement.</p><p class="equation">Inter-channel correlation &rarr; stability and asymmetry</p><p>Higher values stabilize the circle; lower values permit organic deformations.</p></div>
+         <div class="aura-map"><div class="map-id">X / Texture</div><h4>Complexity</h4><p>Mean normalized spectral entropy across 40 frequency bins from 1 to 40 Hz for both channels.</p><p class="equation">Spectral entropy &rarr; edge detail</p><p>The outline gains finer folds, irregularities and local thickness variation within one continuous form.</p></div>
+         <div class="aura-map"><div class="map-id">R / Motion</div><h4>Rhythm</h4><p>Magnitude of change in Energy, Coherence and Complexity between successive analysis windows; not a literal neural oscillation rate.</p><p class="equation">Feature variation &rarr; orbit, pulse, drift</p><p>Controls a slowly orbiting hotspot, breathing-like expansion and fine surface motion, with damped speed changes.</p></div>
+        </div>
+       </section>
+       <section class="aura-report-section" aria-labelledby="aura-system-title">
+        <div class="aura-section-head"><div class="label">02 / Architecture</div><h3 id="aura-system-title">From EEG to light, entirely on the wearable.</h3></div>
+        <ol class="aura-pipeline">
+         <li><strong>Sense + transmit</strong><span>VIE Zone, two live EEG channels. Encrypted, bonded Bluetooth Low Energy connection.</span></li>
+         <li><strong>Acquire + check</strong><span>BLE sample decoding, sample-rate and clipping checks, transient rejection.</span></li>
+         <li><strong>Filter + window</strong><span>1&ndash;40 Hz bandpass. Overlapping 2-second windows, advanced every second.</span></li>
+         <li><strong>Extract features</strong><span>RMS amplitude, Pearson correlation, spectral entropy and change between states.</span></li>
+         <li><strong>Calibrate + smooth</strong><span>Rolling history of 24 accepted windows, percentile normalization and gradual transitions.</span></li>
+         <li><strong>Render + display</strong><span>Organic corona, 16 radial gradient bands and soft hotspot. Full-screen 16-bit framebuffer sent to AMOLED.</span></li>
+        </ol>
+        <div class="aura-clarity"><strong>Why local matters</strong>No laptop, intermediary computer or cloud service is needed for the final EEG-driven artwork. BLE acquisition, filtering, feature mapping and rendering run on the ESP32-S3.</div>
+       </section>
+       <section class="aura-report-section" aria-labelledby="aura-system-details-title">
+        <div class="aura-section-head"><div class="label">03 / Implementation</div><h3 id="aura-system-details-title">Hardware, timing and resilience.</h3></div>
+        <dl class="aura-specs">
+         <div><dt>EEG source</dt><dd>VIE Zone wearable, two live channels.</dd></div>
+         <div><dt>Wearable processor + display</dt><dd>M5Stack StopWatch C152, ESP32-S3 and 466 &times; 466 circular AMOLED.</dd></div>
+         <div><dt>Software stack</dt><dd>Arduino/C++, M5Unified, M5GFX and NimBLE-Arduino.</dd></div>
+         <div><dt>Connectivity</dt><dd>Direct BLE, encrypted/bonded. No continuous computer connection.</dd></div>
+         <div><dt>Acquisition assumption</dt><dd>Approximately 600 samples/second/channel, based on observed streaming behavior, not independently validated.</dd></div>
+         <div><dt>Feature cadence</dt><dd>2-second windows / 1-second hop; approximately one artistic feature update per second in normal operation.</dd></div>
+         <div><dt>Adaptive calibration</dt><dd>24 accepted feature windows in rolling history, roughly 24 seconds under uninterrupted operation.</dd></div>
+         <div><dt>Rendering goal</dt><dd>30 frames per second target, with a 16-bit off-screen framebuffer to reduce visible flicker.</dd></div>
+        </dl>
+        <p class="aura-prose" style="margin-top:22px">When EEG disconnects, the system retains its last meaningful artistic state and settles into a quieter autonomous animation. Reconnection runs in a separate processing task; EEG-driven behavior can resume after reacquisition and signal checks.</p>
+       </section>
+       <section class="aura-report-section" aria-labelledby="aura-art-title">
+        <div class="aura-section-head"><div class="label">04 / Visual language</div><h3 id="aura-art-title">One form, no dashboard.</h3></div>
+        <p class="aura-prose">The continuous organic corona has soft inner and outer edges, dissolving into a true-black AMOLED background. There are no numbers, gauges, icons, labels or decorative particles in the artwork.</p>
+        <div class="aura-swatches" aria-label="Principal firmware color definitions">
+         <div class="aura-swatch"><span class="color" style="background:#000000"></span><span class="hex">#000000</span><span class="color-name">AMOLED black</span></div>
+         <div class="aura-swatch"><span class="color" style="background:#080012"></span><span class="hex">#080012</span><span class="color-name">Deep violet</span></div>
+         <div class="aura-swatch"><span class="color" style="background:#200340"></span><span class="hex">#200340</span><span class="color-name">Shadow purple</span></div>
+         <div class="aura-swatch"><span class="color" style="background:#6818CD"></span><span class="hex">#6818CD</span><span class="color-name">Purple</span></div>
+         <div class="aura-swatch"><span class="color" style="background:#AE37FF"></span><span class="hex">#AE37FF</span><span class="color-name">Electric violet</span></div>
+         <div class="aura-swatch"><span class="color" style="background:#EBB4FF"></span><span class="hex">#EBB4FF</span><span class="color-name">Pale lavender</span></div>
+        </div>
+        <p class="aura-prose" style="margin-top:18px">These are firmware palette definitions. Displayed colors also depend on blending, brightness scaling and the physical screen.</p>
+       </section>
+       <section class="aura-report-section" aria-labelledby="aura-boundaries-title">
+        <div class="aura-section-head"><div class="label">05 / Boundaries</div><h3 id="aura-boundaries-title">Biological input. Artistic output.</h3></div>
+        <p class="aura-prose">AURA is EEG-driven generative art, not a brainwave diagnostic or an emotional-state display. Energy, Coherence, Complexity and Rhythm are names for creative control variables; they do not identify thoughts, attention, relaxation or consciousness.</p>
+        <p class="aura-prose">The IMU/motion-reactive experiment is outside the EEG-only version documented here. The approximately 600 Hz acquisition rate and 30 fps rendering goal are implementation assumptions or targets, not certified performance figures.</p>
+        <div class="aura-next"><strong>Portfolio documentation</strong><p>Pair this technical record with a photograph of ECLIPSE worn on the body, a short real video of the moving corona, and concise diagrams of the four mappings and signal-processing architecture when those assets are available for publication.</p></div>
+       </section>
+      </div>
+    </div>
+
+
+ <article id="briefFieldFile" class="field-file-brief" hidden aria-labelledby="briefFieldHeading">
+  <header class="field-file-brief-head">
+   <div class="eyebrow" id="briefFieldStatus">Field file / Current record</div>
+   <h3 id="briefFieldHeading">A project in progress.</h3>
+   <p id="briefFieldIntro"></p>
+  </header>
+  <div class="field-file-brief-body">
+   <section><div class="eyebrow">01 / Intent</div><h4>What this experiment asks</h4><p id="briefFieldIntent"></p></section>
+   <section><div class="eyebrow">02 / What is documented</div><h4>The current record</h4><p id="briefFieldRecord"></p></section>
+   <section><div class="eyebrow">03 / Next evidence</div><h4>What I want to capture</h4><p id="briefFieldNext"></p></section>
+  </div>
+  <p class="field-file-brief-caveat">This is an evolving field file, not a claim that technical testing or a working demonstration has been completed.</p>
+ </article>
+</dialog>
+<script>
+const projects = [{"n": "00", "status": "COMPLETED", "statusClass": "built", "title": "AURA / ECLIPSE", "track": "01 / Wearables", "tagline": "A wearable EEG-driven generative artwork: a luminous purple corona shaped by two live biosignal channels.", "categories": ["built", "wearable"], "chips": ["embedded", "wearable", "biosignals", "generative art"], "build": "An organic luminous corona rendered on a circular AMOLED brooch. Four EEG-derived artistic controls influence its presence, form, texture and motion.", "learn": "Local BLE acquisition and digital filtering, RMS and correlation features, spectral entropy, adaptive calibration, continuous generative rendering and wearable integration.", "hardware": "VIE Zone EEG (two channels) via encrypted BLE to M5Stack StopWatch C152 / ESP32-S3 / 466 x 466 AMOLED.", "ai": "No cloud or laptop in the final architecture. EEG-derived values become artistic controls, not diagnosed emotions or thoughts.", "evidence": "Completed wearable; full technical field file now documents the signal-to-visual mapping, firmware pipeline, visual system and implementation boundaries. Photos and video can be added when supplied.", "id": "exp-00", "slug": "wearables", "state": "Complete", "active": true}, {"n": "01", "status": "PLANNED", "statusClass": "", "title": "PERSONAL SPACE ORGANISM", "track": "01 / Wearables", "tagline": "A wearable appendage notices nearby people, turns toward them and changes posture when they enter your space.", "categories": ["wearable"], "chips": ["mechatronics", "ToF sensing", "kinetic wearable", "behaviour"], "build": "A lightweight wearable appendage with simple expressive degrees of freedom that tracks proximity and direction around the wearer.", "learn": "Servo control, mechanical design, distance sensing, power management, wearable safety and kinetic behaviour.", "hardware": "M5/ESP32-class controller plus small servos, ToF sensors, lightweight structure and battery.", "ai": "Keep it local and lightweight: deterministic behaviour or TinyML is preferable to an LLM.", "evidence": "A wearable filmed in real social space where its reactions are immediately readable without an explanation.", "id": "exp-01", "slug": "wearables", "state": "Concept", "active": false}, {"n": "02", "status": "CAPSTONE", "statusClass": "", "title": "SYMBIOTIC CREATURE", "track": "01 / Wearables", "tagline": "A wearable organism shaped by the wearer, nearby people and the environment at the same time.", "categories": ["wearable"], "chips": ["multimodal sensing", "emergence", "wearable robotics"], "build": "Combine biosignals, proximity/environment sensing and kinetic expression into a creature not reducible to one input-output rule.", "learn": "Multimodal fusion, behaviour arbitration, embodied intelligence and legible emergent systems.", "hardware": "Reuses wearable electronics, sensing and kinetic mechanisms from earlier projects.", "ai": "Hybrid local intelligence. Classification can be learned, but continuous behaviour should remain reliable and locally controlled.", "evidence": "A signature wearable and a behaviour diagram showing how body, people and environment jointly influence its movement.", "id": "exp-02", "slug": "wearables", "state": "Capstone concept", "active": false}, {"n": "03", "status": "LONG TERM", "statusClass": "", "title": "LIVING GARMENT", "track": "01 / Wearables", "tagline": "A kinetic garment that appears to breathe, tense, retract and reorganize itself around the body.", "categories": ["wearable"], "chips": ["soft robotics", "kinetic fashion", "materials", "signature piece"], "build": "Move from attached organism to garment-scale behaviour through distributed actuation, soft structures and coordinated states.", "learn": "Soft robotics, material systems, distributed actuation, garment integration and physical choreography.", "hardware": "Custom system assembled once earlier wearable mechanisms are proven.", "ai": "Only where it adds meaning; the kinetic garment must remain compelling without visible AI.", "evidence": "A long-term signature work integrating the portfolio's technical language into a coherent physical object.", "id": "exp-03", "slug": "wearables", "state": "Long-term concept", "active": false}, {"n": "04", "status": "PLANNED", "statusClass": "", "title": "IDLY / ART CRITIC 3000™", "track": "02 / Robotics", "tagline": "Cozmo becomes an expressive familiar with curiosity, moods and a strangely opinionated taste in art.", "categories": ["robotics"], "chips": ["Python", "HRI", "state machines", "robot personality"], "build": "Develop IDLY's autonomous behaviour and character. Art Critic 3000™ is an initial interaction: the robot examines art and communicates its judgement with gaze, posture, sound, movement and timing.", "learn": "Robot control, perception pipelines, behavioural state machines, expressive movement and human–robot interaction.", "hardware": "Anki Cozmo + Mac or Raspberry Pi bridge.", "ai": "Start with locally scripted behaviour and perception; invoke cloud interpretation only on meaningful events if useful.", "evidence": "A memorable performance plus a behaviour map showing how perception and internal state create physical expression.", "id": "exp-04", "slug": "robotics", "state": "Concept", "active": false}, {"n": "05", "status": "HARDWARE ORDERED", "statusClass": "ordered", "title": "MICRODUCK LAB", "track": "02 / Robotics", "tagline": "An embodied intelligence playground for learned motion, autonomous behaviour and the messy gap between simulation and reality.", "categories": ["robotics"], "chips": ["physical AI", "locomotion", "sim-to-real", "robot learning"], "build": "Explore the available Microduck development stack, prototype movement behaviours in simulation where supported, then evaluate them with the physical robot once it arrives.", "learn": "Embodied control, robot learning, behaviour evaluation, simulation-to-real transfer and real-world constraints.", "hardware": "Pollen Robotics Microduck (ordered); computer for development and simulation.", "ai": "Use learned control where it genuinely improves movement; compare against simpler rule-based control before claiming autonomy.", "evidence": "A repeatable behaviour experiment with simulation footage, real-robot demonstration and clear observations about what transfers and what fails.", "id": "exp-05", "slug": "robotics", "state": "Hardware ordered", "active": true}, {"n": "06", "status": "OPTIONAL", "statusClass": "", "title": "€39 DIGITAL TWIN™", "track": "02 / Robotics", "tagline": "A cheap robot, an expensive concept, and the measurable gap between the model and physical reality.", "categories": ["robotics", "optional"], "chips": ["telemetry", "digital twin", "uncertainty", "engineering satire"], "build": "Create a live digital representation of the mBot and expose the difference between expected commands and physical behaviour. Can also inform Microduck sim-to-real experiments, without replacing the mBot concept.", "learn": "Telemetry, mapping, synchronization, robot tracking, uncertainty and closed-loop control.", "hardware": "Makeblock mBot + Raspberry Pi 5; optional external camera.", "ai": "Minimal. Engineering, sensing and state estimation are the core, not generative AI.", "evidence": "A synchronized physical/digital demonstration with the reveal: SIMULATION WORKED FINE™ while reality drifts, slips or collides.", "id": "exp-06", "slug": "robotics", "state": "Optional experiment", "active": false}, {"n": "07", "status": "IN PROGRESS", "statusClass": "next", "title": "LIVING CANVAS / MANUAL OVERRIDE™", "track": "03 / Interfaces", "tagline": "A spatial generative system played with bare hands. The body is the controller.", "categories": ["interaction", "ongoing"], "chips": ["TouchDesigner", "hand tracking", "spatial UI", "real-time systems"], "build": "A hand-controlled generative artwork where position, openness, speed, two-hand distance and movement history become a playable visual vocabulary.", "learn": "TouchDesigner, Leap tracking, coordinate mapping, smoothing, interaction states and real-time generative systems.", "hardware": "Leap Motion Controller + Mac.", "ai": "Not required. Begin with embodied direct control; add generative intelligence only if it changes the interaction meaningfully.", "evidence": "A performance recording, a visual interaction score showing what each gesture does, and the TouchDesigner network behind it.", "id": "exp-07", "slug": "interfaces", "state": "In progress", "active": true}, {"n": "08", "status": "IN PROGRESS", "statusClass": "next", "title": "BRAIN KPI™", "track": "03 / Interfaces", "tagline": "My brain has a PR department: real personal data becomes an absurdly confident executive narrative.", "categories": ["interaction", "ongoing"], "chips": ["local AI", "data pipeline", "dashboard", "critical design"], "build": "A standalone touchscreen object turning imperfect physiological measurements into authoritative-looking executive KPIs and commentary.", "learn": "Local applications, sensor/data ingestion, visualization, local inference, narrative interfaces and privacy-aware design.", "hardware": "Raspberry Pi 5 + touchscreen; Oura Ring, Apple Watch and/or VIE data if accessible.", "ai": "Prefer a small local model for interpretation, without continuous cloud inference.", "evidence": "A polished physical dashboard and a demo contrasting real measurements with the invented certainty of its conclusions.", "id": "exp-08", "slug": "interfaces", "state": "In progress", "active": true}];
+const projectByNumber = Object.fromEntries(projects.map(p=>[p.n,p]));
+const documentedFieldFiles = {
+ '00':{
+  index:'001',status:'COMPLETED PROJECT',heading:'AURA / ECLIPSE',
+  description:'Technical Field File about the completed EEG-driven generative wearable.'
+ },
+ '07':{
+  index:'002',status:'IN PROGRESS',heading:'LIVING CANVAS',
+  description:'Field File recording the current direction of this in-progress gestural artwork.',
+  lead:'Hand movement becomes an input language for a live generative visual environment.',
+  intent:'Explore what changes when an artwork can be shaped directly with bare hands, using Leap Motion tracking and TouchDesigner.',
+  record:'The project is in progress. The planned interaction vocabulary includes hand position, openness, speed, two-hand distance and movement history. Specific tested gestures and outcomes have not been provided for publication.',
+  next:'Document the first tested gesture-to-visual mappings, the TouchDesigner network and a short performance recording.'
+ },
+ '08':{
+  index:'003',status:'IN PROGRESS',heading:'BRAIN KPI™',
+  description:'Field File for an in-progress critical-design touchscreen object.',
+  lead:'A personal-data device that turns uncertain measurements into an absurdly confident executive story.',
+  intent:'Question the authority of dashboards by making a physical touchscreen object that overinterprets imperfect physiological signals.',
+  record:'The critical-design concept is established and the project is in progress. Raspberry Pi 5 and its touchscreen are the intended platform. Oura Ring, Apple Watch and VIE EEG are potential data sources, subject to accessible data and permission. Implementation findings have not yet been supplied.',
+  next:'Record the actual available data inputs, the narrative interface rules and observations from the working prototype once verified.'
+ },
+ '05':{
+  index:'004',status:'HARDWARE ORDERED',heading:'MICRODUCK LAB',
+  description:'Preparation record for embodied intelligence experiments; the robot has been ordered.',
+  lead:'A physical AI study in learned movement and the gap between simulated and real behavior.',
+  intent:'Use Microduck to explore embodied control, learned motion and what does or does not transfer from simulation to a real robot.',
+  record:'The Microduck hardware has been ordered. The experimental direction is established, but no results from the physical robot have been documented. Simulation and development tools are potential starting points, not completed experiments.',
+  next:'Identify the supported development workflow, define a repeatable motion test and document actual sim-to-real results after the hardware is available.'
+ }
+};
+const dialog = document.getElementById('projectDialog');
+const closeDialogButton = dialog.querySelector('.dialog-close');
+let triggerBeforeDialog = null;
+let navigatingToFieldFile = false;
+const stateNotes = {
+ '00':'AURA is completed. The technical Field File documents signal mapping, local processing, rendering and implementation boundaries.',
+ '07':'Living Canvas is in progress. A short Field File records its goals, with technical observations to be added after testing.',
+ '08':'Brain KPI™ is in progress. A short Field File records its design intention; verified implementation findings can follow.',
+ '05':'Microduck is ordered. Its preparation Field File contains no claims of completed physical testing.'
+};
+function openProject(id,source){
+ const p=projectByNumber[id];if(!p)return;
+ triggerBeforeDialog=source||document.activeElement;
+ const assign=(elementId,value)=>{document.getElementById(elementId).textContent=value};
+ assign('dialogEyebrow',`PROJECT OVERVIEW ${p.n} / ${p.track} / ${p.state}`);
+ assign('dialogTitle',p.title);
+ assign('dialogLead',p.tagline);
+ assign('dialogBuild',p.build);
+ assign('dialogLearn',p.learn);
+ assign('dialogHardware',p.hardware);
+ assign('dialogAI',p.ai);
+ assign('dialogEvidence',p.evidence);
+ assign('dialogStatusNote',stateNotes[p.n]||'Concept stage. A Field File will be added when there is substantive work to document.');
+ const fieldButton=document.getElementById('dialogOpenFieldFile');
+ fieldButton.hidden=!documentedFieldFiles[p.n];
+ fieldButton.dataset.fieldId=p.n;
+ dialog.showModal();
+ closeDialogButton.focus();
+}
+closeDialogButton.addEventListener('click',()=>dialog.close());
+dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
+dialog.addEventListener('close',()=>{
+ if(navigatingToFieldFile){navigatingToFieldFile=false;return;}
+ if(triggerBeforeDialog?.isConnected)triggerBeforeDialog.focus({preventScroll:true});
+});
+const fieldDialog=document.getElementById('fieldFileDialog');
+const fieldCloseButton=fieldDialog.querySelector('.aura-dialog-close');
+const auraReport=document.getElementById('auraReport');
+const briefFieldFile=document.getElementById('briefFieldFile');
+let fieldReturnFocus=null;
+function openFieldFile(id,source){
+ const file=documentedFieldFiles[id];if(!file)return;
+ const openingFromProject=dialog.open;
+ fieldReturnFocus=openingFromProject ? (triggerBeforeDialog?.isConnected ? triggerBeforeDialog : source) : (source||document.activeElement);
+ if(openingFromProject){navigatingToFieldFile=true;dialog.close();}
+ document.getElementById('fieldFileEyebrow').textContent=`FIELD FILE / ${file.index} / ${file.status}`;
+ document.getElementById('fieldFileTitle').textContent=file.heading;
+ document.getElementById('fieldFileDescription').textContent=file.description;
+ auraReport.hidden=id!=='00';
+ briefFieldFile.hidden=id==='00';
+ if(id!=='00'){
+  const assign=(elementId,value)=>{document.getElementById(elementId).textContent=value};
+  assign('briefFieldStatus',`${file.status} / ${projectByNumber[id].track}`);
+  assign('briefFieldHeading',file.heading);
+  assign('briefFieldIntro',file.lead);
+  assign('briefFieldIntent',file.intent);
+  assign('briefFieldRecord',file.record);
+  assign('briefFieldNext',file.next);
+ }
+ fieldDialog.showModal();
+ fieldDialog.scrollTop=0;
+ fieldCloseButton.focus({preventScroll:true});
+}
+// Native dialog is modal; keep the focus loop predictable for keyboard users.
+fieldDialog.addEventListener('keydown',e=>{
+ if(e.key!=='Tab')return;
+ const items=[...fieldDialog.querySelectorAll('a[href],button:not([disabled]),[tabindex]:not([tabindex="-1"])')]
+  .filter(el=>el.getClientRects().length>0);
+ if(!items.length){e.preventDefault();fieldCloseButton.focus();return;}
+ const first=items[0],last=items[items.length-1];
+ if((e.shiftKey&&document.activeElement===first)||(!e.shiftKey&&document.activeElement===last)){
+  e.preventDefault();(e.shiftKey?last:first).focus();
+ }
+});
+fieldCloseButton.addEventListener('click',()=>fieldDialog.close());
+fieldDialog.addEventListener('click',e=>{if(e.target===fieldDialog)fieldDialog.close()});
+fieldDialog.addEventListener('close',()=>{
+ if(fieldReturnFocus?.isConnected)fieldReturnFocus.focus({preventScroll:true});
+ fieldReturnFocus=null;
+});
+document.getElementById('dialogOpenFieldFile').addEventListener('click',e=>openFieldFile(e.currentTarget.dataset.fieldId,e.currentTarget));
+document.addEventListener('click',e=>{
+ const fieldLink=e.target.closest('[data-field-id]');
+ if(fieldLink){openFieldFile(fieldLink.dataset.fieldId,fieldLink);return;}
+ const overviewLink=e.target.closest('[data-project]');
+ if(overviewLink)openProject(overviewLink.dataset.project,overviewLink);
+});
+const cards=[...document.querySelectorAll('.experiment-card')];
+const filterButtons=[...document.querySelectorAll('[data-filter]')];
+function applyFilter(filter){
+ filterButtons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===filter)));
+ let n=0;
+ cards.forEach(card=>{
+  const show=filter==='all'||(filter==='active'&&['COMPLETED','IN PROGRESS','HARDWARE ORDERED'].includes(card.dataset.state))||card.dataset.track===filter;
+  card.hidden=!show;
+  if(show)n++;
+ });
+ document.getElementById('resultText').textContent=`Showing ${n} ${n===1?'experiment':'experiments'}`;
+ document.getElementById('emptyState').style.display=n?'none':'block';
+}
+filterButtons.forEach(b=>b.addEventListener('click',()=>applyFilter(b.dataset.filter)));
+document.querySelectorAll('[data-set-filter]').forEach(a=>a.addEventListener('click',()=>applyFilter(a.dataset.setFilter)));
+const toggle=document.querySelector('.menu-toggle');const menu=document.querySelector('.nav-links');const header=document.querySelector('.site-header');const main=document.querySelector('main');const footer=document.querySelector('footer');
+function closeMenu(focusToggle=false){menu.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.textContent='MENU';header.classList.remove('menu-open');document.body.style.overflow='';main.inert=false;footer.inert=false;if(focusToggle)toggle.focus();}
+toggle.addEventListener('click',()=>{const open=!menu.classList.contains('open');if(open){menu.classList.add('open');toggle.setAttribute('aria-expanded','true');toggle.textContent='CLOSE';header.classList.add('menu-open');document.body.style.overflow='hidden';main.inert=true;footer.inert=true;menu.querySelector('a').focus();}else{closeMenu(true)}});
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>closeMenu()));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.classList.contains('open')){e.preventDefault();closeMenu(true);}if(e.key==='Tab'&&menu.classList.contains('open')){const links=[...menu.querySelectorAll('a')];if(e.shiftKey&&document.activeElement===toggle){e.preventDefault();links[links.length-1].focus();}else if(!e.shiftKey&&document.activeElement===links[links.length-1]){e.preventDefault();toggle.focus();}else if(!e.shiftKey&&document.activeElement===toggle){e.preventDefault();links[0].focus();}}});
+window.addEventListener('resize',()=>{if(window.innerWidth>900&&menu.classList.contains('open'))closeMenu()});
+</script>
+</body></html>
