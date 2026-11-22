@@ -1,0 +1,129 @@
+{
+  "manifestVersion": 4,
+  "name": "Valentina Contini",
+  "namespace": "VC",
+  "files": [
+    "INTEGRATION.md",
+    "README.md",
+    "ai-instructions.md",
+    "api/components/Button.md",
+    "api/components/Dialog.md",
+    "api/components/EditorialTile.md",
+    "api/components/Field.md",
+    "api/components/FieldFileRow.md",
+    "api/components/Hero.md",
+    "api/components/ModeSwitch.md",
+    "api/components/Navigation.md",
+    "api/components/PageExample.md",
+    "api/components/Readout.md",
+    "api/components/SectionLead.md",
+    "api/components/Status.md",
+    "api/components/TextAction.md",
+    "api/tokens.md",
+    "brand-guidelines.md",
+    "components/Button/README.md",
+    "components/Button/preview.html",
+    "components/Dialog/README.md",
+    "components/Dialog/preview.html",
+    "components/EditorialTile/README.md",
+    "components/EditorialTile/preview.html",
+    "components/Field/README.md",
+    "components/Field/preview.html",
+    "components/FieldFileRow/README.md",
+    "components/FieldFileRow/preview.html",
+    "components/Hero/README.md",
+    "components/Hero/preview.html",
+    "components/ModeSwitch/README.md",
+    "components/ModeSwitch/preview.html",
+    "components/Navigation/README.md",
+    "components/Navigation/preview.html",
+    "components/PageExample/README.md",
+    "components/PageExample/preview.html",
+    "components/Readout/README.md",
+    "components/Readout/preview.html",
+    "components/SectionLead/README.md",
+    "components/SectionLead/preview.html",
+    "components/Status/README.md",
+    "components/Status/preview.html",
+    "components/TextAction/README.md",
+    "components/TextAction/preview.html",
+    "components/bundle.css",
+    "index.html",
+    "source-audit.md",
+    "tokens.css",
+    "tokens.json",
+    "voice.md"
+  ],
+  "libraries": [],
+  "components": [
+    {
+      "name": "Button",
+      "group": "Actions",
+      "summary": "A sharp-cornered, 44px-high outlined button for actions, toggles and filters; it fills with foreground on hover and with accent when selected."
+    },
+    {
+      "name": "Dialog",
+      "group": "Content",
+      "summary": "A modal dialog for a project overview or a short decision, built on the native dialog element: a hairline-bordered canvas panel over a scrim backdrop, with a m…"
+    },
+    {
+      "name": "EditorialTile",
+      "group": "Content",
+      "summary": "A bordered, sharp-edged tile with a meta line, an uppercase title, a short description and an action; it inverts to the opposite surface on hover and keyboard…"
+    },
+    {
+      "name": "Field",
+      "group": "Instrument",
+      "summary": "A labelled text input for an instrument or form: tracked uppercase label, value in mono on a white (paper) or ink field, a hint and an error line."
+    },
+    {
+      "name": "FieldFileRow",
+      "group": "Content",
+      "summary": "A compact ruled list row for a field file: number and status, project title, short context and a clear action."
+    },
+    {
+      "name": "Hero",
+      "group": "Page patterns",
+      "summary": "The page's opening: a text-first split with a kicker, one huge uppercase headline with a single accented phrase, a lead paragraph and an optional side note; fr…"
+    },
+    {
+      "name": "ModeSwitch",
+      "group": "Instrument",
+      "summary": "A row of mutually exclusive options for switching an instrument's view or mode; the chosen option inverts to the opposite surface, from the v1 manual's express…"
+    },
+    {
+      "name": "Navigation",
+      "group": "Navigation",
+      "summary": "Wordmark on the left, a few concise links on the right, with an underline that grows from the left on hover, focus and the current page."
+    },
+    {
+      "name": "PageExample",
+      "group": "Page patterns",
+      "summary": "An example page showing how the parts compose; copy the structure, not the words."
+    },
+    {
+      "name": "Readout",
+      "group": "Instrument",
+      "summary": "A row of large measured values with units and short labels, for an instrument's results or a page's key facts; from the v1 manual's metric rows."
+    },
+    {
+      "name": "SectionLead",
+      "group": "Page patterns",
+      "summary": "The opener for each page section: a numbered kicker and an uppercase headline on the left, a short lead paragraph on the right aligned to the headline's foot;…"
+    },
+    {
+      "name": "Status",
+      "group": "Content",
+      "summary": "A lifecycle label for a project, experiment or field file: one of five fixed words, with a square marker that repeats the meaning by shape."
+    },
+    {
+      "name": "TextAction",
+      "group": "Actions",
+      "summary": "A direct text link with an arrow that moves 5px on hover and focus; the default call to action instead of an oversized button."
+    }
+  ],
+  "assetGroups": [],
+  "version": "2.0.0-repository-candidate",
+  "notes": "Portable repository-ready package: source ZIP had 13 components. No font binaries and no duplicated v1 files. Open index.html for offline reference.",
+  "componentCount": 13
+}
