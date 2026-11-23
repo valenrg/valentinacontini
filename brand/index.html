@@ -352,13 +352,13 @@
 .vc-section { padding: var(--section-padding) 0; }
 .vc-kicker { margin: 0; color: var(--vc-accent); font: 700 0.71rem/1.4 var(--font-display); letter-spacing: 0.2em; text-transform: uppercase; }
 .vc-hero { padding: clamp(70px, 9vw, 145px) 0 clamp(75px, 8vw, 130px); }
-.vc-hero-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(250px, 0.42fr); gap: clamp(35px, 4vw, 80px); align-items: end; }
+.vc-hero-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(220px, 0.42fr); gap: clamp(24px, 3vw, 60px); align-items: end; }
 .vc-hero-grid > * { min-width: 0; }
-.vc-hero h1 { font: 700 clamp(4.8rem, 9.6vw, 10.9rem)/0.83 var(--font-display); letter-spacing: -0.066em; text-transform: uppercase; margin: 42px 0 30px; max-width: 1100px; }
+.vc-hero h1 { font: 700 clamp(3.3rem, 6.5vw, 7.2rem)/0.88 var(--font-display); letter-spacing: -0.06em; text-transform: uppercase; margin: 42px 0 30px; max-width: 1100px; }
 .vc-hero h1 em { font-style: normal; color: var(--vc-accent); }
 .vc-hero-lead { max-width: 780px; font-size: clamp(1.18rem, 1.8vw, 1.55rem); line-height: 1.46; margin: 30px 0 0; }
 .vc-hero-aside { border-top: 1px solid var(--vc-line); padding-top: 18px; }
-.vc-hero-mark { font: 700 clamp(5rem, 8vw, 8rem)/0.86 var(--font-display); letter-spacing: -0.075em; white-space: nowrap; }
+.vc-hero-mark { font: 700 clamp(3.2rem, 5.5vw, 6.75rem)/0.9 var(--font-display); letter-spacing: -0.07em; white-space: nowrap; }
 .vc-hero-mark span { font-size: 0.5em; color: var(--vc-accent); }
 .vc-hero-rule { height: 2px; width: 58px; background: var(--vc-accent); margin: 28px 0; }
 .vc-hero-aside p { color: var(--vc-fg-muted); max-width: 300px; font-size: 0.95rem; line-height: 1.55; }
@@ -367,9 +367,9 @@
 .vc-section-lead > * { min-width: 0; }
 .vc-section-lead h2 { font: 700 clamp(3.7rem, 7.8vw, 8.6rem)/0.9 var(--font-display); letter-spacing: -0.057em; text-transform: uppercase; margin: 14px 0 0; }
 .vc-section-lead > p { margin: 0 0 5px; font-size: clamp(1rem, 1.45vw, 1.22rem); line-height: 1.58; max-width: 520px; color: var(--vc-fg-muted); }
-@media (max-width: 900px) { .vc-hero-grid { grid-template-columns: 1fr; } .vc-hero-aside { display: grid; grid-template-columns: auto 1fr; gap: 12px 35px; align-items: center; } .vc-hero-mark { font-size: 5rem; grid-row: span 2; } .vc-hero-rule { display: none; } .vc-hero-aside p { max-width: none; margin: 0; } .vc-section-lead { grid-template-columns: 1fr; gap: 20px; margin-bottom: 45px; } .vc-section-lead > p { max-width: 700px; } }
-@media (max-width: 620px) { .vc-section { padding: 82px 0; } .vc-hero { padding-top: 60px; } .vc-hero h1 { font-size: clamp(3rem, 12.5vw, 6.1rem); margin-top: 30px; } .vc-hero-lead { font-size: 1.08rem; } .vc-hero-mark { font-size: 3.7rem; } .vc-section-lead h2 { font-size: clamp(3.4rem, 12vw, 5.6rem); } }
-@media (max-width: 360px) { .vc-hero h1 { font-size: 12vw; } .vc-section-lead h2 { font-size: 11.5vw; } }
+@media (max-width: 900px) { .vc-hero-grid { grid-template-columns: 1fr; } .vc-hero h1 { font-size: clamp(2.2rem, 9vw, 5.8rem); } .vc-hero-aside { display: grid; grid-template-columns: minmax(0, .55fr) minmax(0, 1fr); gap: 12px 28px; align-items: center; } .vc-hero-mark { font-size: 5rem; grid-row: span 2; } .vc-hero-rule { display: none; } .vc-hero-aside p { max-width: none; margin: 0; } .vc-section-lead { grid-template-columns: 1fr; gap: 20px; margin-bottom: 45px; } .vc-section-lead > p { max-width: 700px; } }
+@media (max-width: 620px) { .vc-section { padding: 82px 0; } .vc-hero { padding-top: 60px; } .vc-hero h1 { font-size: clamp(1.75rem, 8.7vw, 3.8rem); margin-top: 30px; } .vc-hero-lead { font-size: 1.08rem; } .vc-hero-aside { display: block; } .vc-hero-aside p { margin: 16px 0; } .vc-hero-mark { font-size: 3.7rem; } .vc-section-lead h2 { font-size: clamp(3.4rem, 12vw, 5.6rem); } }
+@media (max-width: 360px) { .vc-hero h1 { font-size: 8.7vw; } .vc-section-lead h2 { font-size: 11.5vw; } }
 
 /* Manual-specific layout, not part of the component library */
 :root{--manual-ink:#17141B;--manual-paper:#F7F5F2;--manual-purple:#6D23C8;--manual-line:rgba(23,20,27,.18)}
@@ -391,7 +391,8 @@ a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #6D2
 .theme-panel{background:#E7DDF4;border-bottom:1px solid var(--manual-line);padding:24px 0}.theme-panel .shell{display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .theme-controls{display:flex;gap:8px;flex-wrap:wrap}.theme-button{border:1px solid #17141B;background:transparent;color:#17141B;text-transform:uppercase;letter-spacing:.08em;font:700 .75rem var(--font-display);min-height:44px;padding:10px 17px}.theme-button[aria-pressed=true]{background:#17141B;color:#F7F5F2}.theme-button:hover{background:#6D23C8;color:#fff}
 .docs{padding:clamp(72px,8vw,120px) 0}.section-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(230px,.4fr);gap:20px 64px;align-items:end;margin-bottom:42px}
-.section-head h2{font:700 clamp(2.7rem,6vw,6.5rem)/.91 var(--font-display);letter-spacing:-.052em;text-transform:uppercase;margin:12px 0 0;overflow-wrap:break-word}
+.section-head > *{min-width:0}
+.section-head h2{font:700 clamp(2.7rem,6vw,6.5rem)/.91 var(--font-display);letter-spacing:-.052em;text-transform:uppercase;margin:12px 0 0;overflow-wrap:anywhere}
 .section-head p{color:#615A67;font-size:1.04rem;margin:0 0 10px}.micro.section-mark{color:#6D23C8}
 .library-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--manual-line);border-left:1px solid var(--manual-line)}
 .library-grid a{padding:24px;min-height:130px;border-right:1px solid var(--manual-line);border-bottom:1px solid var(--manual-line);display:flex;flex-direction:column;justify-content:space-between;transition:background .22s,color .22s}.library-grid a:hover,.library-grid a:focus-visible{background:#17141B;color:#fff}.library-grid span{font:700 .7rem var(--font-display);color:#6D23C8;letter-spacing:.12em}.library-grid a:hover span{color:#FF93E5}.library-grid b{font:700 clamp(1.2rem,2vw,2rem)/1.1 var(--font-display);text-transform:uppercase}
