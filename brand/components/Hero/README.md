@@ -7,3 +7,7 @@ The consumer provides: `section.vc-hero` with a `data-surface`, a `.vc-shell.vc-
 - Do write the headline as a claim you can stand behind ("I research the future. Then I build bits of it."), not a slogan.
 - Do use `.vc-hero-mark` only for a real index, edition or number; leave the aside out rather than fill it.
 - Don't use more than one hero per page or a hero inside a section.
+
+### Embedded previews and narrow containers
+
+The hero headline must fit the **first grid column**, not just the viewport. The shared component CSS uses a restrained fluid display scale and a smaller side mark so words never intrude into the adjacent note. Below 900px the columns stack, and below 620px the aside also becomes single-column. Preserve these rules if embedding the Hero inside a specimen, article, or narrower canvas. Test at 320, 390, 1024, 1440 and 1920px with both Hero variants.
